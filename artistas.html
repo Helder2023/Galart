@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="GALART Artistas - Conheça os talentos da arte plástica angolana. Descubra pintores, escultores e artistas digitais de todas as províncias de Angola.">
+  <meta name="theme-color" content="#0D0D0D">
+  
+  <title>Artistas | GALART - Talento Angolano</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+ 
+</head>
+<body>
+  
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+   <nav class="navbar">
+    <div class="galart-logo">
+      <!-- Logotipo Oficial GALART (SVG) -->
+      <svg class="galart-logo-svg" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Fundo Preto -->
+        <rect width="50" height="50" fill="#0D0D0D"/>
+        <!-- Letra G Estilizada -->
+        <path d="M12 38L25 12L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Rabisco Vermelho -->
+        <path d="M16 28H34" stroke="#E53935" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Detalhe Amarelo -->
+        <circle cx="25" cy="38" r="2" fill="#FFC107"/>
+      </svg>
+      <div>
+        <div class="galart-logo-text">
+          GAL<span class="accent">ART</span>
+        </div>
+        <div class="galart-slogan">ARTE ANGOLANA • TALENTO SEM FRONTEIRAS</div>
+      </div>
+    </div>
+    
+    <div class="nav-links" style="display: flex; gap: 2.5rem; align-items: center;">
+      <a href="home.html">Home</a>
+      <a href="loja.html">Loja</a>
+      <a href="artistas.html" style="color: var(--color-red);">Artistas</a>
+      
+      <a href="/vender" class="btn btn-primary" style="padding: 0.6rem 1.8rem;">Vender Arte</a>
+    </div>
+  </nav>
+  
+  <!-- ============================================ -->
+  <!-- PAGE HEADER                                  -->
+  <!-- ============================================ -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="home.html">Home</a> / <span>Artistas</span>
+      </div>
+      <h1>Os <span class="accent">Criadores</span></h1>
+      <p class="header-description">
+        Conheça os talentos que estão a moldar a nova era da arte plástica angolana. 
+        De Luanda ao Cunene, descubra as vozes visuais do nosso país.
+      </p>
+      
+      <div class="header-stats">
+        <div class="header-stat">
+          <span class="header-stat-number" id="totalArtists">9</span>
+          <span class="header-stat-label">Artistas</span>
+        </div>
+        <div class="header-stat">
+          <span class="header-stat-number">14</span>
+          <span class="header-stat-label">Províncias</span>
+        </div>
+        <div class="header-stat">
+          <span class="header-stat-number">500+</span>
+          <span class="header-stat-label">Obras</span>
+        </div>
+        <div class="header-stat">
+          <span class="header-stat-number">50+</span>
+          <span class="header-stat-label">Exposições</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- ARTISTA EM DESTAQUE                          -->
+  <!-- ============================================ -->
+  <section>
+    <div class="container">
+      <div class="featured-artist" id="featuredArtist"></div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- PESQUISA E FILTROS                           -->
+  <!-- ============================================ -->
+  <section class="search-filter-section">
+    <div class="container">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar por nome, província ou especialidade...">
+      </div>
+      
+      <div class="filters-bar">
+        <div class="filter-group">
+          <button class="filter-btn active" data-province="all">Todas as Províncias</button>
+          <button class="filter-btn" data-province="Luanda">Luanda</button>
+          <button class="filter-btn" data-province="Benguela">Benguela</button>
+          <button class="filter-btn" data-province="Huíla">Huíla</button>
+          <button class="filter-btn" data-province="Cabinda">Cabinda</button>
+          <button class="filter-btn" data-province="outras">Outras</button>
+        </div>
+        
+        <div class="filter-group">
+          <button class="filter-btn active" data-specialty="all">Todas as Especialidades</button>
+          <button class="filter-btn" data-specialty="Pintura">Pintura</button>
+          <button class="filter-btn" data-specialty="Escultura">Escultura</button>
+          <button class="filter-btn" data-specialty="Arte Digital">Arte Digital</button>
+          <button class="filter-btn" data-specialty="Fotografia">Fotografia</button>
+        </div>
+        
+        <div class="results-count">
+          Mostrando <span id="showingCount">9</span> artistas
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- GRID DE ARTISTAS                             -->
+  <!-- ============================================ -->
+  <section>
+    <div class="container">
+      <div class="artists-grid" id="artistsGrid"></div>
+      
+      <div class="pagination">
+        <a href="#" class="page-link"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" class="page-link active">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- MODAL DE PERFIL DO ARTISTA                   -->
+  <!-- ============================================ -->
+  <div class="modal-overlay" id="artistModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="galart-logo" style="margin-bottom: var(--space-md);">
+            <svg width="35" height="35" viewBox="0 0 50 50" fill="none">
+              <rect width="50" height="50" fill="#0D0D0D"/>
+              <path d="M12 38L25 12L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M16 28H34" stroke="#E53935" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="25" cy="38" r="2" fill="#FFC107"/>
+            </svg>
+            <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+          </div>
+          <p style="text-transform: none; letter-spacing: normal; opacity: 0.8; margin-bottom: var(--space-sm);">
+            Plataforma de arte angolana. Conectamos criadores a colecionadores em todo o mundo.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="loja.html">Loja</a></li>
+            <li><a href="artistas.html">Artistas</a></li>
+            <li><a href="revista.html">Revista</a></li>
+            <li><a href="empresas.html">Para Empresas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Plataforma</h4>
+          <ul>
+            <li><a href="vender.html">Vender Arte</a></li>
+            <li><a href="como-funciona.html">Como Funciona</a></li>
+            <li><a href="termos.html">Termos</a></li>
+            <li><a href="privacidade.html">Privacidade</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:contacto@galart.ao">contacto@galart.ao</a></li>
+            <li>+244 999 999 999</li>
+            <li>Luanda, Angola</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 GALART. Todos os direitos reservados.</span>
+        <span style="color: var(--color-yellow);">ANGOLA • ÁFRICA • MUNDO</span>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script>
+    (function() {
+      'use strict';
+      
+      // ===== DADOS DOS ARTISTAS =====
+      const artists = [
+        {
+          id: 1,
+          name: 'Isabel Domingos',
+          location: 'Benguela',
+          province: 'Benguela',
+          avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80',
+          cover: 'https://images.joseartgallery.com/247650/conversions/portrait-painting-dreaming-colorful-portrait-thumb.jpg?w=800&q=80',
+          bio: 'Artista plástica benguelense com mais de 15 anos de carreira. O seu trabalho explora a identidade feminina africana através do abstracionismo lírico, utilizando cores vibrantes e texturas que remetem às paisagens do Namibe.',
+          specialties: ['Pintura', 'Abstracionismo', 'Técnica Mista'],
+          artworks: 34,
+          sales: 128,
+          exhibitions: 8,
+          verified: true,
+          featured: true,
+          social: { ig: '@isabel.art', web: 'isabeldomingos.art' }
+        },
+        {
+          id: 2,
+          name: 'Manuel Kiala',
+          location: 'Luanda',
+          province: 'Luanda',
+          avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80',
+          cover: 'https://images.joseartgallery.com/169221/conversions/portrait-painting-floral-tranquility-thumb.jpg?w=800&q=80',
+          bio: 'Escultor autodidata, Manuel Kiala trabalha principalmente com madeiras angolanas e bronze. As suas obras celebram a ancestralidade e os guardiões espirituais das tradições bantu, reinterpretados numa linguagem contemporânea.',
+          specialties: ['Escultura', 'Madeira', 'Bronze'],
+          artworks: 22,
+          sales: 67,
+          exhibitions: 5,
+          verified: true,
+          featured: false,
+          social: { ig: '@kiala.escultor' }
+        },
+        {
+          id: 3,
+          name: 'Ana Tchiyo',
+          location: 'Lubango',
+          province: 'Huíla',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80',
+          cover: 'https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?w=800&q=80',
+          bio: 'Artista digital e designer, Ana Tchiyo funde elementos da cultura tradicional angolana com estética futurista. O seu trabalho explora a intersecção entre tecnologia, identidade e espiritualidade africana.',
+          specialties: ['Arte Digital', 'Mixed Media', 'Ilustração'],
+          artworks: 45,
+          sales: 210,
+          exhibitions: 3,
+          verified: true,
+          featured: false,
+          social: { ig: '@anat.digital', web: 'anatchiyo.com' }
+        },
+        {
+          id: 4,
+          name: 'Carlos Ndunduma',
+          location: 'Cabinda',
+          province: 'Cabinda',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
+          cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme17rHUwz-YbheVgAdD0PBdrKtT3tMPlOhg&s?w=800&q=80',
+          bio: 'Fotógrafo e pintor realista, Carlos captura a essência da vida quotidiana em Cabinda. As suas paisagens e retratos documentam a beleza crua e a resiliência do povo cabindense.',
+          specialties: ['Fotografia', 'Pintura', 'Realismo'],
+          artworks: 28,
+          sales: 45,
+          exhibitions: 6,
+          verified: false,
+          featured: false,
+          social: { ig: '@carlos.ndunduma' }
+        },
+        {
+          id: 5,
+          name: 'João Tchitula',
+          location: 'Benguela',
+          province: 'Benguela',
+          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80',
+          cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb9mZvva96IzEBja42LczDdOHxOEzr7sdamw&s?w=800&q=80',
+          bio: 'Pintor expressionista, João Tchitula é conhecido pelas suas representações vibrantes do quotidiano angolano. As suas telas são uma celebração da cor e do movimento das ruas de Benguela.',
+          specialties: ['Pintura', 'Expressionismo', 'Óleo'],
+          artworks: 41,
+          sales: 156,
+          exhibitions: 12,
+          verified: true,
+          featured: true,
+          social: { ig: '@tchitula.art' }
+        },
+        {
+          id: 6,
+          name: 'Márcia Nguabi',
+          location: 'Luanda',
+          province: 'Luanda',
+          avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80',
+          cover: 'https://arteref.com/wp-content/uploads/2019/04/mona-lisa-leonardo-da-vinci.jpg?w=800&q=80',
+          bio: 'Escultora formada pela Escola de Artes da Universidade Metodista. Márcia trabalha com materiais reciclados e madeira, criando peças que questionam o consumo e a sustentabilidade na África contemporânea.',
+          specialties: ['Escultura', 'Reciclagem', 'Instalação'],
+          artworks: 18,
+          sales: 42,
+          exhibitions: 4,
+          verified: true,
+          featured: false,
+          social: { ig: '@marcia.nguabi' }
+        },
+        {
+          id: 7,
+          name: 'Pedro Tchindele',
+          location: 'Lubango',
+          province: 'Huíla',
+          avatar: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&q=80',
+          cover: 'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=800&q=80',
+          bio: 'Pintor paisagista, Pedro dedica-se a capturar a luz única da Serra da Leba e os horizontes infinitos da Huíla. As suas obras transmitem uma serenidade contemplativa característica do planalto central.',
+          specialties: ['Pintura', 'Paisagismo', 'Acrílico'],
+          artworks: 26,
+          sales: 89,
+          exhibitions: 7,
+          verified: false,
+          featured: false,
+          social: { ig: '@pedro.tchindele' }
+        },
+        {
+          id: 8,
+          name: 'António Sapalo',
+          location: 'Saurimo',
+          province: 'Lunda Sul',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
+          cover: 'https://images.joseartgallery.com/128279/conversions/cityscapes-painting-big-apple-mirage-more-photo-thumb900.jpg?w=800&q=80',
+          bio: 'Mestre escultor da tradição Cokwe, António Sapalo é guardião de técnicas ancestrais de talhe em madeira. As suas máscaras e figuras rituais são reconhecidas internacionalmente pela sua autenticidade.',
+          specialties: ['Escultura', 'Arte Tradicional', 'Madeira'],
+          artworks: 15,
+          sales: 23,
+          exhibitions: 9,
+          verified: true,
+          featured: true,
+          social: { ig: '@sapalo.arte' }
+        },
+        {
+          id: 9,
+          name: 'Yonamine Miguel',
+          location: 'Luanda',
+          province: 'Luanda',
+          avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&q=80',
+          cover: 'https://www.artmajeur.com/medias/home/p/r/preston-m-smith-pms/artwork/14987231_alma.jpg?w=800&q=80',
+          bio: 'Fotógrafo documental, Yonamine regista a transformação urbana de Luanda. O seu olhar sensível capta a poesia escondida nos musseques e a energia caótica da capital angolana.',
+          specialties: ['Fotografia', 'Documental', 'Street Photography'],
+          artworks: 52,
+          sales: 134,
+          exhibitions: 11,
+          verified: true,
+          featured: false,
+          social: { ig: '@yonamine.foto', web: 'yonaminemiguel.com' }
+        }
+      ];
+      
+      // ===== ESTADO =====
+      let currentProvince = 'all';
+      let currentSpecialty = 'all';
+      let searchTerm = '';
+      
+      // ===== ELEMENTOS DOM =====
+      const artistsGrid = document.getElementById('artistsGrid');
+      const featuredArtistDiv = document.getElementById('featuredArtist');
+      const searchInput = document.getElementById('searchInput');
+      const showingCount = document.getElementById('showingCount');
+      const artistModal = document.getElementById('artistModal');
+      const modalContent = document.getElementById('modalContent');
+      const modalClose = document.getElementById('modalClose');
+      
+      // ===== FORMATAR PREÇO =====
+      function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      }
+      
+      // ===== FILTRAR ARTISTAS =====
+      function filterArtists() {
+        return artists.filter(artist => {
+          if (currentProvince !== 'all') {
+            if (currentProvince === 'outras') {
+              const mainProvinces = ['Luanda', 'Benguela', 'Huíla', 'Cabinda', 'Huambo'];
+              if (mainProvinces.includes(artist.province)) return false;
+            } else {
+              if (artist.province !== currentProvince) return false;
+            }
+          }
+          
+          if (currentSpecialty !== 'all') {
+            if (!artist.specialties.includes(currentSpecialty)) return false;
+          }
+          
+          if (searchTerm) {
+            const searchLower = searchTerm.toLowerCase();
+            const matchName = artist.name.toLowerCase().includes(searchLower);
+            const matchLocation = artist.location.toLowerCase().includes(searchLower);
+            const matchProvince = artist.province.toLowerCase().includes(searchLower);
+            const matchSpecialty = artist.specialties.some(s => s.toLowerCase().includes(searchLower));
+            
+            if (!(matchName || matchLocation || matchProvince || matchSpecialty)) return false;
+          }
+          
+          return true;
+        });
+      }
+      
+      // ===== RENDERIZAR ARTISTA EM DESTAQUE =====
+      function renderFeaturedArtist() {
+        const featured = artists.find(a => a.featured) || artists[0];
+        
+        featuredArtistDiv.innerHTML = `
+          <div class="featured-content">
+            <div class="featured-avatar">
+              <img src="${featured.avatar}" alt="${featured.name}">
+            </div>
+            <div class="featured-info">
+              <span class="featured-badge">
+                <i class="fas fa-star"></i> Artista em Destaque
+              </span>
+              <h3>${featured.name}</h3>
+              <div class="featured-location">
+                <i class="fas fa-map-pin"></i> ${featured.location}, ${featured.province}
+              </div>
+              <p class="featured-bio">${featured.bio.substring(0, 150)}...</p>
+              <div class="featured-stats">
+                <div class="stat">
+                  <div class="stat-value">${featured.artworks}</div>
+                  <div class="stat-label">Obras</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">${featured.sales}</div>
+                  <div class="stat-label">Vendas</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">${featured.exhibitions}</div>
+                  <div class="stat-label">Exposições</div>
+                </div>
+              </div>
+              <div class="featured-actions">
+                <button class="btn btn-primary" onclick="viewArtistProfile(${featured.id})">
+                  Ver Perfil Completo
+                </button>
+                <button class="btn btn-outline-yellow" onclick="window.location.href='loja.html?artist=${featured.id}'">
+                  Ver Obras
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // ===== RENDERIZAR GRID =====
+      function renderArtists() {
+        const filtered = filterArtists();
+        showingCount.textContent = filtered.length;
+        
+        if (filtered.length === 0) {
+          artistsGrid.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-search"></i>
+              <p>Nenhum artista encontrado com os filtros selecionados.</p>
+              <p style="font-size: 0.85rem; opacity: 0.7;">Tente ajustar os critérios de pesquisa ou limpar os filtros.</p>
+              <button class="btn btn-outline-yellow" style="margin-top: var(--space-md);" onclick="clearAllFilters()">
+                Limpar Todos os Filtros
+              </button>
+            </div>
+          `;
+          return;
+        }
+        
+        let html = '';
+        filtered.forEach(artist => {
+          const verifiedBadge = artist.verified ? `
+            <span class="artist-verified">
+              <i class="fas fa-check-circle"></i> Verificado
+            </span>
+          ` : '';
+          
+          const specialtiesHtml = artist.specialties.slice(0, 3).map(s => 
+            `<span class="specialty-tag">${s}</span>`
+          ).join('');
+          
+          html += `
+            <div class="artist-card">
+              <div class="artist-cover">
+                <img src="${artist.cover}" alt="${artist.name}">
+                ${verifiedBadge}
+              </div>
+              <div class="artist-avatar">
+                <img src="${artist.avatar}" alt="${artist.name}">
+              </div>
+              <div class="artist-info">
+                <div class="artist-name">${artist.name}</div>
+                <div class="artist-location">
+                  <i class="fas fa-map-pin"></i> ${artist.location}, ${artist.province}
+                </div>
+                <p class="artist-bio">${artist.bio}</p>
+                <div class="artist-specialties">
+                  ${specialtiesHtml}
+                </div>
+                <div class="artist-stats">
+                  <div class="stat">
+                    <div class="stat-value">${artist.artworks}</div>
+                    <div class="stat-label">Obras</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-value">${artist.sales}</div>
+                    <div class="stat-label">Vendas</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-value">${artist.exhibitions}</div>
+                    <div class="stat-label">Exp.</div>
+                  </div>
+                </div>
+                <div class="artist-actions">
+                  <button class="btn btn-primary" onclick="viewArtistProfile(${artist.id})">
+                    <i class="fas fa-user"></i> Perfil
+                  </button>
+                  <button class="btn" onclick="window.location.href='loja.html?artist=${artist.id}'">
+                    <i class="fas fa-palette"></i> Obras
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        
+        artistsGrid.innerHTML = html;
+      }
+      
+      // ===== VISUALIZAR PERFIL (MODAL) =====
+      window.viewArtistProfile = function(artistId) {
+        const artist = artists.find(a => a.id === artistId);
+        if (!artist) return;
+        
+        const verifiedBadge = artist.verified ? `
+          <span class="modal-verified">
+            <i class="fas fa-check-circle"></i> Verificado
+          </span>
+        ` : '';
+        
+        const specialtiesHtml = artist.specialties.map(s => 
+          `<span class="specialty-tag">${s}</span>`
+        ).join('');
+        
+        const artworksHtml = `
+          <div class="modal-artworks-grid">
+            <div class="modal-artwork" onclick="window.location.href='loja.html'">
+              <img src="${artist.cover}" alt="Obra 1">
+            </div>
+            <div class="modal-artwork" onclick="window.location.href='loja.html'">
+              <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320bf?w=300&q=80" alt="Obra 2">
+            </div>
+            <div class="modal-artwork" onclick="window.location.href='loja.html'">
+              <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=300&q=80" alt="Obra 3">
+            </div>
+          </div>
+        `;
+        
+        modalContent.innerHTML = `
+          <div class="modal-cover">
+            <img src="${artist.cover}" alt="${artist.name}">
+            <div class="modal-avatar">
+              <img src="${artist.avatar}" alt="${artist.name}">
+            </div>
+          </div>
+          <div class="modal-content">
+            <div class="modal-name">
+              ${artist.name}
+              ${verifiedBadge}
+            </div>
+            <div class="modal-location">
+              <i class="fas fa-map-pin"></i> ${artist.location}, ${artist.province}
+            </div>
+            <p class="modal-bio">${artist.bio}</p>
+            
+            <div class="modal-section">
+              <h4>Especialidades</h4>
+              <div class="artist-specialties">
+                ${specialtiesHtml}
+              </div>
+            </div>
+            
+            <div class="modal-section">
+              <h4>Estatísticas</h4>
+              <div class="modal-stats-grid">
+                <div class="stat">
+                  <div class="stat-value" style="font-size: 1.5rem;">${artist.artworks}</div>
+                  <div class="stat-label">Obras Publicadas</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value" style="font-size: 1.5rem;">${artist.sales}</div>
+                  <div class="stat-label">Vendas Realizadas</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value" style="font-size: 1.5rem;">${artist.exhibitions}</div>
+                  <div class="stat-label">Exposições</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="modal-section">
+              <h4>Obras em Destaque</h4>
+              ${artworksHtml}
+            </div>
+            
+            <div class="modal-section">
+              <h4>Contacto e Redes</h4>
+              <div class="modal-social">
+                ${artist.social.ig ? `<a href="#"><i class="fab fa-instagram"></i> ${artist.social.ig}</a>` : ''}
+                ${artist.social.web ? `<a href="#"><i class="fas fa-globe"></i> Website</a>` : ''}
+              </div>
+            </div>
+            
+            <div class="modal-actions">
+              <button class="btn btn-primary" onclick="window.location.href='loja.html?artist=${artist.id}'; document.getElementById('artistModal').classList.remove('active');">
+                <i class="fas fa-shopping-bag"></i> Ver Todas as Obras
+              </button>
+              <button class="btn btn-outline-yellow" onclick="document.getElementById('artistModal').classList.remove('active');">
+                Fechar
+              </button>
+            </div>
+          </div>
+        `;
+        
+        artistModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+      
+      // ===== LIMPAR FILTROS =====
+      window.clearAllFilters = function() {
+        currentProvince = 'all';
+        currentSpecialty = 'all';
+        searchTerm = '';
+        searchInput.value = '';
+        
+        document.querySelectorAll('[data-province]').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.province === 'all') btn.classList.add('active');
+        });
+        
+        document.querySelectorAll('[data-specialty]').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.specialty === 'all') btn.classList.add('active');
+        });
+        
+        renderArtists();
+      };
+      
+      // ===== EVENT LISTENERS =====
+      searchInput.addEventListener('input', (e) => {
+        searchTerm = e.target.value;
+        renderArtists();
+      });
+      
+      document.querySelectorAll('[data-province]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-province]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentProvince = btn.dataset.province;
+          renderArtists();
+        });
+      });
+      
+      document.querySelectorAll('[data-specialty]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-specialty]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentSpecialty = btn.dataset.specialty;
+          renderArtists();
+        });
+      });
+      
+      modalClose.addEventListener('click', () => {
+        artistModal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      
+      artistModal.addEventListener('click', (e) => {
+        if (e.target === artistModal) {
+          artistModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && artistModal.classList.contains('active')) {
+          artistModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+      
+      // ===== INICIALIZAR =====
+      renderFeaturedArtist();
+      renderArtists();
+      
+    })();
+  </script>
+  <style>
+    /* ============================================
+   GALART - PÁGINA DE ARTISTAS
+   Segue o CSS Base Global v2.0
+   Paleta Oficial: Preto + Branco + Vermelho + Amarelo
+   ============================================ */
+
+/* ---------- RESET & VARIÁVEIS (IDÊNTICO AO BASE) ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Cores Principais - Extraídas do Logotipo */
+  --color-black: #0D0D0D;
+  --color-black-light: #1A1A1A;
+  --color-black-lighter: #262626;
+  --color-white: #FFFFFF;
+  --color-white-soft: #F5F5F5;
+  --color-white-muted: rgba(255, 255, 255, 0.7);
+  --color-red: #E53935;
+  --color-red-hover: #C62828;
+  --color-yellow: #FFC107;
+  --color-yellow-soft: #FFD54F;
+  
+  /* Cores de Interface */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.15);
+  --color-overlay: rgba(13, 13, 13, 0.85);
+  
+  /* Tipografia Futurista */
+  --font-primary: 'Space Grotesk', 'Montserrat', 'Inter', sans-serif;
+  --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Monaco', monospace;
+  --font-logo: 'Space Grotesk', 'Montserrat', sans-serif;
+  
+  /* Espaçamento */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+  
+  /* Bordas */
+  --border-radius-none: 0px;
+  --border-radius-sm: 2px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 8px;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow-red: 0 0 20px rgba(229, 57, 53, 0.3);
+  --shadow-glow-yellow: 0 0 20px rgba(255, 193, 7, 0.2);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--color-red);
+  
+  /* Curvas de Animação */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  
+  /* Transições */
+  --transition-fast: 0.2s var(--ease-out-quint);
+  --transition-medium: 0.4s var(--ease-out-quint);
+  --transition-slow: 0.6s var(--ease-out-expo);
+}
+
+/* ---------- ESTILOS BASE ---------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-black);
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white-soft);
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 1rem;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Grid Técnico Futurista */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- TIPOGRAFIA ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: var(--space-sm);
+  color: var(--color-white-soft);
+  opacity: 0.85;
+}
+
+a {
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+a:hover {
+  color: var(--color-red);
+}
+
+/* Sublinhado Futurista */
+a:not(.no-underline):not(.btn)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--color-red);
+  transition: width var(--transition-fast);
+}
+
+a:not(.no-underline):not(.btn):hover::after {
+  width: 100%;
+}
+
+/* ---------- LOGOTIPO ---------- */
+.galart-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.galart-logo-svg {
+  width: 45px;
+  height: 45px;
+}
+
+.galart-logo-text {
+  font-family: var(--font-logo);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  text-transform: uppercase;
+}
+
+.galart-logo-text .accent {
+  color: var(--color-red);
+}
+
+.galart-slogan {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-yellow);
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* ---------- BOTÕES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.8rem 1.8rem;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid var(--color-white);
+  background-color: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: var(--border-radius-none);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--color-red);
+  transition: width var(--transition-fast);
+  z-index: -1;
+}
+
+.btn:hover {
+  border-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+  box-shadow: var(--shadow-glow-red);
+}
+
+.btn-primary::before {
+  background-color: var(--color-black);
+}
+
+.btn-primary:hover {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+.btn-outline-yellow {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+.btn-outline-yellow::before {
+  background-color: var(--color-yellow);
+}
+
+.btn-outline-yellow:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-black);
+}
+
+.btn-small {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.7rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  position: sticky;
+  top: var(--space-sm);
+  margin: var(--space-sm) auto;
+  width: 95%;
+  max-width: 1440px;
+  padding: 0.8rem 2rem;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--border-radius-none);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: slideDown 0.6s var(--ease-out-expo) forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a.active {
+  color: var(--color-yellow);
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+
+.cart-icon:hover {
+  color: var(--color-yellow);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- PAGE HEADER ---------- */
+.page-header {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-lg);
+}
+
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-white-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.breadcrumb a {
+  color: var(--color-yellow);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-red);
+}
+
+.page-header h1 .accent {
+  color: var(--color-yellow);
+}
+
+.header-description {
+  color: var(--color-white-soft);
+  opacity: 0.8;
+  max-width: 700px;
+  margin-bottom: var(--space-md);
+}
+
+.header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
+}
+
+.header-stat {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.header-stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-red);
+}
+
+.header-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-white-muted);
+}
+
+/* ---------- ARTISTA EM DESTAQUE ---------- */
+.featured-artist {
+  background: linear-gradient(135deg, var(--color-black) 0%, #1A0505 100%);
+  border: 1px solid var(--color-red);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-artist::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(229, 57, 53, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.featured-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.featured-avatar {
+  width: 200px;
+  height: 200px;
+  border: 3px solid var(--color-yellow);
+  overflow: hidden;
+}
+
+.featured-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-info h3 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-xs);
+}
+
+.featured-badge {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  background-color: var(--color-yellow);
+  color: var(--color-black);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-md);
+}
+
+.featured-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-yellow);
+  margin-bottom: var(--space-md);
+}
+
+.featured-bio {
+  max-width: 600px;
+  color: var(--color-white-muted);
+  margin-bottom: var(--space-md);
+}
+
+.featured-stats {
+  display: flex;
+  gap: var(--space-xl);
+  margin: var(--space-md) 0;
+}
+
+.featured-actions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* ---------- PESQUISA E FILTROS ---------- */
+.search-filter-section {
+  margin-bottom: var(--space-xl);
+}
+
+.search-wrapper {
+  position: relative;
+  margin-bottom: var(--space-lg);
+}
+
+.search-input {
+  width: 100%;
+  padding: 1.2rem 1.5rem 1.2rem 3.5rem;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  background-color: var(--color-black-light);
+  border: 1px solid var(--color-border);
+  color: var(--color-white);
+  border-radius: var(--border-radius-none);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-red);
+  box-shadow: var(--shadow-glow-red);
+}
+
+.search-input::placeholder {
+  color: var(--color-white-muted);
+  opacity: 0.5;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-yellow);
+  font-size: 1.2rem;
+}
+
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.filter-btn {
+  padding: 0.5rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-white-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+.filter-btn.active {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.results-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-yellow);
+}
+
+/* ---------- GRID DE ARTISTAS ---------- */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.artist-card {
+  background-color: var(--color-black-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  will-change: transform, box-shadow;
+}
+
+.artist-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-red);
+  border-color: var(--color-red);
+}
+
+.artist-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--color-red), transparent);
+  transition: left 0.6s var(--ease-out-quint);
+  z-index: 3;
+}
+
+.artist-card:hover::after {
+  left: 100%;
+}
+
+.artist-cover {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.artist-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 6s var(--ease-out-expo);
+  transform: scale(1.01);
+  filter: brightness(0.7);
+}
+
+.artist-card:hover .artist-cover img {
+  transform: scale(1.08);
+  filter: brightness(0.9);
+}
+
+.artist-verified {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  padding: 0.25rem 0.75rem;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+.artist-verified i {
+  margin-right: 4px;
+  color: var(--color-yellow);
+}
+
+.artist-avatar {
+  position: absolute;
+  bottom: -40px;
+  left: var(--space-md);
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--color-black-light);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.artist-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-info {
+  padding: calc(var(--space-lg) + 10px) var(--space-md) var(--space-md);
+}
+
+.artist-name {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-white);
+  margin-bottom: 4px;
+}
+
+.artist-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-yellow);
+  margin-bottom: var(--space-sm);
+}
+
+.artist-bio {
+  color: var(--color-white-soft);
+  opacity: 0.8;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-md);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.artist-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.specialty-tag {
+  padding: 0.2rem 0.75rem;
+  background-color: var(--color-black-lighter);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-white-soft);
+}
+
+.artist-stats {
+  display: flex;
+  justify-content: space-around;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  margin-bottom: var(--space-md);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-red);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-white-muted);
+}
+
+.artist-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.artist-actions .btn {
+  flex: 1;
+  padding: 0.6rem;
+  font-size: 0.7rem;
+}
+
+/* ---------- MODAL DE PERFIL ---------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: var(--space-lg);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background-color: var(--color-black-light);
+  border: 2px solid var(--color-red);
+  border-radius: var(--border-radius-sm);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.4s var(--ease-out-quint);
+  position: relative;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: color var(--transition-fast);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: var(--color-red);
+}
+
+.modal-cover {
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.modal-avatar {
+  position: absolute;
+  bottom: -50px;
+  left: var(--space-xl);
+  width: 120px;
+  height: 120px;
+  border: 4px solid var(--color-black-light);
+  overflow: hidden;
+}
+
+.modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-content {
+  padding: calc(var(--space-xl) + 30px) var(--space-xl) var(--space-xl);
+}
+
+.modal-name {
+  font-size: 2.2rem;
+  margin-bottom: var(--space-xs);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.modal-verified {
+  background-color: var(--color-red);
+  padding: 0.2rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-white);
+}
+
+.modal-verified i {
+  color: var(--color-yellow);
+  margin-right: 4px;
+}
+
+.modal-location {
+  font-family: var(--font-mono);
+  color: var(--color-yellow);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+}
+
+.modal-bio {
+  margin-bottom: var(--space-lg);
+  line-height: 1.8;
+  color: var(--color-white-muted);
+}
+
+.modal-section {
+  margin-bottom: var(--space-lg);
+}
+
+.modal-section h4 {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-yellow);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal-artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+.modal-artwork {
+  aspect-ratio: 1 / 1.2;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.modal-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-medium);
+}
+
+.modal-artwork:hover img {
+  transform: scale(1.05);
+}
+
+.modal-stats-grid {
+  display: flex;
+  gap: var(--space-xl);
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.modal-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.modal-social a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-white-muted);
+}
+
+.modal-social a:hover {
+  color: var(--color-yellow);
+}
+
+/* ---------- MENSAGEM SEM RESULTADOS ---------- */
+.no-results {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--color-white-muted);
+  grid-column: 1 / -1;
+}
+
+.no-results i {
+  font-size: 3rem;
+  color: var(--color-red);
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+.no-results p {
+  margin-bottom: var(--space-sm);
+}
+
+/* ---------- PAGINAÇÃO ---------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin: var(--space-xl) 0;
+}
+
+.page-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-white-muted);
+  font-family: var(--font-mono);
+  transition: all var(--transition-fast);
+}
+
+.page-link:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+.page-link.active {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  background-color: var(--color-black);
+  color: var(--color-white-soft);
+  padding: var(--space-2xl) 0 var(--space-lg);
+  margin-top: var(--space-3xl);
+  border-top: 1px solid var(--color-red);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 5;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-red), var(--color-yellow), transparent);
+  animation: scanFooter 5s infinite linear;
+}
+
+@keyframes scanFooter {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.footer a {
+  color: var(--color-white-soft);
+  opacity: 0.7;
+}
+
+.footer a:hover {
+  color: var(--color-yellow);
+  opacity: 1;
+}
+
+.footer h4 {
+  color: var(--color-white);
+  font-size: 1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.footer ul {
+  list-style: none;
+}
+
+.footer ul li {
+  margin-bottom: var(--space-xs);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--color-red);
+  padding-top: var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-white-muted);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.social-links a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  color: var(--color-white);
+}
+
+.social-links a:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+/* ---------- ANIMAÇÕES DE REVELAÇÃO ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease-out-quint), transform 0.7s var(--ease-out-quint);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-red);
+  border-radius: var(--border-radius-none);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-yellow);
+}
+
+/* ---------- SELEÇÃO DE TEXTO ---------- */
+::selection {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+::-moz-selection {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+@media (max-width: 1024px) {
+  .artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .featured-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .featured-avatar {
+    margin: 0 auto;
+  }
+  
+  .featured-location {
+    justify-content: center;
+  }
+  
+  .featured-stats {
+    justify-content: center;
+  }
+  
+  .featured-actions {
+    justify-content: center;
+  }
+  
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .modal-artworks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .artists-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filters-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-group {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .header-stats {
+    gap: var(--space-md);
+  }
+  
+  .modal-artworks-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .navbar {
+    padding: 0.8rem 1rem;
+  }
+}
+
+/* ---------- ACESSIBILIDADE ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .artist-card:hover .artist-cover img,
+  .modal-artwork:hover img {
+    transform: none;
+  }
+  
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+  </style>
+</body>
+</html>

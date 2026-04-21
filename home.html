@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="GALART - Marketplace de arte angolana. Conectamos artistas plásticos de Angola a colecionadores em todo o mundo.">
+  <meta name="theme-color" content="#0D0D0D">
+  
+  <title>GALART | Arte Angolana, Talento sem Fronteiras</title>
+  
+  <!-- Fontes Futuristas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- CSS Base Global (Versão Corrigida) -->
+  <link rel="stylesheet" href="assets/css/style.css">
+ 
+</head>
+<body>
+  
+  <!-- ============================================ -->
+  <!-- MENU SUPERIOR COM LOGOTIPO OFICIAL           -->
+  <!-- ============================================ -->
+  <nav class="navbar">
+    <div class="galart-logo">
+      <!-- Logotipo Oficial GALART (SVG) -->
+      <svg class="galart-logo-svg" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Fundo Preto -->
+        <rect width="50" height="50" fill="#0D0D0D"/>
+        <!-- Letra G Estilizada -->
+        <path d="M12 38L25 12L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Rabisco Vermelho -->
+        <path d="M16 28H34" stroke="#E53935" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Detalhe Amarelo -->
+        <circle cx="25" cy="38" r="2" fill="#FFC107"/>
+      </svg>
+      <div>
+        <div class="galart-logo-text">
+          GAL<span class="accent">ART</span>
+        </div>
+        <div class="galart-slogan">ARTE ANGOLANA • TALENTO SEM FRONTEIRAS</div>
+      </div>
+    </div>
+    
+    <div class="nav-links" style="display: flex; gap: 2.5rem; align-items: center;">
+      <a href="home.html" style="color: var(--color-red);">Home</a>
+      <a href="loja.html">Loja</a>
+      <a href="artistas.html">Artistas</a>
+      <a href="vender.html" class="btn btn-primary" style="padding: 0.6rem 1.8rem;">Vender Arte</a>
+    </div>
+  </nav>
+  
+  <!-- ============================================ -->
+  <!-- HERO SECTION                                 -->
+  <!-- ============================================ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Conteúdo Esquerdo -->
+        <div class="hero-content">
+          <div class="hero-badge">Marketplace Curado • Desde 2026</div>
+          <h1 class="hero-title">
+            Arte de <span class="highlight">Angola</span><br>
+            para o mundo
+          </h1>
+          <p class="hero-subtitle">
+            Conectamos os artistas plásticos mais talentosos de Angola a colecionadores, 
+            empresas e apreciadores de arte em todos os continentes.
+          </p>
+          <div class="hero-cta">
+            <a href="loja.html" class="btn btn-primary">Explorar Coleção</a>
+            <a href="artistas.html" class="btn btn-outline-yellow">Conhecer Artistas</a>
+          </div>
+          
+          <!-- Métricas -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">120+</div>
+              <div class="stat-label">Artistas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Obras</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">14</div>
+              <div class="stat-label">Províncias</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Visual Direito -->
+        <div class="hero-visual">
+          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80" alt="Obra de arte angolana contemporânea">
+          <div class="hero-frame"></div>
+          <div class="hero-hud">
+            OBRA EM DESTAQUE • <span>ISABEL BENGUELA</span> • 2026
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- OBRAS EM DESTAQUE                            -->
+  <!-- ============================================ -->
+  <section style="padding: var(--space-2xl) 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2>Curadoria da <span class="accent">Semana</span></h2>
+        <a href="loja.html" class="section-link">
+          Ver todas
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="featured-grid">
+        <!-- Card 1 -->
+        <div class="art-card reveal">
+          <img src="https://images.joseartgallery.com/247650/conversions/portrait-painting-dreaming-colorful-portrait-thumb.jpg?w=800&q=80" alt="Pintura 'Raízes'">
+          <div class="art-info">
+            <div class="art-title">Raízes do Namibe</div>
+            <div class="art-artist">João Tchitula • Benguela</div>
+            <div class="art-price">180.000 Kz</div>
+          </div>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="art-card reveal">
+          <img src="https://images.joseartgallery.com/169221/conversions/portrait-painting-floral-tranquility-thumb.jpg?w=800&q=80" alt="Escultura 'Guardião'">
+          <div class="art-info">
+            <div class="art-title">Guardião Ancestral</div>
+            <div class="art-artist">Márcia Nguabi • Luanda</div>
+            <div class="art-price">320.000 Kz</div>
+          </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="art-card reveal">
+          <img src="https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=600&q=80" alt="Pintura 'Horizonte'">
+          <div class="art-info">
+            <div class="art-title">Horizonte da Huíla</div>
+            <div class="art-artist">Pedro Tchindele • Lubango</div>
+            <div class="art-price">95.000 Kz</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- COMO FUNCIONA                                -->
+  <!-- ============================================ -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>Como funciona a <span class="accent">GALART</span></h2>
+        <span style="font-family: var(--font-mono); color: var(--color-yellow);">// plataforma_curada_v2.0</span>
+      </div>
+      
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-number">01</div>
+          <h3>Curadoria Rigorosa</h3>
+          <p>Selecionamos artistas com elevado padrão de qualidade. Cada obra é validada pela nossa equipa antes de entrar na plataforma.</p>
+        </div>
+        
+        <div class="step-card reveal">
+          <div class="step-number">02</div>
+          <h3>Marketing Ativo</h3>
+          <p>Promovemos ativamente cada obra com campanhas profissionais. O artista cria, nós vendemos para Angola e para o mundo.</p>
+        </div>
+        
+        <div class="step-card reveal">
+          <div class="step-number">03</div>
+          <h3>Logística Premium</h3>
+          <p>Entregas seguras em todo o território nacional e exportação internacional com seguro incluído. A arte chega perfeita.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- ARTISTAS EM DESTAQUE                         -->
+  <!-- ============================================ -->
+  <section style="padding: var(--space-2xl) 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2>Conheça os <span class="accent">Artistas</span></h2>
+        <a href="artistas.html" class="section-link">
+          Todos os artistas
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="artists-grid">
+        <!-- Artista 1 -->
+        <div class="artist-card reveal">
+          <div class="artist-image">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" alt="Isabel Domingos">
+          </div>
+          <div class="artist-name">Isabel Domingos</div>
+          <div class="artist-location">Benguela, Angola</div>
+          <div class="artist-style">Pintura • Abstracionismo Lírico</div>
+        </div>
+        
+        <!-- Artista 2 -->
+        <div class="artist-card reveal">
+          <div class="artist-image">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="Manuel Kiala">
+          </div>
+          <div class="artist-name">Manuel Kiala</div>
+          <div class="artist-location">Luanda, Angola</div>
+          <div class="artist-style">Escultura • Madeira e Bronze</div>
+        </div>
+        
+        <!-- Artista 3 -->
+        <div class="artist-card reveal">
+          <div class="artist-image">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="Ana Tchiyo">
+          </div>
+          <div class="artist-name">Ana Tchiyo</div>
+          <div class="artist-location">Huíla, Angola</div>
+          <div class="artist-style">Arte Digital • Mixed Media</div>
+        </div>
+        
+        <!-- Artista 4 -->
+        <div class="artist-card reveal">
+          <div class="artist-image">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Carlos Ndunduma">
+          </div>
+          <div class="artist-name">Carlos Ndunduma</div>
+          <div class="artist-location">Cabinda, Angola</div>
+          <div class="artist-style">Pintura • Realismo Contemporâneo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- CTA FINAL                                    -->
+  <!-- ============================================ -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="reveal-text">
+        <span>Pronto para descobrir a</span><br>
+        <span>nova geração da arte angolana?</span>
+      </h2>
+      <div class="cta-buttons">
+        <a href="loja.html" class="btn btn-primary">Explorar Coleção</a>
+        <a href="vender.html" class="btn btn-outline-yellow">Sou Artista</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- RODAPÉ                                       -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl);">
+        
+        <div>
+          <div class="galart-logo" style="margin-bottom: var(--space-md);">
+            <svg width="35" height="35" viewBox="0 0 50 50" fill="none">
+              <rect width="50" height="50" fill="#0D0D0D"/>
+              <path d="M12 38L25 12L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M16 28H34" stroke="#E53935" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="25" cy="38" r="2" fill="#FFC107"/>
+            </svg>
+            <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+          </div>
+          <p style="color: var(--color-white-soft); font-family: var(--font-secondary); text-transform: none; letter-spacing: normal; font-size: 0.9rem; opacity: 0.8;">
+            Conectando o talento angolano ao mundo.<br>
+            Arte sem fronteiras, cultura sem limites.
+          </p>
+        </div>
+        
+        <div>
+          <h4 style="color: var(--color-white); font-size: 1rem; margin-bottom: var(--space-sm);">Explorar</h4>
+          <ul style="list-style: none;">
+            <li><a href="loja.html">Loja</a></li>
+            <li><a href="artistas.html">Artistas</a></li>
+            <li><a href="/revista">Revista</a></li>
+            <li><a href="/empresas">Para Empresas</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="color: var(--color-white); font-size: 1rem; margin-bottom: var(--space-sm);">Plataforma</h4>
+          <ul style="list-style: none;">
+            <li><a href="vender.html">Vender Arte</a></li>
+            <li><a href="/como-funciona">Como Funciona</a></li>
+            <li><a href="/termos">Termos</a></li>
+            <li><a href="/privacidade">Privacidade</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="color: var(--color-white); font-size: 1rem; margin-bottom: var(--space-sm);">Contacto</h4>
+          <ul style="list-style: none;">
+            <li><a href="mailto:contacto@galart.ao">contacto@galart.ao</a></li>
+            <li><a href="tel:+244999999999">+244 999 999 999</a></li>
+            <li>Luanda, Angola</li>
+            <li style="margin-top: var(--space-sm); display: flex; gap: var(--space-md);">
+              <a href="#" style="font-size: 1.2rem;">IG</a>
+              <a href="#" style="font-size: 1.2rem;">FB</a>
+              <a href="#" style="font-size: 1.2rem;">LI</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-red); padding-top: var(--space-md); display: flex; justify-content: space-between; color: var(--color-white-soft); opacity: 0.7;">
+        <span>© 2026 GALART. Todos os direitos reservados.</span>
+        <span style="color: var(--color-yellow);">ANGOLA • ÁFRICA • MUNDO</span>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT PARA ANIMAÇÕES                    -->
+  <!-- ============================================ -->
+  <script>
+    (function() {
+      'use strict';
+      
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+      
+      const textObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      document.querySelectorAll('.reveal, .stagger-item').forEach(el => revealObserver.observe(el));
+      document.querySelectorAll('.reveal-text').forEach(el => textObserver.observe(el));
+      
+      document.querySelectorAll('.stagger-item').forEach((el, index) => {
+        el.style.transitionDelay = `${index * 0.05}s`;
+      });
+      
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.style.boxShadow = '0 10px 40px rgba(229, 57, 53, 0.15)';
+        } else {
+          navbar.style.boxShadow = 'var(--shadow-md)';
+        }
+      });
+    })();
+  </script>
+  
+   
+  <style>
+    /* ============================================
+       ESTILOS ESPECÍFICOS DA HOMEPAGE v2
+       ============================================ */
+    
+    /* Hero Section */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: var(--space-2xl) 0;
+      margin-top: -80px;
+    }
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background-color: rgba(229, 57, 53, 0.1);
+      border: 1px solid var(--color-red);
+      color: var(--color-red);
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease-out-expo) 0.1s forwards;
+    }
+    
+    .hero-title {
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      line-height: 1.05;
+      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease-out-expo) 0.2s forwards;
+    }
+    
+    .hero-title .highlight {
+      color: var(--color-red);
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Rabisco vermelho animado por baixo de "Angola" */
+    .hero-title .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--color-yellow);
+      opacity: 0.4;
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: drawLine 0.8s var(--ease-out-expo) 0.8s forwards;
+    }
+    
+    @keyframes drawLine {
+      to { transform: scaleX(1); }
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--color-white-soft);
+      opacity: 0.8;
+      max-width: 550px;
+      margin-bottom: var(--space-lg);
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease-out-expo) 0.4s forwards;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease-out-expo) 0.6s forwards;
+    }
+    
+    .hero-visual {
+      position: relative;
+      height: 650px;
+      opacity: 0;
+      animation: fadeIn 0.8s var(--ease-out-expo) 0.3s forwards;
+    }
+    
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 1px solid var(--color-border-light);
+    }
+    
+    /* Moldura Futurista Vermelha/Amarela */
+    .hero-frame {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      right: -25px;
+      bottom: -25px;
+      border: 2px solid var(--color-red);
+      z-index: -1;
+      opacity: 0.6;
+    }
+    
+    .hero-frame::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 1px solid var(--color-yellow);
+      opacity: 0.3;
+    }
+    
+    /* HUD sobre a imagem */
+    .hero-hud {
+      position: absolute;
+      bottom: 30px;
+      left: -30px;
+      background: rgba(13, 13, 13, 0.9);
+      backdrop-filter: blur(8px);
+      padding: var(--space-sm) var(--space-lg);
+      border: 1px solid var(--color-red);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-white);
+    }
+    
+    .hero-hud span {
+      color: var(--color-yellow);
+      font-weight: 600;
+    }
+    
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Métricas */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      font-family: var(--font-mono);
+    }
+    
+    .stat-item {
+      border-left: 2px solid var(--color-red);
+      padding-left: var(--space-sm);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-yellow);
+      line-height: 1.2;
+    }
+    
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-white-soft);
+      opacity: 0.7;
+    }
+    
+    /* Secção Cabeçalho */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: var(--space-xl);
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    
+    .section-header h2 {
+      margin-bottom: 0;
+      color: var(--color-white);
+    }
+    
+    .section-header h2 .accent {
+      color: var(--color-red);
+    }
+    
+    .section-link {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      color: var(--color-yellow);
+    }
+    
+    .section-link:hover {
+      gap: var(--space-sm);
+      color: var(--color-red);
+    }
+    
+    /* Grid de Obras */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+    
+    /* Secção Como Funciona */
+    .how-it-works {
+      background: linear-gradient(180deg, var(--color-black) 0%, #0A0505 100%);
+      padding: var(--space-3xl) 0;
+      margin: var(--space-3xl) 0;
+      position: relative;
+      border-top: 1px solid rgba(229, 57, 53, 0.3);
+      border-bottom: 1px solid rgba(229, 57, 53, 0.3);
+    }
+    
+    .how-it-works::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(229, 57, 53, 0.02) 0px,
+        rgba(229, 57, 53, 0.02) 1px,
+        transparent 1px,
+        transparent 6px
+      );
+      pointer-events: none;
+    }
+    
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2xl);
+    }
+    
+    .step-card {
+      border-left: 3px solid var(--color-red);
+      padding-left: var(--space-lg);
+    }
+    
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--color-red);
+      opacity: 0.8;
+      line-height: 1;
+      margin-bottom: var(--space-md);
+    }
+    
+    .step-card h3 {
+      color: var(--color-white);
+      font-size: 1.6rem;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .step-card p {
+      color: var(--color-white-soft);
+      opacity: 0.8;
+    }
+    
+    /* Grid de Artistas */
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-xl);
+    }
+    
+    .artist-card {
+      text-align: left;
+    }
+    
+    .artist-image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      margin-bottom: var(--space-md);
+      border: 1px solid var(--color-border);
+      position: relative;
+    }
+    
+    .artist-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--color-red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-medium);
+    }
+    
+    .artist-card:hover .artist-image::after {
+      transform: scaleX(1);
+    }
+    
+    .artist-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .artist-card:hover .artist-image img {
+      transform: scale(1.05);
+    }
+    
+    .artist-name {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: var(--color-white);
+    }
+    
+    .artist-location {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-yellow);
+      margin-top: 6px;
+    }
+    
+    .artist-style {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--color-white-soft);
+      opacity: 0.7;
+    }
+    
+    /* CTA Final */
+    .cta-section {
+      text-align: center;
+      padding: var(--space-3xl) 0;
+      border-top: 1px solid var(--color-red);
+      border-bottom: 1px solid var(--color-red);
+      margin: var(--space-3xl) 0;
+      background: linear-gradient(135deg, rgba(229, 57, 53, 0.05) 0%, transparent 100%);
+    }
+    
+    .cta-section h2 {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--color-white);
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .featured-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .artists-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+      
+      .hero-visual {
+        height: 450px;
+        order: -1;
+      }
+      
+      .hero-frame {
+        display: none;
+      }
+      
+      .hero-hud {
+        left: 20px;
+        bottom: 20px;
+      }
+      
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .artists-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .navbar {
+        padding: 0.8rem 1rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</body>
+
+</html>

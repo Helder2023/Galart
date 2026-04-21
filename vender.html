@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Venda a sua arte na GALART. Conecte-se a colecionadores em Angola e no mundo. Cadastre-se como artista e faça parte da maior plataforma de arte angolana.">
+  <meta name="theme-color" content="#0D0D0D">
+  
+  <title>Vender Arte | GALART - Para Artistas Angolanos</title>
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* ============================================ */
+    /* GALART - CSS BASE GLOBAL v2.0                 */
+    /* ============================================ */
+    
+    /* ---------- 1. RESET & BOX-SIZING ---------- */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* ---------- 2. VARIÁVEIS DE DESIGN ---------- */
+    :root {
+      --color-black: #0D0D0D;
+      --color-black-light: #1A1A1A;
+      --color-black-lighter: #262626;
+      --color-white: #FFFFFF;
+      --color-white-soft: #F5F5F5;
+      --color-white-muted: rgba(255, 255, 255, 0.7);
+      --color-red: #E53935;
+      --color-red-hover: #C62828;
+      --color-yellow: #FFC107;
+      --color-yellow-soft: #FFD54F;
+      
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-border-light: rgba(255, 255, 255, 0.15);
+      --color-overlay: rgba(13, 13, 13, 0.85);
+      
+      --font-primary: 'Space Grotesk', 'Montserrat', 'Inter', sans-serif;
+      --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Monaco', monospace;
+      --font-logo: 'Space Grotesk', 'Montserrat', sans-serif;
+      
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --space-3xl: 8rem;
+      
+      --border-radius-none: 0px;
+      --border-radius-sm: 2px;
+      --border-radius-md: 4px;
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow-red: 0 0 20px rgba(229, 57, 53, 0.3);
+      --shadow-glow-yellow: 0 0 20px rgba(255, 193, 7, 0.2);
+      
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quint: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      
+      --transition-fast: 0.2s var(--ease-out-quint);
+      --transition-medium: 0.4s var(--ease-out-quint);
+      --transition-slow: 0.6s var(--ease-out-expo);
+    }
+    
+    /* ---------- 3. ESTILOS BASE ---------- */
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--color-black);
+    }
+    
+    body {
+      background-color: var(--color-black);
+      color: var(--color-white-soft);
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: 1rem;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--space-md);
+      padding-right: var(--space-md);
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* ---------- 4. TIPOGRAFIA ---------- */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--color-white);
+    }
+    
+    h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    
+    h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      margin-bottom: var(--space-md);
+      font-weight: 600;
+    }
+    
+    h3 {
+      font-size: 1.75rem;
+      font-weight: 500;
+    }
+    
+    p {
+      margin-bottom: var(--space-sm);
+      color: var(--color-white-soft);
+      opacity: 0.85;
+    }
+    
+    a {
+      color: var(--color-white);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      position: relative;
+    }
+    
+    a:hover {
+      color: var(--color-red);
+    }
+    
+    a:not(.no-underline):not(.btn)::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--color-red);
+      transition: width var(--transition-fast);
+    }
+    
+    a:not(.no-underline):not(.btn):hover::after {
+      width: 100%;
+    }
+    
+    /* ---------- 5. LOGOTIPO ---------- */
+    .galart-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .galart-logo-svg {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .galart-logo-text {
+      font-family: var(--font-logo);
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: var(--color-white);
+      text-transform: uppercase;
+    }
+    
+    .galart-logo-text .accent {
+      color: var(--color-red);
+    }
+    
+    .galart-slogan {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-yellow);
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+    
+    /* ---------- 6. BOTÕES ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid var(--color-white);
+      background-color: transparent;
+      color: var(--color-white);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border-radius: var(--border-radius-none);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: var(--color-red);
+      transition: width var(--transition-fast);
+      z-index: -1;
+    }
+    
+    .btn:hover {
+      border-color: var(--color-red);
+      color: var(--color-white);
+    }
+    
+    .btn:hover::before {
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background-color: var(--color-red);
+      border-color: var(--color-red);
+      color: var(--color-white);
+      box-shadow: var(--shadow-glow-red);
+    }
+    
+    .btn-primary::before {
+      background-color: var(--color-black);
+    }
+    
+    .btn-primary:hover {
+      border-color: var(--color-white);
+    }
+    
+    .btn-outline-yellow {
+      border-color: var(--color-yellow);
+      color: var(--color-yellow);
+    }
+    
+    .btn-outline-yellow::before {
+      background-color: var(--color-yellow);
+    }
+    
+    .btn-outline-yellow:hover {
+      border-color: var(--color-yellow);
+      color: var(--color-black);
+    }
+    
+    .btn-small {
+      padding: 0.5rem 1.2rem;
+      font-size: 0.7rem;
+    }
+    
+    .btn-block {
+      width: 100%;
+    }
+    
+    /* ---------- 7. NAVBAR ---------- */
+    .navbar {
+      position: sticky;
+      top: var(--space-sm);
+      margin: var(--space-sm) auto;
+      width: 95%;
+      max-width: 1440px;
+      padding: 0.8rem 2rem;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-none);
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideDown 0.6s var(--ease-out-expo) forwards;
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    
+    .nav-links a.active {
+      color: var(--color-yellow);
+    }
+    
+    .cart-icon {
+      position: relative;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--color-white);
+      transition: color var(--transition-fast);
+    }
+    
+    .cart-icon:hover {
+      color: var(--color-yellow);
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--color-red);
+      color: var(--color-white);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* ---------- 8. PAGE HEADER ---------- */
+    .page-header {
+      padding: var(--space-xl) 0 var(--space-lg);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .breadcrumb {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-white-muted);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .breadcrumb a {
+      color: var(--color-yellow);
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--color-red);
+    }
+    
+    .page-header h1 .accent {
+      color: var(--color-yellow);
+    }
+    
+    .header-description {
+      color: var(--color-white-soft);
+      opacity: 0.8;
+      max-width: 700px;
+    }
+    
+    /* ---------- 9. FORMULÁRIOS ---------- */
+    input, textarea, select {
+      background-color: var(--color-black-light);
+      border: 1px solid var(--color-border);
+      padding: 0.9rem 1.2rem;
+      font-family: var(--font-secondary);
+      font-size: 1rem;
+      color: var(--color-white);
+      border-radius: var(--border-radius-none);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      width: 100%;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--color-red);
+      box-shadow: var(--shadow-glow-red);
+    }
+    
+    input::placeholder, textarea::placeholder {
+      color: var(--color-white-muted);
+      opacity: 0.5;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .form-group {
+      margin-bottom: var(--space-md);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    
+    .form-hint {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--color-white-muted);
+      margin-top: var(--space-xs);
+      text-transform: none;
+      letter-spacing: normal;
+    }
+    
+    /* Checkbox e Radio */
+    .checkbox-group, .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-top: var(--space-xs);
+    }
+    
+    .checkbox-item, .radio-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    
+    .checkbox-item input, .radio-item input {
+      width: auto;
+      accent-color: var(--color-red);
+    }
+    
+    .checkbox-item label, .radio-item label {
+      margin-bottom: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      font-family: var(--font-secondary);
+      font-size: 0.9rem;
+      color: var(--color-white-soft);
+    }
+    
+    /* File Upload */
+    .file-upload {
+      border: 1px dashed var(--color-border);
+      padding: var(--space-lg);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--transition-fast);
+    }
+    
+    .file-upload:hover {
+      border-color: var(--color-yellow);
+    }
+    
+    .file-upload i {
+      font-size: 2rem;
+      color: var(--color-red);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .file-upload p {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0;
+    }
+    
+    .file-upload input {
+      display: none;
+    }
+    
+    /* ---------- 10. LAYOUT DA PÁGINA VENDER ---------- */
+    .vender-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-2xl);
+    }
+    
+    /* Card de Benefícios */
+    .benefits-card {
+      background: linear-gradient(135deg, var(--color-black-light) 0%, #1A0505 100%);
+      border: 1px solid var(--color-red);
+      padding: var(--space-xl);
+      position: sticky;
+      top: calc(80px + var(--space-xl));
+      height: fit-content;
+    }
+    
+    .benefits-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: var(--space-md);
+    }
+    
+    .benefits-card h3 i {
+      color: var(--color-yellow);
+      margin-right: var(--space-sm);
+    }
+    
+    .benefit-list {
+      list-style: none;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .benefit-item {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .benefit-item:last-child {
+      border-bottom: none;
+    }
+    
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      background-color: var(--color-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .benefit-icon i {
+      color: var(--color-white);
+      font-size: 1.2rem;
+    }
+    
+    .benefit-content h4 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--color-white);
+    }
+    
+    .benefit-content p {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 0;
+    }
+    
+    .commission-info {
+      background-color: var(--color-black);
+      padding: var(--space-md);
+      border: 1px solid var(--color-yellow);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .commission-info h4 {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .commission-value {
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+    
+    .commission-value small {
+      font-size: 1rem;
+      color: var(--color-white-muted);
+    }
+    
+    .testimonial {
+      font-style: italic;
+      color: var(--color-white-muted);
+      padding: var(--space-md) 0;
+      border-top: 1px solid var(--color-border);
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    
+    .testimonial-author img {
+      width: 40px;
+      height: 40px;
+      border-radius: 0;
+      border: 2px solid var(--color-yellow);
+    }
+    
+    .testimonial-author-info {
+      font-family: var(--font-mono);
+    }
+    
+    .testimonial-author-name {
+      color: var(--color-white);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .testimonial-author-location {
+      color: var(--color-yellow);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Formulário Principal */
+    .form-card {
+      background-color: var(--color-black-light);
+      border: 1px solid var(--color-border);
+      padding: var(--space-xl);
+    }
+    
+    .form-section {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .form-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .form-section-title {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .form-section-title i {
+      color: var(--color-red);
+    }
+    
+    /* Progress Steps */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-xl);
+      position: relative;
+    }
+    
+    .progress-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-border);
+      z-index: 0;
+    }
+    
+    .step {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      flex: 1;
+    }
+    
+    .step-number {
+      width: 30px;
+      height: 30px;
+      background-color: var(--color-black-light);
+      border: 1px solid var(--color-border);
+      color: var(--color-white-muted);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-xs);
+      transition: all var(--transition-fast);
+    }
+    
+    .step.active .step-number {
+      background-color: var(--color-red);
+      border-color: var(--color-red);
+      color: var(--color-white);
+    }
+    
+    .step.completed .step-number {
+      background-color: var(--color-yellow);
+      border-color: var(--color-yellow);
+      color: var(--color-black);
+    }
+    
+    .step-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-white-muted);
+    }
+    
+    .step.active .step-label {
+      color: var(--color-yellow);
+    }
+    
+    /* Modal de Sucesso */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(13, 13, 13, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal {
+      background-color: var(--color-black-light);
+      border: 2px solid var(--color-red);
+      max-width: 500px;
+      width: 100%;
+      padding: var(--space-xl);
+      text-align: center;
+      animation: modalSlideIn 0.4s var(--ease-out-quint);
+    }
+    
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    .modal-icon {
+      font-size: 4rem;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-md);
+    }
+    
+    .modal h3 {
+      font-size: 2rem;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .modal p {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+    }
+    
+    /* ---------- 11. FOOTER ---------- */
+    .footer {
+      background-color: var(--color-black);
+      color: var(--color-white-soft);
+      padding: var(--space-2xl) 0 var(--space-lg);
+      margin-top: var(--space-3xl);
+      border-top: 1px solid var(--color-red);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 5;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-red), var(--color-yellow), transparent);
+      animation: scanFooter 5s infinite linear;
+    }
+    
+    @keyframes scanFooter {
+      0% { opacity: 0; transform: translateX(-100%); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(100%); }
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .footer a {
+      color: var(--color-white-soft);
+      opacity: 0.7;
+    }
+    
+    .footer a:hover {
+      color: var(--color-yellow);
+      opacity: 1;
+    }
+    
+    .footer h4 {
+      color: var(--color-white);
+      font-size: 1rem;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .footer ul {
+      list-style: none;
+    }
+    
+    .footer ul li {
+      margin-bottom: var(--space-xs);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--color-red);
+      padding-top: var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      color: var(--color-white-muted);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      color: var(--color-white);
+    }
+    
+    .social-links a:hover {
+      border-color: var(--color-yellow);
+      color: var(--color-yellow);
+    }
+    
+    /* ---------- 12. SCROLLBAR ---------- */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--color-black);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-red);
+      border-radius: var(--border-radius-none);
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-yellow);
+    }
+    
+    /* ---------- 13. SELEÇÃO ---------- */
+    ::selection {
+      background-color: var(--color-red);
+      color: var(--color-white);
+    }
+    
+    ::-moz-selection {
+      background-color: var(--color-red);
+      color: var(--color-white);
+    }
+    
+    /* ---------- 14. RESPONSIVIDADE ---------- */
+    @media (max-width: 1024px) {
+      .vender-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+      
+      .benefits-card {
+        position: static;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .navbar {
+        padding: 0.8rem 1rem;
+      }
+      
+      .progress-steps {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      
+      .progress-steps::before {
+        display: none;
+      }
+      
+      .step {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        text-align: left;
+      }
+      
+      .step-number {
+        margin: 0;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+      }
+    }
+    
+    /* ---------- 15. ACESSIBILIDADE ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+  <nav class="navbar">
+    <div class="galart-logo">
+      <svg class="galart-logo-svg" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="50" height="50" fill="#0D0D0D"/>
+        <path d="M12 38L25 12L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 28H34" stroke="#E53935" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="25" cy="38" r="2" fill="#FFC107"/>
+      </svg>
+      <div>
+        <div class="galart-logo-text">GAL<span class="accent">ART</span></div>
+        <div class="galart-slogan">ARTE ANGOLANA • TALENTO SEM FRONTEIRAS</div>
+      </div>
+    </div>
+    
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="loja.html">Loja</a>
+      <a href="artistas.html">Artistas</a>
+
+    </div>
+    
+    <div style="display: flex; align-items: center; gap: var(--space-md);">
+      <a href="vender.html" class="btn btn-primary btn-small">Vender Arte</a>
+      <div class="cart-icon">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count">0</span>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- ============================================ -->
+  <!-- PAGE HEADER                                  -->
+  <!-- ============================================ -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="home.html">Home</a> / <span>Vender Arte</span>
+      </div>
+      <h1>Venda a sua <span class="accent">Arte</span></h1>
+      <p class="header-description">
+        Junte-se à maior plataforma de arte angolana. Conecte-se a colecionadores em Angola e no mundo, 
+        e transforme a sua paixão num negócio sustentável.
+      </p>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- LAYOUT PRINCIPAL                             -->
+  <!-- ============================================ -->
+  <section>
+    <div class="container">
+      <div class="vender-layout">
+        
+        <!-- COLUNA ESQUERDA: FORMULÁRIO -->
+        <div class="form-card">
+          
+          <!-- Progress Steps -->
+          <div class="progress-steps">
+            <div class="step active" id="step1">
+              <div class="step-number">1</div>
+              <div class="step-label">Informações Pessoais</div>
+            </div>
+            <div class="step" id="step2">
+              <div class="step-number">2</div>
+              <div class="step-label">Portfólio Artístico</div>
+            </div>
+            <div class="step" id="step3">
+              <div class="step-number">3</div>
+              <div class="step-label">Termos e Envio</div>
+            </div>
+          </div>
+          
+          <form id="artistApplicationForm" onsubmit="submitApplication(event)">
+            
+            <!-- SECÇÃO 1: INFORMAÇÕES PESSOAIS -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <i class="fas fa-user-astronaut"></i> Informações Pessoais
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName">Nome Completo *</label>
+                  <input type="text" id="fullName" name="fullName" placeholder="Ex: Constancia dos Santos" required>
+                </div>
+                <div class="form-group">
+                  <label for="artisticName">Nome Artístico</label>
+                  <input type="text" id="artisticName" name="artisticName" placeholder="Como assina as suas obras">
+                  <div class="form-hint">Deixe em branco se for igual ao nome completo</div>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" placeholder="contacto@exemplo.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Telefone / WhatsApp *</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+244 9XX XXX XXX" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="province">Província *</label>
+                  <select id="province" name="province" required>
+                    <option value="">Selecione a sua província</option>
+                    <option value="Bengo">Bengo</option>
+                    <option value="Benguela">Benguela</option>
+                    <option value="Bié">Bié</option>
+                    <option value="Cabinda">Cabinda</option>
+                    <option value="Cuando Cubango">Cuando Cubango</option>
+                    <option value="Cuanza Norte">Cuanza Norte</option>
+                    <option value="Cuanza Sul">Cuanza Sul</option>
+                    <option value="Cunene">Cunene</option>
+                    <option value="Huambo">Huambo</option>
+                    <option value="Huíla">Huíla</option>
+                    <option value="Luanda">Luanda</option>
+                    <option value="Lunda Norte">Lunda Norte</option>
+                    <option value="Lunda Sul">Lunda Sul</option>
+                    <option value="Malanje">Malanje</option>
+                    <option value="Moxico">Moxico</option>
+                    <option value="Namibe">Namibe</option>
+                    <option value="Uíge">Uíge</option>
+                    <option value="Zaire">Zaire</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="city">Cidade / Município *</label>
+                  <input type="text" id="city" name="city" placeholder="Ex: Lubango" required>
+                </div>
+              </div>
+            </div>
+            
+            <!-- SECÇÃO 2: PORTFÓLIO ARTÍSTICO -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <i class="fas fa-palette"></i> Portfólio Artístico
+              </div>
+              
+              <div class="form-group">
+                <label>Especialidades Artísticas *</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyPintura" name="specialties" value="Pintura">
+                    <label for="specialtyPintura">Pintura</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyEscultura" name="specialties" value="Escultura">
+                    <label for="specialtyEscultura">Escultura</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyDigital" name="specialties" value="Arte Digital">
+                    <label for="specialtyDigital">Arte Digital</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyFotografia" name="specialties" value="Fotografia">
+                    <label for="specialtyFotografia">Fotografia</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyDesenho" name="specialties" value="Desenho">
+                    <label for="specialtyDesenho">Desenho</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyCeramica" name="specialties" value="Cerâmica">
+                    <label for="specialtyCeramica">Cerâmica</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="specialtyOutra" name="specialties" value="Outra">
+                    <label for="specialtyOutra">Outra</label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="experience">Anos de Experiência *</label>
+                <select id="experience" name="experience" required>
+                  <option value="">Selecione</option>
+                  <option value="menos1">Menos de 1 ano</option>
+                  <option value="1-3">1-3 anos</option>
+                  <option value="4-7">4-7 anos</option>
+                  <option value="8-15">8-15 anos</option>
+                  <option value="mais15">Mais de 15 anos</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="bio">Biografia Artística *</label>
+                <textarea id="bio" name="bio" rows="4" placeholder="Conte-nos sobre a sua trajetória, formação, influências e principais exposições..." required></textarea>
+                <div class="form-hint">Mínimo 100 caracteres. Esta biografia aparecerá no seu perfil público.</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="portfolio">Link para Portfólio Online</label>
+                <input type="url" id="portfolio" name="portfolio" placeholder="https://... (Instagram, Behance, Website)">
+                <div class="form-hint">Se tiver um portfólio online, partilhe o link</div>
+              </div>
+              
+              <div class="form-group">
+                <label>Carregar Imagens de Obras *</label>
+                <div class="file-upload" onclick="document.getElementById('artworkUpload').click()">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>Clique para carregar ou arraste ficheiros</p>
+                  <span style="font-size: 0.7rem; opacity: 0.6;">Mínimo 3 imagens (JPG, PNG, até 5MB cada)</span>
+                  <input type="file" id="artworkUpload" name="artworks" multiple accept="image/jpeg,image/png" style="display: none;">
+                </div>
+                <div class="form-hint" id="uploadFeedback">Nenhum ficheiro selecionado</div>
+              </div>
+              
+              <div class="form-group">
+                <label>Redes Sociais</label>
+                <div class="form-row">
+                  <input type="text" name="instagram" placeholder="Instagram (ex: @isabel.art)">
+                  <input type="text" name="facebook" placeholder="Facebook">
+                </div>
+              </div>
+            </div>
+            
+            <!-- SECÇÃO 3: TERMOS E ENVIO -->
+            <div class="form-section">
+              <div class="form-section-title">
+                <i class="fas fa-file-signature"></i> Termos e Condições
+              </div>
+              
+              <div class="commission-info">
+                <h4>Comissão GALART</h4>
+                <div class="commission-value">30% <small>sobre cada venda</small></div>
+                <p style="margin-top: var(--space-sm); margin-bottom: 0; font-size: 0.85rem;">
+                  Inclui: Marketing profissional, gestão de redes sociais, tráfego pago, 
+                  atendimento ao cliente e logística de entrega.
+                </p>
+              </div>
+              
+              <div class="form-group">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="termsAgreement" name="termsAgreement" required>
+                  <label for="termsAgreement">
+                    Li e concordo com os <a href="#" style="color: var(--color-yellow);">Termos e Condições</a> da GALART *
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="exclusivityAgreement" name="exclusivityAgreement">
+                  <label for="exclusivityAgreement">
+                    Concordo com a exclusividade de 6 meses para as obras publicadas na GALART
+                  </label>
+                </div>
+                <div class="form-hint">Recomendado para maximizar o investimento em marketing</div>
+              </div>
+              
+              <div class="form-group">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="newsletterAgreement" name="newsletterAgreement">
+                  <label for="newsletterAgreement">
+                    Desejo receber a newsletter da GALART com dicas para artistas
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fas fa-paper-plane"></i> Enviar Candidatura
+            </button>
+            
+            <p style="font-size: 0.75rem; opacity: 0.5; margin-top: var(--space-md); text-align: center;">
+              A nossa equipa analisará a sua candidatura e entrará em contacto em até 5 dias úteis.
+            </p>
+          </form>
+        </div>
+        
+        <!-- COLUNA DIREITA: BENEFÍCIOS -->
+        <div class="benefits-card">
+          <h3><i class="fas fa-gem"></i> Porquê a GALART?</h3>
+          
+          <ul class="benefit-list">
+            <li class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Marketing Profissional</h4>
+                <p>Gerimos campanhas de tráfego pago, SEO e redes sociais para si.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-globe-africa"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Alcance Global</h4>
+                <p>Venda para Angola, diáspora e colecionadores internacionais.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Logística Simplificada</h4>
+                <p>Tratamos da embalagem profissional, envio e seguro das obras.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-newspaper"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Assessoria de Imprensa</h4>
+                <p>Divulgamos o seu trabalho na Revista GALART e em parceiros media.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-hand-holding-usd"></i>
+              </div>
+              <div class="benefit-content">
+                <h4>Pagamentos Garantidos</h4>
+                <p>Receba o valor das vendas diretamente na sua conta em até 7 dias.</p>
+              </div>
+            </li>
+          </ul>
+          
+          <div class="testimonial">
+            <i class="fas fa-quote-left" style="color: var(--color-red); opacity: 0.5; margin-right: 4px;"></i>
+            A GALART transformou a minha carreira. Em 6 meses, vendi mais obras do que nos últimos 3 anos. 
+            Agora vivo exclusivamente da minha arte.
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=50&q=80" alt="Isabel Domingos">
+              <div class="testimonial-author-info">
+                <div class="testimonial-author-name">Isabel Domingos</div>
+                <div class="testimonial-author-location">Benguela, Angola</div>
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top: var(--space-lg); text-align: center;">
+            <p style="font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;">
+              <i class="fas fa-headset"></i> Dúvidas? Fale connosco
+            </p>
+            <a href="mailto:artistas@galart.ao" style="color: var(--color-yellow);">artistas@galart.ao</a>
+            <span style="color: var(--color-white-muted);"> | </span>
+            <span>+244 999 888 777</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- MODAL DE SUCESSO                             -->
+  <!-- ============================================ -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="modal-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h3>Candidatura Enviada!</h3>
+      <p>
+        Obrigado pelo seu interesse em fazer parte da GALART.<br>
+        A nossa equipa de curadoria analisará o seu portfólio e entrará em contacto em até 5 dias úteis.
+      </p>
+      <p style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.7;">
+        Nº de Protocolo: <span id="protocolNumber">GAL-2026-0421-001</span>
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="closeModal()">Continuar no Site</button>
+        <a href="home.html" class="btn btn-outline-yellow">Ir para Home</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="galart-logo" style="margin-bottom: var(--space-md);">
+            <svg width="35" height="35" viewBox="0 0 50 50" fill="none">
+              <rect width="50" height="50" fill="#0D0D0D"/>
+              <path d="M12 38L25 12L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M16 28H34" stroke="#E53935" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="25" cy="38" r="2" fill="#FFC107"/>
+            </svg>
+            <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+          </div>
+          <p style="text-transform: none; letter-spacing: normal; opacity: 0.8; margin-bottom: var(--space-sm);">
+            Plataforma de arte angolana. Conectamos criadores a colecionadores em todo o mundo.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="loja.html">Loja</a></li>
+            <li><a href="artistas.html">Artistas</a></li>
+            <li><a href="revista.html">Revista</a></li>
+            <li><a href="empresas.html">Para Empresas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Plataforma</h4>
+          <ul>
+            <li><a href="vender.html">Vender Arte</a></li>
+            <li><a href="como-funciona.html">Como Funciona</a></li>
+            <li><a href="termos.html">Termos</a></li>
+            <li><a href="privacidade.html">Privacidade</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:contacto@galart.ao">contacto@galart.ao</a></li>
+            <li>+244 999 999 999</li>
+            <li>Luanda, Angola</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 GALART. Todos os direitos reservados.</span>
+        <span style="color: var(--color-yellow);">ANGOLA • ÁFRICA • MUNDO</span>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script>
+    // Atualizar feedback do upload de ficheiros
+    document.getElementById('artworkUpload').addEventListener('change', function(e) {
+      const fileCount = e.target.files.length;
+      const feedback = document.getElementById('uploadFeedback');
+      if (fileCount === 0) {
+        feedback.textContent = 'Nenhum ficheiro selecionado';
+      } else if (fileCount === 1) {
+        feedback.textContent = `1 ficheiro selecionado: ${e.target.files[0].name}`;
+      } else {
+        feedback.textContent = `${fileCount} ficheiros selecionados`;
+      }
+    });
+    
+    // Gerar número de protocolo aleatório
+    function generateProtocol() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const random = Math.random().toString(36).substr(2, 3).toUpperCase();
+      return `GAL-${year}${month}${day}-${random}`;
+    }
+    
+    // Submeter formulário
+    function submitApplication(event) {
+      event.preventDefault();
+      
+      // Validação básica
+      const form = event.target;
+      const specialties = form.querySelectorAll('input[name="specialties"]:checked');
+      const terms = form.querySelector('#termsAgreement');
+      const fileUpload = form.querySelector('#artworkUpload');
+      
+      if (specialties.length === 0) {
+        alert('Por favor, selecione pelo menos uma especialidade artística.');
+        return false;
+      }
+      
+      if (!terms.checked) {
+        alert('Por favor, aceite os Termos e Condições.');
+        return false;
+      }
+      
+      if (fileUpload.files.length < 3) {
+        alert('Por favor, carregue pelo menos 3 imagens das suas obras.');
+        return false;
+      }
+      
+      // Gerar protocolo e mostrar modal
+      document.getElementById('protocolNumber').textContent = generateProtocol();
+      document.getElementById('successModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Resetar formulário (opcional - comentado para demonstração)
+      // form.reset();
+      // document.getElementById('uploadFeedback').textContent = 'Nenhum ficheiro selecionado';
+      
+      return false;
+    }
+    
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    // Fechar modal ao clicar fora
+    document.getElementById('successModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+    
+    // Fechar modal com tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+    
+    // Atualizar steps do formulário (simulação visual)
+    const formInputs = document.querySelectorAll('#artistApplicationForm input, #artistApplicationForm select, #artistApplicationForm textarea');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        // Identificar em qual secção estamos
+        const section = this.closest('.form-section');
+        const sections = document.querySelectorAll('.form-section');
+        const index = Array.from(sections).indexOf(section);
+        
+        document.querySelectorAll('.step').forEach((step, i) => {
+          step.classList.remove('active');
+          if (i === index) {
+            step.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>
