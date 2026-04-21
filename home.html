@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-AO">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="GALART - Marketplace de arte angolana. Conectamos artistas plásticos de Angola a colecionadores em todo o mundo.">
+  <meta name="description"
+    content="GALART - Marketplace de arte angolana. Conectamos artistas plásticos de Angola a colecionadores em todo o mundo.">
   <meta name="theme-color" content="#0D0D0D">
-  
+
   <title>GALART | Arte Angolana, Talento sem Fronteiras</title>
-  
+
   <!-- Fontes Futuristas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
+
   <style>
     /* ============================================ */
     /* GALART - CSS BASE GLOBAL v2.0                 */
     /* Paleta Oficial: Preto + Branco + Vermelho + Amarelo */
     /* ============================================ */
-    
+
     /* ---------- RESET & VARIÁVEIS ---------- */
     *,
     *::before,
@@ -31,7 +35,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     :root {
       --color-black: #0D0D0D;
       --color-black-light: #1A1A1A;
@@ -43,14 +47,14 @@
       --color-red-hover: #C62828;
       --color-yellow: #FFC107;
       --color-yellow-soft: #FFD54F;
-      
+
       --color-border: rgba(255, 255, 255, 0.08);
       --color-border-light: rgba(255, 255, 255, 0.15);
-      
+
       --font-primary: 'Space Grotesk', 'Montserrat', sans-serif;
       --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Monaco', monospace;
-      
+
       --space-xs: 0.5rem;
       --space-sm: 1rem;
       --space-md: 1.5rem;
@@ -58,24 +62,24 @@
       --space-xl: 4rem;
       --space-2xl: 6rem;
       --space-3xl: 8rem;
-      
+
       --border-radius-none: 0px;
       --border-radius-sm: 2px;
-      
+
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
       --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
       --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
       --shadow-glow-red: 0 0 20px rgba(229, 57, 53, 0.3);
       --shadow-glow-yellow: 0 0 20px rgba(255, 193, 7, 0.2);
-      
+
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-out-quint: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      
+
       --transition-fast: 0.2s var(--ease-out-quint);
       --transition-medium: 0.4s var(--ease-out-quint);
       --transition-slow: 0.6s var(--ease-out-expo);
     }
-    
+
     /* ---------- ESTILOS BASE ---------- */
     html {
       scroll-behavior: smooth;
@@ -83,7 +87,7 @@
       -moz-osx-font-smoothing: grayscale;
       background-color: var(--color-black);
     }
-    
+
     body {
       background-color: var(--color-black);
       color: var(--color-white-soft);
@@ -94,7 +98,7 @@
       min-height: 100vh;
       position: relative;
     }
-    
+
     body::before {
       content: '';
       position: fixed;
@@ -102,18 +106,18 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: 
+      background-image:
         linear-gradient(rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px),
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px);
       background-size: 60px 60px;
       pointer-events: none;
       z-index: 0;
     }
-    
+
     body.menu-open {
       overflow: hidden;
     }
-    
+
     .container {
       width: 100%;
       max-width: 1440px;
@@ -124,51 +128,56 @@
       position: relative;
       z-index: 2;
     }
-    
+
     /* ---------- TIPOGRAFIA ---------- */
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: var(--font-primary);
       font-weight: 600;
       line-height: 1.2;
       letter-spacing: -0.02em;
       color: var(--color-white);
     }
-    
+
     h1 {
       font-size: clamp(3rem, 10vw, 6rem);
       font-weight: 700;
       letter-spacing: -0.03em;
       text-transform: uppercase;
     }
-    
+
     h2 {
       font-size: clamp(2.2rem, 6vw, 4rem);
       margin-bottom: var(--space-md);
       font-weight: 600;
     }
-    
+
     h3 {
       font-size: 1.75rem;
       font-weight: 500;
     }
-    
+
     p {
       margin-bottom: var(--space-sm);
       color: var(--color-white-soft);
       opacity: 0.85;
     }
-    
+
     a {
       color: var(--color-white);
       text-decoration: none;
       transition: color var(--transition-fast);
       position: relative;
     }
-    
+
     a:hover {
       color: var(--color-red);
     }
-    
+
     a:not(.no-underline):not(.btn)::after {
       content: '';
       position: absolute;
@@ -179,23 +188,23 @@
       background-color: var(--color-red);
       transition: width var(--transition-fast);
     }
-    
+
     a:not(.no-underline):not(.btn):hover::after {
       width: 100%;
     }
-    
+
     /* ---------- LOGOTIPO ---------- */
     .galart-logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    
+
     .galart-logo-svg {
       width: 45px;
       height: 45px;
     }
-    
+
     .galart-logo-text {
       font-family: var(--font-primary);
       font-weight: 800;
@@ -204,11 +213,11 @@
       color: var(--color-white);
       text-transform: uppercase;
     }
-    
+
     .galart-logo-text .accent {
       color: var(--color-red);
     }
-    
+
     .galart-slogan {
       font-family: var(--font-mono);
       font-size: 0.55rem;
@@ -218,7 +227,7 @@
       opacity: 0.9;
       margin-top: 2px;
     }
-    
+
     /* ---------- BOTÕES ---------- */
     .btn {
       display: inline-flex;
@@ -242,7 +251,7 @@
       overflow: hidden;
       z-index: 1;
     }
-    
+
     .btn::before {
       content: '';
       position: absolute;
@@ -254,50 +263,50 @@
       transition: width var(--transition-fast);
       z-index: -1;
     }
-    
+
     .btn:hover {
       border-color: var(--color-red);
       color: var(--color-white);
     }
-    
+
     .btn:hover::before {
       width: 100%;
     }
-    
+
     .btn-primary {
       background-color: var(--color-red);
       border-color: var(--color-red);
       color: var(--color-white);
       box-shadow: var(--shadow-glow-red);
     }
-    
+
     .btn-primary::before {
       background-color: var(--color-black);
     }
-    
+
     .btn-primary:hover {
       border-color: var(--color-white);
     }
-    
+
     .btn-outline-yellow {
       border-color: var(--color-yellow);
       color: var(--color-yellow);
     }
-    
+
     .btn-outline-yellow::before {
       background-color: var(--color-yellow);
     }
-    
+
     .btn-outline-yellow:hover {
       border-color: var(--color-yellow);
       color: var(--color-black);
     }
-    
+
     .btn-small {
       padding: 0.5rem 1.2rem;
       font-size: 0.7rem;
     }
-    
+
     /* ---------- CARDS DE OBRA ---------- */
     .art-card {
       background-color: var(--color-black-light);
@@ -309,13 +318,13 @@
       position: relative;
       will-change: transform, box-shadow;
     }
-    
+
     .art-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-lg), var(--shadow-glow-red);
       border-color: var(--color-red);
     }
-    
+
     .art-card::after {
       content: '';
       position: absolute;
@@ -327,11 +336,11 @@
       transition: left 0.6s var(--ease-out-quint);
       z-index: 3;
     }
-    
+
     .art-card:hover::after {
       left: 100%;
     }
-    
+
     .art-card img {
       width: 100%;
       height: auto;
@@ -342,17 +351,17 @@
       aspect-ratio: 1 / 1.2;
       filter: brightness(0.95);
     }
-    
+
     .art-card:hover img {
       transform: scale(1.06);
       filter: brightness(1.05);
     }
-    
+
     .art-info {
       padding: var(--space-sm);
       background: linear-gradient(to top, var(--color-black-light), transparent);
     }
-    
+
     .art-title {
       font-family: var(--font-primary);
       font-weight: 600;
@@ -360,7 +369,7 @@
       color: var(--color-white);
       margin-bottom: 4px;
     }
-    
+
     .art-artist {
       font-family: var(--font-secondary);
       color: var(--color-white-soft);
@@ -368,14 +377,14 @@
       font-size: 0.95rem;
       margin-bottom: 8px;
     }
-    
+
     .art-price {
       font-family: var(--font-mono);
       font-weight: 600;
       color: var(--color-yellow);
       font-size: 1.2rem;
     }
-    
+
     /* ---------- NAVBAR RESPONSIVA ---------- */
     .navbar {
       position: sticky;
@@ -396,18 +405,25 @@
       justify-content: space-between;
       animation: slideDown 0.6s var(--ease-out-expo) forwards;
     }
-    
+
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    
+
     .nav-links {
       display: flex;
       gap: 2.5rem;
       align-items: center;
     }
-    
+
     .nav-links a {
       position: relative;
       font-family: var(--font-primary);
@@ -416,22 +432,22 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    
+
     .nav-links a.active {
       color: var(--color-yellow);
     }
-    
+
     .nav-links a.active::after {
       width: 100%;
       background-color: var(--color-yellow);
     }
-    
+
     .nav-actions {
       display: flex;
       align-items: center;
       gap: var(--space-md);
     }
-    
+
     /* Botão Hamburguer */
     .mobile-menu-toggle {
       display: none;
@@ -445,30 +461,30 @@
       padding: 0;
       z-index: 1001;
     }
-    
+
     .mobile-menu-toggle span {
       width: 100%;
       height: 2px;
       background-color: var(--color-white);
       transition: all 0.3s var(--ease-out-quint);
     }
-    
+
     .mobile-menu-toggle:hover span {
       background-color: var(--color-yellow);
     }
-    
+
     .mobile-menu-toggle.active span:nth-child(1) {
       transform: translateY(11px) rotate(45deg);
     }
-    
+
     .mobile-menu-toggle.active span:nth-child(2) {
       opacity: 0;
     }
-    
+
     .mobile-menu-toggle.active span:nth-child(3) {
       transform: translateY(-11px) rotate(-45deg);
     }
-    
+
     /* Overlay Menu Mobile */
     .mobile-menu-overlay {
       position: fixed;
@@ -486,12 +502,12 @@
       visibility: hidden;
       transition: opacity 0.3s var(--ease-out-quint), visibility 0.3s;
     }
-    
+
     .mobile-menu-overlay.active {
       opacity: 1;
       visibility: visible;
     }
-    
+
     .mobile-menu {
       width: 100%;
       max-width: 400px;
@@ -504,11 +520,11 @@
       transition: transform 0.4s var(--ease-out-expo);
       overflow-y: auto;
     }
-    
+
     .mobile-menu-overlay.active .mobile-menu {
       transform: translateX(0);
     }
-    
+
     .mobile-menu-header {
       display: flex;
       align-items: center;
@@ -516,7 +532,7 @@
       padding: var(--space-lg) var(--space-md);
       border-bottom: 1px solid var(--color-border);
     }
-    
+
     .mobile-menu-close {
       background: none;
       border: none;
@@ -530,11 +546,11 @@
       justify-content: center;
       transition: color var(--transition-fast);
     }
-    
+
     .mobile-menu-close:hover {
       color: var(--color-red);
     }
-    
+
     .mobile-menu-links {
       flex: 1;
       display: flex;
@@ -542,7 +558,7 @@
       padding: var(--space-xl) var(--space-md);
       gap: var(--space-sm);
     }
-    
+
     .mobile-menu-links a {
       font-family: var(--font-primary);
       font-size: 1.5rem;
@@ -554,16 +570,16 @@
       border-bottom: 1px solid var(--color-border);
       transition: color var(--transition-fast), padding-left var(--transition-fast);
     }
-    
+
     .mobile-menu-links a:hover {
       color: var(--color-yellow);
       padding-left: var(--space-sm);
     }
-    
+
     .mobile-menu-links a.active {
       color: var(--color-red);
     }
-    
+
     .mobile-menu-links .mobile-vender-link {
       margin-top: var(--space-lg);
       background-color: var(--color-red);
@@ -573,22 +589,22 @@
       border: none !important;
       font-size: 1.2rem !important;
     }
-    
+
     .mobile-menu-links .mobile-vender-link:hover {
       background-color: var(--color-red-hover);
       padding-left: var(--space-md) !important;
     }
-    
+
     .mobile-menu-footer {
       padding: var(--space-xl) var(--space-md);
       border-top: 1px solid var(--color-border);
     }
-    
+
     .mobile-social {
       display: flex;
       gap: var(--space-md);
     }
-    
+
     .mobile-social a {
       width: 44px;
       height: 44px;
@@ -601,12 +617,12 @@
       font-size: 1.2rem;
       transition: all var(--transition-fast);
     }
-    
+
     .mobile-social a:hover {
       border-color: var(--color-yellow);
       color: var(--color-yellow);
     }
-    
+
     /* ---------- ANIMAÇÕES ---------- */
     .reveal {
       opacity: 0;
@@ -614,29 +630,29 @@
       transition: opacity 0.7s var(--ease-out-quint), transform 0.7s var(--ease-out-quint);
       will-change: opacity, transform;
     }
-    
+
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .reveal-text {
       position: relative;
       overflow: hidden;
       display: inline-block;
     }
-    
+
     .reveal-text span {
       display: block;
       transform: translateY(100%);
       transition: transform 0.6s var(--ease-out-expo);
       will-change: transform;
     }
-    
+
     .reveal-text.visible span {
       transform: translateY(0);
     }
-    
+
     /* ---------- HOMEPAGE ESPECÍFICO ---------- */
     .hero {
       min-height: 90vh;
@@ -646,14 +662,14 @@
       padding: var(--space-2xl) 0;
       margin-top: -80px;
     }
-    
+
     .hero-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       gap: var(--space-2xl);
       align-items: center;
     }
-    
+
     .hero-badge {
       display: inline-block;
       padding: 0.4rem 1rem;
@@ -668,7 +684,7 @@
       opacity: 0;
       animation: fadeUp 0.6s var(--ease-out-expo) 0.1s forwards;
     }
-    
+
     .hero-title {
       font-size: clamp(3.5rem, 10vw, 6.5rem);
       line-height: 1.05;
@@ -677,13 +693,13 @@
       opacity: 0;
       animation: fadeUp 0.6s var(--ease-out-expo) 0.2s forwards;
     }
-    
+
     .hero-title .highlight {
       color: var(--color-red);
       position: relative;
       display: inline-block;
     }
-    
+
     .hero-title .highlight::after {
       content: '';
       position: absolute;
@@ -698,11 +714,13 @@
       transform-origin: left;
       animation: drawLine 0.8s var(--ease-out-expo) 0.8s forwards;
     }
-    
+
     @keyframes drawLine {
-      to { transform: scaleX(1); }
+      to {
+        transform: scaleX(1);
+      }
     }
-    
+
     .hero-subtitle {
       font-size: 1.3rem;
       color: var(--color-white-soft);
@@ -712,7 +730,7 @@
       opacity: 0;
       animation: fadeUp 0.6s var(--ease-out-expo) 0.4s forwards;
     }
-    
+
     .hero-cta {
       display: flex;
       gap: var(--space-md);
@@ -720,21 +738,21 @@
       opacity: 0;
       animation: fadeUp 0.6s var(--ease-out-expo) 0.6s forwards;
     }
-    
+
     .hero-visual {
       position: relative;
       height: 650px;
       opacity: 0;
       animation: fadeIn 0.8s var(--ease-out-expo) 0.3s forwards;
     }
-    
+
     .hero-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border: 1px solid var(--color-border-light);
     }
-    
+
     .hero-frame {
       position: absolute;
       top: 25px;
@@ -745,7 +763,7 @@
       z-index: -1;
       opacity: 0.6;
     }
-    
+
     .hero-frame::after {
       content: '';
       position: absolute;
@@ -756,7 +774,7 @@
       border: 1px solid var(--color-yellow);
       opacity: 0.3;
     }
-    
+
     .hero-hud {
       position: absolute;
       bottom: 30px;
@@ -771,41 +789,53 @@
       letter-spacing: 3px;
       color: var(--color-white);
     }
-    
+
     .hero-hud span {
       color: var(--color-yellow);
       font-weight: 600;
     }
-    
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
-    
+
     .hero-stats {
       display: flex;
       gap: 2.5rem;
       margin-top: 3rem;
       font-family: var(--font-mono);
     }
-    
+
     .stat-item {
       border-left: 2px solid var(--color-red);
       padding-left: var(--space-sm);
     }
-    
+
     .stat-number {
       font-size: 2rem;
       font-weight: 700;
       color: var(--color-yellow);
       line-height: 1.2;
     }
-    
+
     .stat-label {
       font-size: 0.7rem;
       text-transform: uppercase;
@@ -813,7 +843,7 @@
       color: var(--color-white-soft);
       opacity: 0.7;
     }
-    
+
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -822,16 +852,16 @@
       flex-wrap: wrap;
       gap: var(--space-md);
     }
-    
+
     .section-header h2 {
       margin-bottom: 0;
       color: var(--color-white);
     }
-    
+
     .section-header h2 .accent {
       color: var(--color-red);
     }
-    
+
     .section-link {
       font-family: var(--font-mono);
       text-transform: uppercase;
@@ -842,18 +872,18 @@
       gap: var(--space-xs);
       color: var(--color-yellow);
     }
-    
+
     .section-link:hover {
       gap: var(--space-sm);
       color: var(--color-red);
     }
-    
+
     .featured-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-xl);
     }
-    
+
     .how-it-works {
       background: linear-gradient(180deg, var(--color-black) 0%, #0A0505 100%);
       padding: var(--space-3xl) 0;
@@ -862,7 +892,7 @@
       border-top: 1px solid rgba(229, 57, 53, 0.3);
       border-bottom: 1px solid rgba(229, 57, 53, 0.3);
     }
-    
+
     .how-it-works::before {
       content: '';
       position: absolute;
@@ -873,18 +903,18 @@
       background: repeating-linear-gradient(0deg, rgba(229, 57, 53, 0.02) 0px, rgba(229, 57, 53, 0.02) 1px, transparent 1px, transparent 6px);
       pointer-events: none;
     }
-    
+
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-2xl);
     }
-    
+
     .step-card {
       border-left: 3px solid var(--color-red);
       padding-left: var(--space-lg);
     }
-    
+
     .step-number {
       font-family: var(--font-mono);
       font-size: 3.5rem;
@@ -894,28 +924,28 @@
       line-height: 1;
       margin-bottom: var(--space-md);
     }
-    
+
     .step-card h3 {
       color: var(--color-white);
       font-size: 1.6rem;
       margin-bottom: var(--space-sm);
     }
-    
+
     .step-card p {
       color: var(--color-white-soft);
       opacity: 0.8;
     }
-    
+
     .artists-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: var(--space-xl);
     }
-    
+
     .artist-card {
       text-align: left;
     }
-    
+
     .artist-image {
       aspect-ratio: 1 / 1;
       overflow: hidden;
@@ -923,7 +953,7 @@
       border: 1px solid var(--color-border);
       position: relative;
     }
-    
+
     .artist-image::after {
       content: '';
       position: absolute;
@@ -936,29 +966,29 @@
       transform-origin: left;
       transition: transform var(--transition-medium);
     }
-    
+
     .artist-card:hover .artist-image::after {
       transform: scaleX(1);
     }
-    
+
     .artist-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform var(--transition-slow);
     }
-    
+
     .artist-card:hover .artist-image img {
       transform: scale(1.05);
     }
-    
+
     .artist-name {
       font-family: var(--font-primary);
       font-weight: 600;
       font-size: 1.3rem;
       color: var(--color-white);
     }
-    
+
     .artist-location {
       font-family: var(--font-mono);
       font-size: 0.75rem;
@@ -967,14 +997,14 @@
       color: var(--color-yellow);
       margin-top: 6px;
     }
-    
+
     .artist-style {
       margin-top: 8px;
       font-size: 0.9rem;
       color: var(--color-white-soft);
       opacity: 0.7;
     }
-    
+
     .cta-section {
       text-align: center;
       padding: var(--space-3xl) 0;
@@ -983,14 +1013,14 @@
       margin: var(--space-3xl) 0;
       background: linear-gradient(135deg, rgba(229, 57, 53, 0.05) 0%, transparent 100%);
     }
-    
+
     .cta-section h2 {
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
       color: var(--color-white);
     }
-    
+
     .cta-buttons {
       display: flex;
       justify-content: center;
@@ -998,7 +1028,7 @@
       flex-wrap: wrap;
       margin-top: var(--space-xl);
     }
-    
+
     /* ---------- FOOTER ---------- */
     .footer {
       background-color: var(--color-black);
@@ -1013,7 +1043,7 @@
       position: relative;
       z-index: 5;
     }
-    
+
     .footer::before {
       content: '';
       position: absolute;
@@ -1024,43 +1054,53 @@
       background: linear-gradient(90deg, transparent, var(--color-red), var(--color-yellow), transparent);
       animation: scanFooter 5s infinite linear;
     }
-    
+
     @keyframes scanFooter {
-      0% { opacity: 0; transform: translateX(-100%); }
-      50% { opacity: 1; }
-      100% { opacity: 0; transform: translateX(100%); }
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
     }
-    
+
     .footer a {
       color: var(--color-white-soft);
       opacity: 0.7;
     }
-    
+
     .footer a:hover {
       color: var(--color-yellow);
       opacity: 1;
     }
-    
+
     .footer h4 {
       color: var(--color-white);
       font-size: 1rem;
       margin-bottom: var(--space-sm);
     }
-    
+
     .footer ul {
       list-style: none;
     }
-    
+
     .footer ul li {
       margin-bottom: var(--space-xs);
     }
-    
+
     .social-links {
       display: flex;
       gap: var(--space-sm);
       margin-top: var(--space-sm);
     }
-    
+
     .social-links a {
       width: 36px;
       height: 36px;
@@ -1070,67 +1110,68 @@
       border: 1px solid var(--color-border);
       color: var(--color-white);
     }
-    
+
     .social-links a:hover {
       border-color: var(--color-yellow);
       color: var(--color-yellow);
     }
-    
+
     /* ---------- SCROLLBAR ---------- */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
-    
+
     ::-webkit-scrollbar-track {
       background: var(--color-black);
     }
-    
+
     ::-webkit-scrollbar-thumb {
       background: var(--color-red);
       border-radius: var(--border-radius-none);
     }
-    
+
     ::-webkit-scrollbar-thumb:hover {
       background: var(--color-yellow);
     }
-    
+
     ::selection {
       background-color: var(--color-red);
       color: var(--color-white);
     }
-    
+
     /* ---------- RESPONSIVIDADE ---------- */
     @media (max-width: 1024px) {
       .featured-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .artists-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .steps-grid {
         grid-template-columns: 1fr;
         gap: var(--space-xl);
       }
-      
+
       .hero-visual {
         height: 500px;
       }
     }
-    
+
     @media (max-width: 900px) {
+
       .nav-links,
       .nav-actions .btn {
         display: none;
       }
-      
+
       .mobile-menu-toggle {
         display: flex;
       }
     }
-    
+
     @media (max-width: 768px) {
       .navbar {
         padding: 0.8rem 1rem;
@@ -1140,66 +1181,67 @@
         border-left: none;
         border-right: none;
       }
-      
+
       .galart-slogan {
         font-size: 0.45rem;
         letter-spacing: 2px;
       }
-      
+
       .galart-logo-text {
         font-size: 1.2rem;
       }
-      
+
       .galart-logo-svg {
         width: 35px;
         height: 35px;
       }
-      
+
       .hero-grid {
         grid-template-columns: 1fr;
         gap: var(--space-xl);
       }
-      
+
       .hero-visual {
         height: 400px;
         order: -1;
       }
-      
+
       .hero-frame {
         display: none;
       }
-      
+
       .hero-hud {
         left: 20px;
         bottom: 20px;
       }
-      
+
       .hero-stats {
         gap: 1.5rem;
       }
-      
+
       .featured-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .artists-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .mobile-menu {
         max-width: 100%;
       }
-      
+
       .mobile-menu-links a {
         font-size: 1.3rem;
       }
-      
+
       .footer-content {
         grid-template-columns: 1fr !important;
       }
     }
-    
+
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
@@ -1211,15 +1253,17 @@
     }
   </style>
 </head>
+
 <body>
-  
+
   <!-- ============================================ -->
   <!-- NAVBAR RESPONSIVA                            -->
   <!-- ============================================ -->
   <nav class="navbar">
     <div class="galart-logo">
-    
-                                    <a href="home.html"> <img class="galart-logo-svg" style="min-width: 90px; min-height: 70px;" src="assets/img/logo.png" alt=""></a>
+
+      <a href="home.html"> <img class="galart-logo-svg" style="min-width: 90px; min-height: 70px;"
+          src="assets/img/logo.png" alt=""></a>
       <div>
         <div class="galart-logo-text">
           GAL<span class="accent">ART</span>
@@ -1227,37 +1271,39 @@
         <div class="galart-slogan">ARTE ANGOLANA • TALENTO SEM FRONTEIRAS</div>
       </div>
     </div>
-    
+
     <div class="nav-links">
       <a href="home.html" class="active">Home</a>
       <a href="loja.html">Loja</a>
       <a href="artistas.html">Artistas</a>
 
     </div>
-    
+
     <div class="nav-actions">
       <a href="vender.html" class="btn btn-primary btn-small">Vender Arte</a>
     </div>
-    
+
     <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
   </nav>
-  
+
   <!-- Menu Mobile Overlay -->
   <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="mobile-menu">
       <div class="mobile-menu-header">
         <div class="galart-logo">
-                                    <a href="home.html"> <img class="galart-logo-svg" style="min-width: 90px; min-height: 70px;" src="assets/img/logo.png" alt=""></a>
+          <a href="home.html"> <img class="galart-logo-svg" style="min-width: 90px; min-height: 70px;"
+              src="assets/img/logo.png" alt=""></a>
 
-          <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+          <span
+            style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
         </div>
         <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
       </div>
-      
+
       <div class="mobile-menu-links">
         <a href="home.html" class="active">Home</a>
         <a href="loja.html">Loja</a>
@@ -1265,7 +1311,7 @@
 
         <a href="vender.html" class="mobile-vender-link">Vender Arte</a>
       </div>
-      
+
       <div class="mobile-menu-footer">
         <div class="mobile-social">
           <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1275,14 +1321,14 @@
       </div>
     </div>
   </div>
-  
+
   <!-- ============================================ -->
   <!-- HERO SECTION                                 -->
   <!-- ============================================ -->
   <section class="hero">
     <div class="container">
       <div class="hero-grid">
-        
+
         <div class="hero-content">
           <div class="hero-badge">Marketplace Curado • Desde 2026</div>
           <h1 class="hero-title">
@@ -1290,14 +1336,14 @@
             para o mundo
           </h1>
           <p class="hero-subtitle">
-            Conectamos os artistas plásticos mais talentosos de Angola a colecionadores, 
+            Conectamos os artistas plásticos mais talentosos de Angola a colecionadores,
             empresas e apreciadores de arte em todos os continentes.
           </p>
           <div class="hero-cta">
             <a href="loja.html" class="btn btn-primary">Explorar Coleção</a>
             <a href="artistas.html" class="btn btn-outline-yellow">Conhecer Artistas</a>
           </div>
-          
+
           <div class="hero-stats">
             <div class="stat-item">
               <div class="stat-number">120+</div>
@@ -1313,19 +1359,20 @@
             </div>
           </div>
         </div>
-        
+
         <div class="hero-visual">
-          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80" alt="Obra de arte angolana contemporânea">
+          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80"
+            alt="Obra de arte angolana contemporânea">
           <div class="hero-frame"></div>
           <div class="hero-hud">
             OBRA EM DESTAQUE • <span>ISABEL BENGUELA</span> • 2026
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
-  
+
   <!-- ============================================ -->
   <!-- OBRAS EM DESTAQUE                            -->
   <!-- ============================================ -->
@@ -1336,30 +1383,33 @@
         <a href="loja.html" class="section-link">
           Ver todas
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
           </svg>
         </a>
       </div>
-      
+
       <div class="featured-grid">
         <div class="art-card reveal">
-          <img src="https://images.joseartgallery.com/247650/conversions/portrait-painting-dreaming-colorful-portrait-thumb.jpg" alt="Pintura 'Raízes'">
+          <img
+            src="https://images.joseartgallery.com/247650/conversions/portrait-painting-dreaming-colorful-portrait-thumb.jpg"
+            alt="Pintura 'Raízes'">
           <div class="art-info">
             <div class="art-title">Raízes do Namibe</div>
             <div class="art-artist">João Tchitula • Benguela</div>
             <div class="art-price">180.000 Kz</div>
           </div>
         </div>
-        
+
         <div class="art-card reveal">
-          <img src="https://images.joseartgallery.com/169221/conversions/portrait-painting-floral-tranquility-thumb.jpg" alt="Escultura 'Guardião'">
+          <img src="https://images.joseartgallery.com/169221/conversions/portrait-painting-floral-tranquility-thumb.jpg"
+            alt="Escultura 'Guardião'">
           <div class="art-info">
             <div class="art-title">Guardião Ancestral</div>
             <div class="art-artist">Márcia Nguabi • Luanda</div>
             <div class="art-price">320.000 Kz</div>
           </div>
         </div>
-        
+
         <div class="art-card reveal">
           <img src="https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=600&q=80" alt="Pintura 'Horizonte'">
           <div class="art-info">
@@ -1371,7 +1421,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- ============================================ -->
   <!-- COMO FUNCIONA                                -->
   <!-- ============================================ -->
@@ -1381,29 +1431,32 @@
         <h2>Como funciona a <span class="accent">GALART</span></h2>
         <span style="font-family: var(--font-mono); color: var(--color-yellow);">// plataforma_curada_v2.0</span>
       </div>
-      
+
       <div class="steps-grid">
         <div class="step-card reveal">
           <div class="step-number">01</div>
           <h3>Curadoria Rigorosa</h3>
-          <p>Selecionamos artistas com elevado padrão de qualidade. Cada obra é validada pela nossa equipa antes de entrar na plataforma.</p>
+          <p>Selecionamos artistas com elevado padrão de qualidade. Cada obra é validada pela nossa equipa antes de
+            entrar na plataforma.</p>
         </div>
-        
+
         <div class="step-card reveal">
           <div class="step-number">02</div>
           <h3>Marketing Ativo</h3>
-          <p>Promovemos ativamente cada obra com campanhas profissionais. O artista cria, nós vendemos para Angola e para o mundo.</p>
+          <p>Promovemos ativamente cada obra com campanhas profissionais. O artista cria, nós vendemos para Angola e
+            para o mundo.</p>
         </div>
-        
+
         <div class="step-card reveal">
           <div class="step-number">03</div>
           <h3>Logística Premium</h3>
-          <p>Entregas seguras em todo o território nacional e exportação internacional com seguro incluído. A arte chega perfeita.</p>
+          <p>Entregas seguras em todo o território nacional e exportação internacional com seguro incluído. A arte chega
+            perfeita.</p>
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- ============================================ -->
   <!-- ARTISTAS EM DESTAQUE                         -->
   <!-- ============================================ -->
@@ -1414,11 +1467,11 @@
         <a href="artistas.html" class="section-link">
           Todos os artistas
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
           </svg>
         </a>
       </div>
-      
+
       <div class="artists-grid">
         <div class="artist-card reveal">
           <div class="artist-image">
@@ -1428,7 +1481,7 @@
           <div class="artist-location">Benguela, Angola</div>
           <div class="artist-style">Pintura • Abstracionismo Lírico</div>
         </div>
-        
+
         <div class="artist-card reveal">
           <div class="artist-image">
             <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" alt="Manuel Kiala">
@@ -1437,7 +1490,7 @@
           <div class="artist-location">Luanda, Angola</div>
           <div class="artist-style">Escultura • Madeira e Bronze</div>
         </div>
-        
+
         <div class="artist-card reveal">
           <div class="artist-image">
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="Ana Tchiyo">
@@ -1446,7 +1499,7 @@
           <div class="artist-location">Huíla, Angola</div>
           <div class="artist-style">Arte Digital • Mixed Media</div>
         </div>
-        
+
         <div class="artist-card reveal">
           <div class="artist-image">
             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Carlos Ndunduma">
@@ -1458,15 +1511,14 @@
       </div>
     </div>
   </section>
-  
+
   <!-- ============================================ -->
   <!-- CTA FINAL                                    -->
   <!-- ============================================ -->
   <section class="cta-section">
     <div class="container">
       <h2 class="reveal-text">
-        <span>Pronto para descobrir a</span><br>
-        <span>nova geração da arte angolana?</span>
+        <span>Pronto para descobrir a nova geração da arte angolana?</span>
       </h2>
       <div class="cta-buttons">
         <a href="loja.html" class="btn btn-primary">Explorar Coleção</a>
@@ -1474,21 +1526,25 @@
       </div>
     </div>
   </section>
-  
+
   <!-- ============================================ -->
   <!-- RODAPÉ                                       -->
   <!-- ============================================ -->
   <footer class="footer">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl);" class="footer-content">
-        
+      <div
+        style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl);"
+        class="footer-content">
+
         <div>
           <div class="galart-logo" style="margin-bottom: var(--space-md);">
-                           <img class="galart-logo-svg" style="min-width: 90px; min-height: 70px;" src="assets/img/logo.png" alt="">
+            <img class="galart-logo-svg" style="min-width: 90px; min-height: 70px;" src="assets/img/logo.png" alt="">
 
-            <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+            <span
+              style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
           </div>
-          <p style="color: var(--color-white-soft); font-family: var(--font-secondary); text-transform: none; letter-spacing: normal; font-size: 0.9rem; opacity: 0.8;">
+          <p
+            style="color: var(--color-white-soft); font-family: var(--font-secondary); text-transform: none; letter-spacing: normal; font-size: 0.9rem; opacity: 0.8;">
             Conectando o talento angolano ao mundo.<br>
             Arte sem fronteiras, cultura sem limites.
           </p>
@@ -1498,7 +1554,7 @@
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
-        
+
         <div>
           <h4>Explorar</h4>
           <ul>
@@ -1508,7 +1564,7 @@
             <li><a href="empresas.html">Para Empresas</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h4>Plataforma</h4>
           <ul>
@@ -1518,7 +1574,7 @@
             <li><a href="privacidade.html">Privacidade</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h4>Contacto</h4>
           <ul>
@@ -1528,66 +1584,67 @@
           </ul>
         </div>
       </div>
-      
-      <div style="border-top: 1px solid var(--color-red); padding-top: var(--space-md); display: flex; justify-content: space-between; color: var(--color-white-soft); opacity: 0.7;">
+
+      <div
+        style="border-top: 1px solid var(--color-red); padding-top: var(--space-md); display: flex; justify-content: space-between; color: var(--color-white-soft); opacity: 0.7;">
         <span>© 2026 GALART. Todos os direitos reservados.</span>
         <span style="color: var(--color-yellow);">ANGOLA • ÁFRICA • MUNDO</span>
       </div>
     </div>
   </footer>
-  
+
   <!-- ============================================ -->
   <!-- JAVASCRIPT                                   -->
   <!-- ============================================ -->
   <script>
-    (function() {
+    (function () {
       'use strict';
-      
+
       // --- MENU MOBILE ---
       const mobileMenuToggle = document.getElementById('mobileMenuToggle');
       const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
       const mobileMenuClose = document.getElementById('mobileMenuClose');
       const body = document.body;
-      
+
       function openMenu() {
         mobileMenuOverlay.classList.add('active');
         mobileMenuToggle.classList.add('active');
         body.classList.add('menu-open');
       }
-      
+
       function closeMenu() {
         mobileMenuOverlay.classList.remove('active');
         mobileMenuToggle.classList.remove('active');
         body.classList.remove('menu-open');
       }
-      
+
       if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', openMenu);
       }
-      
+
       if (mobileMenuClose) {
         mobileMenuClose.addEventListener('click', closeMenu);
       }
-      
+
       if (mobileMenuOverlay) {
-        mobileMenuOverlay.addEventListener('click', function(e) {
+        mobileMenuOverlay.addEventListener('click', function (e) {
           if (e.target === mobileMenuOverlay) {
             closeMenu();
           }
         });
       }
-      
-      document.addEventListener('keydown', function(e) {
+
+      document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) {
           closeMenu();
         }
       });
-      
+
       const mobileLinks = document.querySelectorAll('.mobile-menu-links a');
       mobileLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
       });
-      
+
       // --- ANIMAÇÕES DE SCROLL ---
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1596,7 +1653,7 @@
           }
         });
       }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
-      
+
       const textObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1604,10 +1661,10 @@
           }
         });
       }, { threshold: 0.5 });
-      
+
       document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
       document.querySelectorAll('.reveal-text').forEach(el => textObserver.observe(el));
-      
+
       // --- EFEITO SCROLL NA NAVBAR ---
       const navbar = document.querySelector('.navbar');
       window.addEventListener('scroll', () => {
@@ -1617,9 +1674,10 @@
           navbar.style.boxShadow = 'var(--shadow-md)';
         }
       });
-      
+
     })();
   </script>
-  
+
 </body>
+
 </html>
