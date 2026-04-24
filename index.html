@@ -23,6 +23,458 @@
 
   <style>
     /* ============================================ */
+    /* USUÁRIO LOGADO - DROPDOWN                    */
+    /* ============================================ */
+
+    .nav-user {
+      position: relative;
+      z-index: 1001;
+    }
+
+    .nav-user-trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid transparent;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-user-trigger:hover {
+      border-color: var(--color-border);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid var(--color-yellow);
+      object-fit: cover;
+      background: var(--color-black-lighter);
+      flex-shrink: 0;
+    }
+
+    .nav-user-info {
+      text-align: left;
+      line-height: 1.3;
+    }
+
+    .nav-user-name {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--color-white);
+      white-space: nowrap;
+    }
+
+    .nav-user-role {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-yellow);
+      white-space: nowrap;
+    }
+
+    .nav-user-arrow {
+      font-size: 0.65rem;
+      color: var(--color-white-muted);
+      transition: transform var(--transition-fast);
+      margin-left: 2px;
+    }
+
+    .nav-user.active .nav-user-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown */
+    .nav-user-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 280px;
+      background: var(--color-black-light);
+      border: 1px solid var(--color-red);
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+      z-index: 1002;
+    }
+
+    .nav-user.active .nav-user-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+    }
+
+    .dropdown-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--color-yellow);
+      object-fit: cover;
+    }
+
+    .dropdown-name {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--color-white);
+    }
+
+    .dropdown-email {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--color-white-muted);
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 0;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 0.8rem var(--space-md);
+      font-family: var(--font-secondary);
+      font-size: 0.85rem;
+      color: var(--color-white-soft);
+      text-decoration: none;
+      transition: background var(--transition-fast), color var(--transition-fast), padding-left var(--transition-fast);
+    }
+
+    .dropdown-item i {
+      width: 18px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-yellow);
+    }
+
+    .dropdown-item:hover {
+      background: rgba(229, 57, 53, 0.1);
+      color: var(--color-white);
+      padding-left: calc(var(--space-md) + 4px);
+    }
+
+    .dropdown-item.logout {
+      color: var(--color-red);
+    }
+
+    .dropdown-item.logout i {
+      color: var(--color-red);
+    }
+
+    .dropdown-item.logout:hover {
+      background: rgba(229, 57, 53, 0.15);
+    }
+
+    /* ============================================ */
+    /* MODAL DE EDIÇÃO DE PERFIL                    */
+    /* ============================================ */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--color-black-light);
+      border: 2px solid var(--color-red);
+      max-width: 550px;
+      width: 100%;
+      height: 85vh;
+      overflow-y: auto;
+      animation: modalSlideIn 0.4s var(--ease-out-quint);
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-header {
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .modal-header h3 i {
+      color: var(--color-yellow);
+      margin-right: 8px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--color-white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      color: var(--color-red);
+    }
+
+    .modal-body {
+      padding: var(--space-lg);
+    }
+
+    .modal-footer {
+      padding: var(--space-lg);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: flex-end;
+    }
+
+    /* Avatar Upload Section */
+    .avatar-upload-section {
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .avatar-upload-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--color-yellow);
+      object-fit: cover;
+      margin-bottom: var(--space-sm);
+      background: var(--color-black-lighter);
+    }
+
+    .avatar-upload-btn {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: transparent;
+      border: 1px solid var(--color-yellow);
+      color: var(--color-yellow);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-upload-btn:hover {
+      background: var(--color-yellow);
+      color: var(--color-black);
+    }
+
+    .avatar-upload-btn input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Form Groups */
+    .form-group {
+      margin-bottom: var(--space-md);
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      font-family: var(--font-secondary);
+      font-size: 0.9rem;
+      background-color: var(--color-black);
+      border: 1px solid var(--color-border);
+      color: var(--color-white);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-red);
+      box-shadow: var(--shadow-glow-red);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    /* Password Strength */
+    .password-strength {
+      margin-top: var(--space-xs);
+      height: 3px;
+      background: var(--color-border);
+      transition: background var(--transition-fast);
+    }
+
+    .password-strength.weak {
+      background: var(--color-red);
+      width: 33%;
+    }
+
+    .password-strength.medium {
+      background: var(--color-yellow);
+      width: 66%;
+    }
+
+    .password-strength.strong {
+      background: var(--color-green);
+      width: 100%;
+    }
+
+    .password-feedback {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .password-feedback.weak {
+      color: var(--color-red);
+    }
+
+    .password-feedback.medium {
+      color: var(--color-yellow);
+    }
+
+    .password-feedback.strong {
+      color: var(--color-green);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: var(--space-lg);
+      right: var(--space-lg);
+      background: var(--color-black-light);
+      border: 1px solid var(--color-yellow);
+      padding: var(--space-md) var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-white);
+      z-index: 9999;
+      transform: translateX(120%);
+      transition: transform 0.4s var(--ease-out-expo);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.success {
+      border-color: var(--color-green);
+    }
+
+    .toast.error {
+      border-color: var(--color-red);
+    }
+
+    .toast.success i {
+      color: var(--color-green);
+    }
+
+    .toast.error i {
+      color: var(--color-red);
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .nav-user-info {
+        display: none;
+      }
+
+      .nav-user-arrow {
+        display: none;
+      }
+
+      .nav-user-trigger {
+        padding: 0.2rem;
+        border: none;
+      }
+
+      .nav-user-trigger:hover {
+        border: none;
+        background: transparent;
+      }
+
+      .nav-user-dropdown {
+        right: -20px;
+        min-width: 250px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================ */
     /* GALART - CSS BASE GLOBAL v2.0                 */
     /* Paleta Oficial: Preto + Branco + Vermelho + Amarelo */
     /* ============================================ */
@@ -386,6 +838,16 @@
     }
 
     /* ---------- NAVBAR RESPONSIVA ---------- */
+    .mobile-menu-links .mobile-vender-link {
+      margin-top: var(--space-lg);
+      background-color: var(--color-red);
+      color: var(--color-white) !important;
+      text-align: center;
+      padding: var(--space-md) !important;
+      border: none !important;
+      font-size: 1.2rem !important;
+    }
+
     .navbar {
       position: sticky;
       top: var(--space-sm);
@@ -1276,11 +1738,168 @@
       <a href="index.html" class="active">Home</a>
       <a href="loja.html">Loja</a>
       <a href="artistas.html">Artistas</a>
+      <a href="como-funciona.html">Como Funciona</a>
+      <a href="contacto.html">Contacto</a>
 
     </div>
+    <!-- ============================================ -->
+    <!-- USUÁRIO LOGADO (DROPDOWN + MODAL)            -->
+    <!-- ============================================ -->
+    <div class="nav-user" id="navUser">
+      <div class="nav-user-trigger" id="navUserTrigger">
+        <img class="nav-user-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=50&q=80"
+          alt="Isabel Domingos"
+          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><rect fill=%22%23262626%22 width=%2240%22 height=%2240%22/><text x=%2250%25%22 y=%2255%25%22 text-anchor=%22middle%22 dy=%22.1em%22 fill=%22%23E53935%22 font-family=%22Arial%22 font-size=%2220%22 font-weight=%22bold%22>I</text></svg>'">
+        <div class="nav-user-info">
+          <div class="nav-user-name">Isabel Domingos</div>
+          <div class="nav-user-role">Artista • Benguela</div>
+        </div>
+        <i class="fas fa-chevron-down nav-user-arrow"></i>
+      </div>
 
+      <!-- Dropdown Menu -->
+      <div class="nav-user-dropdown" id="navUserDropdown">
+        <div class="dropdown-header">
+          <img class="dropdown-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=50&q=80"
+            alt="Isabel Domingos">
+          <div>
+            <div class="dropdown-name">Isabel Domingos</div>
+            <div class="dropdown-email">isabel@email.com</div>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item" onclick="openProfileModal(); closeDropdown();"><i class="fas fa-user-cog"></i>
+          Editar Perfil</a>
+        <a href="#" class="dropdown-item" onclick="openPasswordModal(); closeDropdown();"><i class="fas fa-lock"></i>
+          Alterar Senha</a>
+        <div class="dropdown-divider"></div>
+        <a href="auth/entrar.html" class="dropdown-item logout"><i class="fas fa-sign-out-alt"></i> Sair da Conta</a>
+      </div>
+    </div>
+    <!-- ============================================ -->
+    <!-- MODAL: EDITAR PERFIL                         -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="profileModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-user-edit"></i> Editar Perfil</h3>
+          <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="profileForm" onsubmit="saveProfile(event)">
+
+            <!-- Avatar Upload -->
+            <div class="avatar-upload-section">
+              <img class="avatar-upload-preview" id="profileAvatarPreview"
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Avatar">
+              <label class="avatar-upload-btn">
+                <i class="fas fa-camera"></i> Alterar Foto
+                <input type="file" id="profileAvatarFile" accept="image/jpeg,image/png"
+                  onchange="previewProfileAvatar(event)">
+              </label>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="profileFirstName">Nome</label>
+                <input type="text" id="profileFirstName" value="Isabel" required>
+              </div>
+              <div class="form-group">
+                <label for="profileLastName">Sobrenome</label>
+                <input type="text" id="profileLastName" value="Domingos" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="profileEmail">Email</label>
+              <input type="email" id="profileEmail" value="isabel@email.com" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="profilePhone">Telefone / WhatsApp</label>
+                <input type="tel" id="profilePhone" value="+244 923 456 789">
+              </div>
+              <div class="form-group">
+                <label for="profileLocation">Localização</label>
+                <select id="profileLocation">
+                  <option value="Luanda">Luanda</option>
+                  <option value="Benguela" selected>Benguela</option>
+                  <option value="Huíla">Huíla</option>
+                  <option value="Cabinda">Cabinda</option>
+                  <option value="Huambo">Huambo</option>
+                  <option value="Bié">Bié</option>
+                  <option value="Cunene">Cunene</option>
+                  <option value="Lunda Sul">Lunda Sul</option>
+                  <option value="Lunda Norte">Lunda Norte</option>
+                  <option value="Malanje">Malanje</option>
+                  <option value="Moxico">Moxico</option>
+                  <option value="Namibe">Namibe</option>
+                  <option value="Uíge">Uíge</option>
+                  <option value="Zaire">Zaire</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="profileBio">Biografia</label>
+              <textarea id="profileBio" rows="3"
+                placeholder="Conte um pouco sobre si...">Artista plástica benguelense com mais de 15 anos de carreira. Especializada em abstracionismo lírico e técnica mista.</textarea>
+            </div>
+
+            <div class="modal-footer" style="padding: 0; border: none; margin-top: var(--space-lg);">
+              <button type="button" class="btn" onclick="closeModal('profileModal')">Cancelar</button>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Alterações</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MODAL: ALTERAR SENHA                         -->
+    <!-- ============================================ -->
+    <div class="modal-overlay" id="passwordModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-lock"></i> Alterar Senha</h3>
+          <button class="modal-close" onclick="closeModal('passwordModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="passwordForm" onsubmit="savePassword(event)">
+
+            <div class="form-group">
+              <label for="currentPassword">Senha Atual</label>
+              <input type="password" id="currentPassword" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword">Nova Senha</label>
+              <input type="password" id="newPassword" placeholder="Mínimo 8 caracteres" required minlength="8"
+                oninput="checkPasswordStrength()">
+              <div class="password-strength" id="passwordStrength"></div>
+              <div class="password-feedback" id="passwordFeedback"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmNewPassword">Confirmar Nova Senha</label>
+              <input type="password" id="confirmNewPassword" placeholder="Repita a nova senha" required minlength="8">
+            </div>
+
+            <div class="modal-footer" style="padding: 0; border: none; margin-top: var(--space-lg);">
+              <button type="button" class="btn" onclick="closeModal('passwordModal')">Cancelar</button>
+              <button type="submit" class="btn btn-primary"><i class="fas fa-key"></i> Atualizar Senha</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMessage"></span></div>
+    
     <div class="nav-actions">
-      <a href="vender.html" class="btn btn-primary btn-small">Vender Arte</a>
+      <a href="auth/entrar.html" class="btn btn-outline-yellow btn-small"><i class="fas fa-user"></i> Entrar</a>
     </div>
 
     <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
@@ -1308,8 +1927,10 @@
         <a href="index.html" class="active">Home</a>
         <a href="loja.html">Loja</a>
         <a href="artistas.html">Artistas</a>
+        <a href="como-funciona.html">Como Funciona</a>
+        <a href="contacto.html">Contacto</a>
 
-        <a href="vender.html" class="mobile-vender-link">Vender Arte</a>
+        <a href="auth/entrar.html" class="mobile-vender-link"><i class="fas fa-user"></i> Entrar</a>
       </div>
 
       <div class="mobile-menu-footer">
@@ -1596,87 +2217,7 @@
   <!-- ============================================ -->
   <!-- JAVASCRIPT                                   -->
   <!-- ============================================ -->
-  <script>
-    (function () {
-      'use strict';
-
-      // --- MENU MOBILE ---
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-      const mobileMenuClose = document.getElementById('mobileMenuClose');
-      const body = document.body;
-
-      function openMenu() {
-        mobileMenuOverlay.classList.add('active');
-        mobileMenuToggle.classList.add('active');
-        body.classList.add('menu-open');
-      }
-
-      function closeMenu() {
-        mobileMenuOverlay.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
-        body.classList.remove('menu-open');
-      }
-
-      if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', openMenu);
-      }
-
-      if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', closeMenu);
-      }
-
-      if (mobileMenuOverlay) {
-        mobileMenuOverlay.addEventListener('click', function (e) {
-          if (e.target === mobileMenuOverlay) {
-            closeMenu();
-          }
-        });
-      }
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) {
-          closeMenu();
-        }
-      });
-
-      const mobileLinks = document.querySelectorAll('.mobile-menu-links a');
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-      });
-
-      // --- ANIMAÇÕES DE SCROLL ---
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
-
-      const textObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.5 });
-
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-      document.querySelectorAll('.reveal-text').forEach(el => textObserver.observe(el));
-
-      // --- EFEITO SCROLL NA NAVBAR ---
-      const navbar = document.querySelector('.navbar');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          navbar.style.boxShadow = '0 10px 40px rgba(229, 57, 53, 0.15)';
-        } else {
-          navbar.style.boxShadow = 'var(--shadow-md)';
-        }
-      });
-
-    })();
-  </script>
+<script src="assets/js/js.js"></script>
 
 </body>
 

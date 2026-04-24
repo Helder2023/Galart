@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="GALART - Descubra como funciona a maior plataforma de arte angolana. Para artistas, colecionadores e galerias.">
+  <meta name="theme-color" content="#0D0D0D">
+  
+  <title>Como Funciona | GALART - Arte Angolana</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ============================================ */
+/* USUÁRIO LOGADO - DROPDOWN                    */
+/* ============================================ */
+
+.nav-user {
+  position: relative;
+  z-index: 1001;
+}
+
+.nav-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid transparent;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav-user-trigger:hover {
+  border-color: var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--color-yellow);
+  object-fit: cover;
+  background: var(--color-black-lighter);
+  flex-shrink: 0;
+}
+
+.nav-user-info {
+  text-align: left;
+  line-height: 1.3;
+}
+
+.nav-user-name {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.nav-user-role {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-yellow);
+  white-space: nowrap;
+}
+
+.nav-user-arrow {
+  font-size: 0.65rem;
+  color: var(--color-white-muted);
+  transition: transform var(--transition-fast);
+  margin-left: 2px;
+}
+
+.nav-user.active .nav-user-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.nav-user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 280px;
+  background: var(--color-black-light);
+  border: 1px solid var(--color-red);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+  z-index: 1002;
+}
+
+.nav-user.active .nav-user-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.dropdown-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid var(--color-yellow);
+  object-fit: cover;
+}
+
+.dropdown-name {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-white);
+}
+
+.dropdown-email {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-white-muted);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.8rem var(--space-md);
+  font-family: var(--font-secondary);
+  font-size: 0.85rem;
+  color: var(--color-white-soft);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.dropdown-item i {
+  width: 18px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-yellow);
+}
+
+.dropdown-item:hover {
+  background: rgba(229, 57, 53, 0.1);
+  color: var(--color-white);
+  padding-left: calc(var(--space-md) + 4px);
+}
+
+.dropdown-item.logout {
+  color: var(--color-red);
+}
+
+.dropdown-item.logout i {
+  color: var(--color-red);
+}
+
+.dropdown-item.logout:hover {
+  background: rgba(229, 57, 53, 0.15);
+}
+
+/* ============================================ */
+/* MODAL DE EDIÇÃO DE PERFIL                    */
+/* ============================================ */
+ .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--color-black-light);
+      border: 2px solid var(--color-red);
+      max-width: 550px;
+      width: 100%;
+      height: 85vh;
+      overflow-y: auto;
+      animation: modalSlideIn 0.4s var(--ease-out-quint);
+    }
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h3 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.modal-header h3 i {
+  color: var(--color-yellow);
+  margin-right: 8px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 36px; height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+  color: var(--color-red);
+}
+
+.modal-body {
+  padding: var(--space-lg);
+}
+
+.modal-footer {
+  padding: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+}
+
+/* Avatar Upload Section */
+.avatar-upload-section {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.avatar-upload-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--color-yellow);
+  object-fit: cover;
+  margin-bottom: var(--space-sm);
+  background: var(--color-black-lighter);
+}
+
+.avatar-upload-btn {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 1px solid var(--color-yellow);
+  color: var(--color-yellow);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-upload-btn:hover {
+  background: var(--color-yellow);
+  color: var(--color-black);
+}
+
+.avatar-upload-btn input {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-yellow);
+  margin-bottom: var(--space-xs);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  background-color: var(--color-black);
+  border: 1px solid var(--color-border);
+  color: var(--color-white);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-red);
+  box-shadow: var(--shadow-glow-red);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* Password Strength */
+.password-strength {
+  margin-top: var(--space-xs);
+  height: 3px;
+  background: var(--color-border);
+  transition: background var(--transition-fast);
+}
+
+.password-strength.weak { background: var(--color-red); width: 33%; }
+.password-strength.medium { background: var(--color-yellow); width: 66%; }
+.password-strength.strong { background: var(--color-green); width: 100%; }
+
+.password-feedback {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.password-feedback.weak { color: var(--color-red); }
+.password-feedback.medium { color: var(--color-yellow); }
+.password-feedback.strong { color: var(--color-green); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  background: var(--color-black-light);
+  border: 1px solid var(--color-yellow);
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-white);
+  z-index: 9999;
+  transform: translateX(120%);
+  transition: transform 0.4s var(--ease-out-expo);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.toast.show { transform: translateX(0); }
+.toast.success { border-color: var(--color-green); }
+.toast.error { border-color: var(--color-red); }
+.toast.success i { color: var(--color-green); }
+.toast.error i { color: var(--color-red); }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .nav-user-info { display: none; }
+  .nav-user-arrow { display: none; }
+  .nav-user-trigger { padding: 0.2rem; border: none; }
+  .nav-user-trigger:hover { border: none; background: transparent; }
+  .nav-user-dropdown { right: -20px; min-width: 250px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+       .mobile-menu-links .mobile-vender-link {
+      margin-top: var(--space-lg);
+      background-color: var(--color-red);
+      color: var(--color-white) !important;
+      text-align: center;
+      padding: var(--space-md) !important;
+      border: none !important;
+      font-size: 1.2rem !important;
+    }
+    *,
+    *::before,
+    *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --color-black: #0D0D0D;
+      --color-black-light: #1A1A1A;
+      --color-black-lighter: #262626;
+      --color-white: #FFFFFF;
+      --color-white-soft: #F5F5F5;
+      --color-white-muted: rgba(255, 255, 255, 0.7);
+      --color-red: #E53935;
+      --color-yellow: #FFC107;
+      --color-green: #4CAF50;
+      --color-blue: #2196F3;
+      --color-purple: #9C27B0;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-border-light: rgba(255, 255, 255, 0.15);
+      
+      --font-primary: 'Space Grotesk', 'Montserrat', sans-serif;
+      --font-secondary: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem;
+      --space-lg: 2.5rem; --space-xl: 4rem; --space-2xl: 6rem; --space-3xl: 8rem;
+      
+      --border-radius-none: 0px; --border-radius-sm: 2px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow-red: 0 0 20px rgba(229, 57, 53, 0.3);
+      
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quint: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-fast: 0.2s var(--ease-out-quint);
+      --transition-medium: 0.4s var(--ease-out-quint);
+      --transition-slow: 0.6s var(--ease-out-expo);
+    }
+    
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; background-color: var(--color-black); }
+    
+    body {
+      background-color: var(--color-black);
+      color: var(--color-white-soft);
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: 1rem;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    body.menu-open { overflow: hidden; }
+    
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--space-md); position: relative; z-index: 2; }
+    
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-primary); font-weight: 600; line-height: 1.2; color: var(--color-white); }
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-md); }
+    h3 { font-size: 1.5rem; }
+    p { margin-bottom: var(--space-sm); color: var(--color-white-soft); opacity: 0.85; }
+    a { color: var(--color-white); text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--color-red); }
+    
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      position: sticky; top: var(--space-sm);
+      margin: var(--space-sm) auto;
+      width: 95%; max-width: 1440px;
+      padding: 0.8rem 2rem;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid var(--color-border-light);
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      animation: slideDown 0.6s var(--ease-out-expo) forwards;
+    }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .galart-logo { display: flex; align-items: center; gap: 10px; }
+    .galart-logo-img { width: 40px; height: 40px; object-fit: contain; }
+    .galart-logo-text { font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white); text-transform: uppercase; }
+    .galart-logo-text .accent { color: var(--color-red); }
+    .galart-slogan { font-family: var(--font-mono); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 3px; color: var(--color-yellow); margin-top: 2px; }
+    
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-family: var(--font-primary); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background-color: var(--color-red); transition: width var(--transition-fast); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--color-yellow); }
+    .nav-links a.active::after { width: 100%; background-color: var(--color-yellow); }
+    
+    .nav-actions { display: flex; align-items: center; gap: var(--space-sm); }
+    
+    .mobile-menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 24px; background: transparent; border: none; cursor: pointer; padding: 0; z-index: 1001; }
+    .mobile-menu-toggle span { width: 100%; height: 2px; background-color: var(--color-white); transition: all 0.3s var(--ease-out-quint); }
+    .mobile-menu-toggle.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+    .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-toggle.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+    
+    .mobile-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(13, 13, 13, 0.98); backdrop-filter: blur(12px); z-index: 2000; display: flex; justify-content: flex-end; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+    .mobile-menu { width: 100%; max-width: 400px; height: 100%; background-color: var(--color-black-light); border-left: 2px solid var(--color-red); display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.4s var(--ease-out-expo); overflow-y: auto; }
+    .mobile-menu-overlay.active .mobile-menu { transform: translateX(0); }
+    .mobile-menu-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-lg) var(--space-md); border-bottom: 1px solid var(--color-border); }
+    .mobile-menu-close { background: none; border: none; color: var(--color-white); font-size: 2rem; cursor: pointer; }
+    .mobile-menu-close:hover { color: var(--color-red); }
+    .mobile-menu-links { flex: 1; display: flex; flex-direction: column; padding: var(--space-xl) var(--space-md); gap: var(--space-sm); }
+    .mobile-menu-links a { font-family: var(--font-primary); font-size: 1.4rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--color-white); padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border); }
+    .mobile-menu-links a:hover { color: var(--color-yellow); padding-left: var(--space-sm); }
+    .mobile-menu-links a.active { color: var(--color-red); }
+    .mobile-menu-footer { padding: var(--space-xl) var(--space-md); border-top: 1px solid var(--color-border); }
+    .mobile-social { display: flex; gap: var(--space-md); }
+    .mobile-social a { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background-color: var(--color-black); border: 1px solid var(--color-border); color: var(--color-white); font-size: 1.2rem; }
+    .mobile-social a:hover { border-color: var(--color-yellow); color: var(--color-yellow); }
+    
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+      padding: 0.7rem 1.5rem;
+      font-family: var(--font-primary); font-weight: 600; font-size: 0.8rem; letter-spacing: 1px;
+      text-transform: uppercase; border: 1.5px solid var(--color-white);
+      background-color: transparent; color: var(--color-white);
+      cursor: pointer; transition: all var(--transition-fast);
+      border-radius: var(--border-radius-none);
+      position: relative; overflow: hidden; z-index: 1;
+    }
+    .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%; background-color: var(--color-red); transition: width var(--transition-fast); z-index: -1; }
+    .btn:hover { border-color: var(--color-red); }
+    .btn:hover::before { width: 100%; }
+    .btn-primary { background-color: var(--color-red); border-color: var(--color-red); box-shadow: var(--shadow-glow-red); }
+    .btn-primary::before { background-color: var(--color-black); }
+    .btn-primary:hover { border-color: var(--color-white); }
+    .btn-outline-yellow { border-color: var(--color-yellow); color: var(--color-yellow); }
+    .btn-outline-yellow::before { background-color: var(--color-yellow); }
+    .btn-outline-yellow:hover { color: var(--color-black); }
+    .btn-small { padding: 0.4rem 1rem; font-size: 0.7rem; }
+    
+    /* ---------- PAGE HEADER ---------- */
+    .page-header { padding: var(--space-xl) 0 var(--space-lg); border-bottom: 1px solid var(--color-border); margin-bottom: var(--space-2xl); }
+    .breadcrumb { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--color-white-muted); margin-bottom: var(--space-sm); }
+    .breadcrumb a { color: var(--color-yellow); }
+    
+    /* ---------- HERO SECTION ---------- */
+    .hero-section { text-align: center; padding: var(--space-2xl) 0; }
+    .hero-section h1 { margin-bottom: var(--space-md); }
+    .hero-section h1 .accent { color: var(--color-yellow); }
+    .hero-section .hero-subtitle { font-size: 1.2rem; max-width: 700px; margin: 0 auto var(--space-xl); opacity: 0.8; }
+    
+    /* ---------- STEPS ---------- */
+    .steps-section { padding: var(--space-3xl) 0; }
+    .step-block { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: center; margin-bottom: var(--space-3xl); }
+    .step-block:last-child { margin-bottom: 0; }
+    .step-block.reverse { direction: rtl; }
+    .step-block.reverse .step-content { direction: ltr; }
+    .step-number { font-family: var(--font-mono); font-size: 8rem; font-weight: 800; color: var(--color-red); opacity: 0.15; line-height: 1; margin-bottom: -2rem; }
+    .step-content h2 { font-size: 2rem; margin-bottom: var(--space-md); }
+    .step-content h2 span { color: var(--color-yellow); }
+    .step-content p { font-size: 1rem; margin-bottom: var(--space-md); }
+    .step-features { list-style: none; margin-bottom: var(--space-lg); }
+    .step-features li { display: flex; align-items: flex-start; gap: var(--space-sm); margin-bottom: var(--space-sm); }
+    .step-features li i { color: var(--color-green); margin-top: 4px; }
+    .step-image { position: relative; }
+    .step-image img { width: 100%; height: auto; border: 1px solid var(--color-border); }
+    .step-image-frame { position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; border: 2px solid var(--color-red); z-index: -1; opacity: 0.4; }
+    
+    /* ---------- PARA QUEM ---------- */
+    .audience-section { padding: var(--space-3xl) 0; background: linear-gradient(180deg, var(--color-black) 0%, #0A0505 100%); border-top: 1px solid rgba(229, 57, 53, 0.3); border-bottom: 1px solid rgba(229, 57, 53, 0.3); }
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+    .audience-card { background: var(--color-black-light); border: 1px solid var(--color-border); padding: var(--space-xl); text-align: center; transition: border-color var(--transition-fast), transform var(--transition-fast); }
+    .audience-card:hover { border-color: var(--color-red); transform: translateY(-6px); }
+    .audience-icon { font-size: 3rem; margin-bottom: var(--space-md); }
+    .audience-icon.artist { color: var(--color-yellow); }
+    .audience-icon.collector { color: var(--color-red); }
+    .audience-icon.gallery { color: var(--color-purple); }
+    .audience-card h3 { margin-bottom: var(--space-sm); }
+    .audience-card p { font-size: 0.9rem; opacity: 0.8; }
+    
+    /* ---------- FAQ ---------- */
+    .faq-section { padding: var(--space-3xl) 0; }
+    .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); }
+    .faq-item { background: var(--color-black-light); border: 1px solid var(--color-border); padding: var(--space-lg); }
+    .faq-item h4 { font-family: var(--font-primary); font-size: 1.1rem; margin-bottom: var(--space-sm); color: var(--color-yellow); }
+    .faq-item p { font-size: 0.9rem; opacity: 0.8; margin-bottom: 0; }
+    
+    /* ---------- CTA ---------- */
+    .cta-section { text-align: center; padding: var(--space-3xl) 0; border-top: 1px solid var(--color-red); border-bottom: 1px solid var(--color-red); margin: var(--space-3xl) 0; background: linear-gradient(135deg, rgba(229, 57, 53, 0.05) 0%, transparent 100%); }
+    .cta-section h2 { max-width: 800px; margin: 0 auto var(--space-lg); }
+    .cta-buttons { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
+    
+    /* ---------- FOOTER ---------- */
+    .footer { background: var(--color-black); padding: var(--space-2xl) 0 var(--space-lg); margin-top: var(--space-3xl); border-top: 1px solid var(--color-red); font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; position: relative; }
+    .footer::before { content: ''; position: absolute; top: -2px; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--color-red), var(--color-yellow), transparent); animation: scanFooter 5s infinite linear; }
+    @keyframes scanFooter { 0% { opacity: 0; transform: translateX(-100%); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateX(100%); } }
+    .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+    .footer a { color: var(--color-white-muted); }
+    .footer a:hover { color: var(--color-yellow); }
+    .footer h4 { color: var(--color-white); font-size: 1rem; margin-bottom: var(--space-sm); }
+    .footer ul { list-style: none; }
+    .footer ul li { margin-bottom: var(--space-xs); }
+    .footer-bottom { border-top: 1px solid var(--color-red); padding-top: var(--space-md); display: flex; justify-content: space-between; color: var(--color-white-muted); }
+    .social-links { display: flex; gap: var(--space-sm); margin-top: var(--space-sm); }
+    .social-links a { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); color: var(--color-white); }
+    .social-links a:hover { border-color: var(--color-yellow); color: var(--color-yellow); }
+    
+    /* ---------- RESPONSIVIDADE ---------- */
+    @media (max-width: 1024px) { .step-block { grid-template-columns: 1fr; gap: var(--space-xl); } .step-block.reverse { direction: ltr; } .audience-grid { grid-template-columns: repeat(2, 1fr); } .faq-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .nav-links, .nav-actions .btn { display: none; } .mobile-menu-toggle { display: flex; } }
+    @media (max-width: 768px) {
+      .navbar { padding: 0.8rem 1rem; width: 100%; top: 0; margin: 0; border-left: none; border-right: none; }
+      .galart-slogan { font-size: 0.45rem; }
+      .galart-logo-text { font-size: 1.2rem; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; }
+      .mobile-menu { max-width: 100%; }
+      .step-number { font-size: 5rem; }
+    }
+    
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--color-black); } ::-webkit-scrollbar-thumb { background: var(--color-red); } ::selection { background-color: var(--color-red); color: var(--color-white); }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body>
+  
+  <!-- ============================================ -->
+  <!-- NAVBAR ATUALIZADA                            -->
+  <!-- ============================================ -->
+  <nav class="navbar">
+    <div class="galart-logo">
+      <a href="index.html"><img class="galart-logo-img"  style="min-width: 90px; min-height: 70px;" src="assets/img/logo.png" alt="GALART"></a>
+      <div>
+        <div class="galart-logo-text">GAL<span class="accent">ART</span></div>
+        <div class="galart-slogan">ARTE ANGOLANA • TALENTO SEM FRONTEIRAS</div>
+      </div>
+    </div>
+    
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="loja.html">Loja</a>
+      <a href="artistas.html">Artistas</a>
+      <a href="como-funciona.html" class="active">Como Funciona</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+    
+    <div class="nav-actions">
+      <a href="auth/entrar.html" class="btn btn-outline-yellow btn-small"><i class="fas fa-user"></i> Entrar</a>
+    </div>
+    
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  
+  <!-- Menu Mobile -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu">
+      <div class="mobile-menu-header">
+        <div class="galart-logo">
+          <img style="width: 50px; height: 35px; object-fit: contain;" src="assets/img/logo.png" alt="GALART">
+          <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+        </div>
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+      </div>
+      <div class="mobile-menu-links">
+        <a href="index.html">Home</a>
+        <a href="loja.html">Loja</a>
+        <a href="artistas.html">Artistas</a>
+        <a href="como-funciona.html" class="active">Como Funciona</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="auth/entrar.html" class="mobile-vender-link"><i class="fas fa-user"></i> Entrar</a>
+      </div>
+      <div class="mobile-menu-footer">
+        <div class="mobile-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ============================================ -->
+  <!-- PAGE HEADER                                  -->
+  <!-- ============================================ -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / <span>Como Funciona</span></div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>Como Funciona a <span class="accent">GALART</span></h1>
+      <p class="hero-subtitle">A plataforma que conecta artistas angolanos a colecionadores em todo o mundo. Simples, transparente e profissional.</p>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- PASSO 1: PARA ARTISTAS                       -->
+  <!-- ============================================ -->
+  <section class="steps-section">
+    <div class="container">
+      
+      <div class="step-block">
+        <div class="step-content">
+          <div class="step-number">01</div>
+          <h2>Para <span>Artistas</span></h2>
+          <p>Junte-se à GALART e transforme a sua paixão em rendimento. Publicamos e promovemos as suas obras para compradores em Angola e no mundo.</p>
+          <ul class="step-features">
+            <li><i class="fas fa-check-circle"></i> <strong>Crie o seu perfil:</strong> Cadastre-se gratuitamente e mostre o seu portfólio.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Publique as suas obras:</strong> Carregue imagens, defina preços e categorize as suas criações.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Nós promovemos:</strong> A GALART faz marketing profissional para atrair compradores.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Receba os seus ganhos:</strong> A cada venda, recebe 70% do valor. A GALART fica com 30%.</li>
+          </ul>
+          <a href="vender.html" class="btn btn-primary"><i class="fas fa-palette"></i> Começar a Vender</a>
+        </div>
+        <div class="step-image">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80" alt="Artista angolana a pintar">
+          <div class="step-image-frame"></div>
+        </div>
+      </div>
+      
+      <!-- PASSO 2: PARA COLECIONADORES -->
+      <div class="step-block reverse">
+        <div class="step-content">
+          <div class="step-number">02</div>
+          <h2>Para <span>Colecionadores</span></h2>
+          <p>Descubra obras únicas de artistas angolanos emergentes e consagrados. Compre ou reserve as suas peças favoritas com total segurança.</p>
+          <ul class="step-features">
+            <li><i class="fas fa-check-circle"></i> <strong>Explore a galeria:</strong> Navegue por centenas de obras organizadas por categoria e artista.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Reserve ou compre:</strong> Reserve obras para garantir a disponibilidade ou compre diretamente.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Receba em casa:</strong> Entregamos em todo o território angolano e exportamos para o mundo.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Acompanhe a sua coleção:</strong> Gira as suas reservas e histórico de compras no painel do colecionador.</li>
+          </ul>
+          <a href="loja.html" class="btn btn-outline-yellow"><i class="fas fa-shopping-bag"></i> Explorar a Loja</a>
+        </div>
+        <div class="step-image">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Colecionador a apreciar arte">
+          <div class="step-image-frame"></div>
+        </div>
+      </div>
+      
+      <!-- PASSO 3: PARA GALERIAS -->
+      <div class="step-block">
+        <div class="step-content">
+          <div class="step-number">03</div>
+          <h2>Para <span>Galerias</span></h2>
+          <p>Representa vários artistas? A GALART oferece um painel dedicado para galerias gerirem todo o seu catálogo num só lugar.</p>
+          <ul class="step-features">
+            <li><i class="fas fa-check-circle"></i> <strong>Cadastre os seus artistas:</strong> Adicione todos os artistas que representa com perfis completos.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Gira as obras:</strong> Publique, acompanhe reservas e marque vendas para cada artista.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Visão consolidada:</strong> Veja o desempenho de todos os artistas num único dashboard.</li>
+            <li><i class="fas fa-check-circle"></i> <strong>Relatórios financeiros:</strong> Acompanhe os ganhos com a comissão de 70% sobre cada venda.</li>
+          </ul>
+          <a href="auth/entrar.html" class="btn btn-primary"><i class="fas fa-building"></i> Aceder como Galeria</a>
+        </div>
+        <div class="step-image">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Galeria de arte contemporânea">
+          <div class="step-image-frame"></div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- PARA QUEM É A GALART?                        -->
+  <!-- ============================================ -->
+  <section class="audience-section">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: var(--space-2xl);">Para Quem é a <span style="color: var(--color-yellow);">GALART</span>?</h2>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-icon artist"><i class="fas fa-paint-brush"></i></div>
+          <h3>Artistas Plásticos</h3>
+          <p>Pintores, escultores, fotógrafos e artistas digitais que desejam expor e vender as suas obras sem depender de galerias físicas.</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon collector"><i class="fas fa-gem"></i></div>
+          <h3>Colecionadores</h3>
+          <p>Apreciadores de arte que procuram descobrir novos talentos angolanos e adquirir obras autênticas com curadoria profissional.</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon gallery"><i class="fas fa-store-alt"></i></div>
+          <h3>Galerias e Curadores</h3>
+          <p>Galerias que representam múltiplos artistas e desejam uma plataforma digital para expandir o seu alcance e gerir catálogos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: var(--space-2xl);">Perguntas <span style="color: var(--color-yellow);">Frequentes</span></h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>Quanto custa publicar obras na GALART?</h4>
+          <p>A publicação de obras é totalmente gratuita. A GALART apenas cobra uma comissão de 30% sobre o valor de cada venda realizada.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Como recebo o pagamento das minhas vendas?</h4>
+          <p>Após a confirmação da venda, o valor correspondente a 70% do preço da obra é transferido para a sua conta bancária em até 7 dias úteis.</p>
+        </div>
+        <div class="faq-item">
+          <h4>A GALART entrega obras internacionalmente?</h4>
+          <p>Sim! Trabalhamos com transportadoras internacionais especializadas em arte para garantir que as obras chegam em perfeitas condições a qualquer destino.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Posso reservar uma obra sem pagar?</h4>
+          <p>Sim. Pode reservar uma obra e a nossa equipa entrará em contacto para finalizar os detalhes de pagamento e entrega.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Como funciona a curadoria da GALART?</h4>
+          <p>A nossa equipa analisa cada obra submetida para garantir a qualidade do catálogo. Aprovações são baseadas em critérios artísticos e técnicos.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Posso usar a GALART se represento vários artistas?</h4>
+          <p>Sim! Temos um dashboard dedicado para galerias onde pode gerir múltiplos artistas, obras, reservas e vendas num só lugar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- CTA FINAL                                    -->
+  <!-- ============================================ -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Pronto para fazer parte da <span style="color: var(--color-yellow);">GALART</span>?</h2>
+      <p style="font-size: 1.1rem; margin-bottom: var(--space-xl); opacity: 0.8;">Junte-se a centenas de artistas e colecionadores que já confiam na nossa plataforma.</p>
+      <div class="cta-buttons">
+        <a href="auth/entrar.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Criar Conta Gratuita</a>
+        <a href="loja.html" class="btn btn-outline-yellow"><i class="fas fa-shopping-bag"></i> Explorar a Loja</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  <!-- ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="galart-logo" style="margin-bottom: var(--space-md);">
+            <img style="width: 50px; height: 35px; object-fit: contain;" src="assets/img/logo.png" alt="GALART">
+            <span style="font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white);">GALART</span>
+          </div>
+          <p style="text-transform: none; letter-spacing: normal; opacity: 0.8;">Conectando o talento angolano ao mundo.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div><h4>Explorar</h4><ul><li><a href="loja.html">Loja</a></li><li><a href="artistas.html">Artistas</a></li><li><a href="como-funciona.html">Como Funciona</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div><h4>Plataforma</h4><ul><li><a href="auth/entrar.html">Entrar</a></li><li><a href="vender.html">Vender Arte</a></li><li><a href="termos.html">Termos</a></li><li><a href="privacidade.html">Privacidade</a></li></ul></div>
+        <div><h4>Contacto</h4><ul><li><a href="mailto:contacto@galart.ao">contacto@galart.ao</a></li><li>+244 999 999 999</li><li>Luanda, Angola</li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 GALART</span>
+        <span style="color: var(--color-yellow);">ANGOLA • ÁFRICA • MUNDO</span>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    (function() {
+      var mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      var mobileMenuClose = document.getElementById('mobileMenuClose');
+      var body = document.body;
+      
+      function openMenu() { mobileMenuOverlay.classList.add('active'); mobileMenuToggle.classList.add('active'); body.classList.add('menu-open'); }
+      function closeMenu() { mobileMenuOverlay.classList.remove('active'); mobileMenuToggle.classList.remove('active'); body.classList.remove('menu-open'); }
+      
+      if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', openMenu);
+      if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+      if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', function(e) { if (e.target === mobileMenuOverlay) closeMenu(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && mobileMenuOverlay && mobileMenuOverlay.classList.contains('active')) closeMenu(); });
+      document.querySelectorAll('.mobile-menu-links a').forEach(function(link) { link.addEventListener('click', closeMenu); });
+    })();
+  </script>
+  
+</body>
+</html>
