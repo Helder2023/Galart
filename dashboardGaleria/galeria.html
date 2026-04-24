@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="GALART Dashboard - Área da Galeria. Gira as obras dos seus artistas, acompanhe reservas, vendas e os seus ganhos.">
+  <meta name="theme-color" content="#0D0D0D">
+  
+  <title>Dashboard | GALART - Área da Galeria</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* ============================================ */
+    /* RESET & VARIÁVEIS                            */
+    /* ============================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --color-black: #0D0D0D;
+      --color-black-light: #1A1A1A;
+      --color-black-lighter: #262626;
+      --color-white: #FFFFFF;
+      --color-white-soft: #F5F5F5;
+      --color-white-muted: rgba(255, 255, 255, 0.7);
+      --color-red: #E53935;
+      --color-red-hover: #C62828;
+      --color-yellow: #FFC107;
+      --color-yellow-soft: #FFD54F;
+      --color-green: #4CAF50;
+      --color-blue: #2196F3;
+      --color-purple: #9C27B0;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-border-light: rgba(255, 255, 255, 0.15);
+      
+      --font-primary: 'Space Grotesk', 'Montserrat', sans-serif;
+      --font-secondary: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      
+      --border-radius-none: 0px;
+      --border-radius-sm: 2px;
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow-red: 0 0 20px rgba(229, 57, 53, 0.3);
+      --shadow-glow-purple: 0 0 20px rgba(156, 39, 176, 0.3);
+      
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quint: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      
+      --transition-fast: 0.2s var(--ease-out-quint);
+      --transition-medium: 0.4s var(--ease-out-quint);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--color-black);
+    }
+    
+    body {
+      background-color: var(--color-black);
+      color: var(--color-white-soft);
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: 1rem;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    body.menu-open, body.modal-open { overflow: hidden; }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 0.5px, transparent 0.5px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--space-md);
+      padding-right: var(--space-md);
+      position: relative;
+      z-index: 2;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--color-white);
+    }
+    
+    h1 { font-size: clamp(2rem, 4vw, 3rem); text-transform: uppercase; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: var(--space-md); }
+    h3 { font-size: 1.3rem; }
+    h4 { font-size: 1rem; }
+    
+    p { margin-bottom: var(--space-sm); color: var(--color-white-soft); opacity: 0.85; }
+    a { color: var(--color-white); text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--color-red); }
+    
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      position: sticky;
+      top: var(--space-sm);
+      margin: var(--space-sm) auto;
+      width: 95%;
+      max-width: 1440px;
+      padding: 0.8rem 2rem;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid var(--color-border-light);
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .galart-logo { display: flex; align-items: center; gap: 10px; }
+    .galart-logo-img { width: 40px; height: 40px; object-fit: contain; }
+    .galart-logo-text { font-family: var(--font-primary); font-weight: 800; font-size: 1.4rem; color: var(--color-white); text-transform: uppercase; }
+    .galart-logo-text .accent { color: var(--color-red); }
+    
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    
+    .nav-user-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 2px solid var(--color-purple);
+      object-fit: cover;
+      background: var(--color-black-lighter);
+    }
+    
+    .nav-user-info { text-align: right; }
+    .nav-user-name { font-family: var(--font-primary); font-weight: 600; font-size: 0.9rem; color: var(--color-white); }
+    .nav-user-role { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--color-purple); }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      padding: 0.7rem 1.5rem;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1.5px solid var(--color-white);
+      background-color: transparent;
+      color: var(--color-white);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border-radius: var(--border-radius-none);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 100%;
+      background-color: var(--color-red);
+      transition: width var(--transition-fast);
+      z-index: -1;
+    }
+    
+    .btn:hover { border-color: var(--color-red); }
+    .btn:hover::before { width: 100%; }
+    
+    .btn-primary { background-color: var(--color-red); border-color: var(--color-red); box-shadow: var(--shadow-glow-red); }
+    .btn-primary::before { background-color: var(--color-black); }
+    .btn-primary:hover { border-color: var(--color-white); }
+    
+    .btn-outline-purple { border-color: var(--color-purple); color: var(--color-purple); }
+    .btn-outline-purple::before { background-color: var(--color-purple); }
+    .btn-outline-purple:hover { color: var(--color-white); }
+    
+    .btn-outline-yellow { border-color: var(--color-yellow); color: var(--color-yellow); }
+    .btn-outline-yellow::before { background-color: var(--color-yellow); }
+    .btn-outline-yellow:hover { color: var(--color-black); }
+    
+    .btn-small { padding: 0.4rem 1rem; font-size: 0.7rem; }
+    .btn-block { width: 100%; }
+    
+    /* ---------- PAGE HEADER ---------- */
+    .page-header {
+      padding: var(--space-xl) 0 var(--space-lg);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .breadcrumb {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-white-muted);
+      margin-bottom: var(--space-sm);
+    }
+    .breadcrumb a { color: var(--color-yellow); }
+    
+    /* ---------- WELCOME BANNER ---------- */
+    .welcome-banner {
+      background: linear-gradient(135deg, var(--color-black-light) 0%, #1A0515 100%);
+      border: 1px solid var(--color-purple);
+      padding: var(--space-lg) var(--space-xl);
+      margin-bottom: var(--space-xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    
+    .welcome-text h2 { margin-bottom: var(--space-xs); }
+    .welcome-text h2 span { color: var(--color-purple); }
+    .welcome-text p { margin-bottom: 0; opacity: 0.7; }
+    
+    .welcome-stats { display: flex; gap: var(--space-xl); }
+    .welcome-stat { text-align: center; }
+    .welcome-stat-value { font-family: var(--font-mono); font-size: 2rem; font-weight: 700; color: var(--color-purple); }
+    .welcome-stat-label { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--color-white-muted); }
+    
+    /* ---------- CARDS DE RESUMO ---------- */
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .summary-card {
+      background: var(--color-black-light);
+      border: 1px solid var(--color-border);
+      padding: var(--space-lg);
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+    
+    .summary-card:hover { border-color: var(--color-purple); transform: translateY(-4px); }
+    
+    .summary-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-md); }
+    
+    .summary-card-icon {
+      width: 45px; height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    
+    .summary-card-icon.red { background: var(--color-red); color: var(--color-white); }
+    .summary-card-icon.yellow { background: var(--color-yellow); color: var(--color-black); }
+    .summary-card-icon.green { background: var(--color-green); color: var(--color-white); }
+    .summary-card-icon.purple { background: var(--color-purple); color: var(--color-white); }
+    .summary-card-icon.blue { background: var(--color-blue); color: var(--color-white); }
+    
+    .summary-card-value { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; color: var(--color-white); margin-bottom: 4px; }
+    .summary-card-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-white-muted); }
+    .summary-card-detail { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-purple); margin-top: var(--space-xs); }
+    
+    /* ---------- TABS ---------- */
+    .dashboard-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--color-border);
+      overflow-x: auto;
+    }
+    
+    .dashboard-tab {
+      padding: var(--space-sm) var(--space-xl);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-white-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+      white-space: nowrap;
+    }
+    
+    .dashboard-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 2px;
+      background: var(--color-purple);
+      transition: width var(--transition-fast);
+    }
+    
+    .dashboard-tab:hover { color: var(--color-white); }
+    .dashboard-tab.active { color: var(--color-yellow); }
+    .dashboard-tab.active::after { width: 100%; }
+    
+    .dashboard-tab .badge {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      background: var(--color-purple);
+      color: var(--color-white);
+      font-size: 0.6rem;
+      margin-left: var(--space-xs);
+    }
+    
+    /* ---------- TABELA ---------- */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeSlideIn 0.4s var(--ease-out-expo); }
+    
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .table-wrapper { overflow-x: auto; margin-bottom: var(--space-xl); }
+    
+    table { width: 100%; border-collapse: collapse; }
+    
+    thead th {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-purple);
+      text-align: left;
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--color-purple);
+      background: var(--color-black-light);
+      white-space: nowrap;
+    }
+    
+    tbody td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+    
+    tbody tr { transition: background var(--transition-fast); }
+    tbody tr:hover { background: rgba(156, 39, 176, 0.05); }
+    
+    .artwork-thumb { width: 50px; height: 60px; object-fit: cover; border: 1px solid var(--color-border); }
+    
+    .artist-avatar-small {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--color-purple);
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .status-badge.published { background: var(--color-green); color: var(--color-white); }
+    .status-badge.reserved { background: var(--color-yellow); color: var(--color-black); }
+    .status-badge.sold { background: var(--color-red); color: var(--color-white); }
+    .status-badge.pending { background: var(--color-blue); color: var(--color-white); }
+    .status-badge.active { background: var(--color-purple); color: var(--color-white); }
+    
+    .amount { font-family: var(--font-mono); font-weight: 600; }
+    .amount.positive { color: var(--color-green); }
+    .amount.yellow { color: var(--color-yellow); }
+    .amount.purple { color: var(--color-purple); }
+    
+    /* ---------- COMISSÃO INFO ---------- */
+    .commission-info-box {
+      background: var(--color-black-light);
+      border: 1px solid var(--color-purple);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    
+    .commission-text h4 { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 2px; color: var(--color-purple); margin-bottom: var(--space-xs); }
+    .commission-text p { margin-bottom: 0; font-size: 0.9rem; }
+    
+    .commission-breakdown { display: flex; gap: var(--space-xl); }
+    .commission-item { text-align: center; }
+    .commission-item-value { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; }
+    .commission-item-value.galart { color: var(--color-red); }
+    .commission-item-value.gallery { color: var(--color-purple); }
+    .commission-item-item-label { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-white-muted); margin-top: 2px; }
+    
+    /* ---------- GRID DE ARTISTAS ---------- */
+    .artists-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .artist-mini-card {
+      background: var(--color-black-light);
+      border: 1px solid var(--color-border);
+      padding: var(--space-md);
+      text-align: center;
+      transition: border-color var(--transition-fast);
+    }
+    
+    .artist-mini-card:hover { border-color: var(--color-purple); }
+    
+    .artist-mini-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--color-purple);
+      object-fit: cover;
+      margin-bottom: var(--space-sm);
+      background: var(--color-black-lighter);
+    }
+    
+    .artist-mini-name { font-family: var(--font-primary); font-weight: 600; font-size: 0.9rem; color: var(--color-white); }
+    .artist-mini-location { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-purple); }
+    .artist-mini-stats { display: flex; justify-content: center; gap: var(--space-md); margin-top: var(--space-sm); font-family: var(--font-mono); font-size: 0.7rem; }
+    
+    /* ---------- FILE UPLOAD ---------- */
+    .file-upload-area {
+      border: 1px dashed var(--color-border);
+      padding: var(--space-lg);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .file-upload-area:hover { border-color: var(--color-purple); background: rgba(156, 39, 176, 0.05); }
+    .file-upload-area i { font-size: 2rem; color: var(--color-purple); margin-bottom: var(--space-sm); display: block; }
+    .file-upload-area p { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: var(--space-xs); }
+    .file-upload-area small { color: var(--color-white-muted); font-size: 0.65rem; }
+    
+    .file-upload-area input[type="file"] {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .image-preview { width: 100%; max-width: 200px; margin: var(--space-sm) auto 0; display: none; }
+    .image-preview.show { display: block; }
+    .image-preview img { width: 100%; height: auto; border: 1px solid var(--color-purple); object-fit: cover; }
+    
+    .image-preview.avatar-preview img {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-purple);
+    }
+    
+    .image-preview.artwork-preview img {
+      width: 100%;
+      max-width: 250px;
+      aspect-ratio: 1 / 1.2;
+      object-fit: cover;
+    }
+    
+    /* ---------- MODAL ---------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(12px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+    }
+    
+    .modal-overlay.active { display: flex; }
+    
+    .modal {
+      background: var(--color-black-light);
+      border: 2px solid var(--color-purple);
+      max-width: 650px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      animation: modalSlideIn 0.4s var(--ease-out-quint);
+    }
+    
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    .modal-header {
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .modal-header h3 { font-size: 1.3rem; text-transform: uppercase; }
+    .modal-header h3 i { color: var(--color-purple); margin-right: 8px; }
+    
+    .modal-close { background: none; border: none; color: var(--color-white); font-size: 1.5rem; cursor: pointer; transition: color var(--transition-fast); }
+    .modal-close:hover { color: var(--color-red); }
+    .modal-body { padding: var(--space-lg); }
+    
+    .modal-footer {
+      padding: var(--space-lg);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: flex-end;
+    }
+    
+    .form-group { margin-bottom: var(--space-md); }
+    
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-purple);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      font-family: var(--font-secondary);
+      font-size: 0.9rem;
+      background-color: var(--color-black);
+      border: 1px solid var(--color-border);
+      color: var(--color-white);
+      transition: border-color var(--transition-fast);
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-purple);
+      box-shadow: var(--shadow-glow-purple);
+    }
+    
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+    
+    /* ---------- FOOTER ---------- */
+    .footer {
+      background: var(--color-black);
+      padding: var(--space-xl) 0;
+      margin-top: var(--space-2xl);
+      border-top: 1px solid var(--color-purple);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      color: var(--color-white-muted);
+    }
+    
+    .footer span { color: var(--color-purple); }
+    
+    /* ---------- TOAST ---------- */
+    .toast {
+      position: fixed;
+      top: var(--space-lg);
+      right: var(--space-lg);
+      background: var(--color-black-light);
+      border: 1px solid var(--color-purple);
+      padding: var(--space-md) var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-white);
+      z-index: 9999;
+      transform: translateX(120%);
+      transition: transform 0.4s var(--ease-out-expo);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .toast.show { transform: translateX(0); }
+    .toast.success { border-color: var(--color-green); }
+    .toast.error { border-color: var(--color-red); }
+    .toast.success i { color: var(--color-green); }
+    .toast.error i { color: var(--color-red); }
+    
+    /* ---------- RESPONSIVIDADE ---------- */
+    @media (max-width: 1024px) {
+      .summary-cards { grid-template-columns: repeat(2, 1fr); }
+      .artists-mini-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    @media (max-width: 768px) {
+      .summary-cards { grid-template-columns: 1fr; }
+      .artists-mini-grid { grid-template-columns: 1fr; }
+      .welcome-stats { gap: var(--space-md); }
+      .welcome-stat-value { font-size: 1.5rem; }
+      .nav-user-info { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .commission-breakdown { flex-direction: column; gap: var(--space-sm); }
+    }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--color-black); }
+    ::-webkit-scrollbar-thumb { background: var(--color-purple); }
+    ::selection { background-color: var(--color-purple); color: var(--color-white); }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Toast -->
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMessage"></span></div>
+  
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="galart-logo">
+      <a href="index.html"><img class="galart-logo-img" style="min-width: 70px; min-height: 50px;" src="assets/img/logo.png" alt="GALART"></a>
+      <div>
+        <div class="galart-logo-text">GAL<span class="accent">ART</span></div>
+      </div>
+    </div>
+    
+    <div class="nav-user">
+      <div class="nav-user-info">
+        <div class="nav-user-name">Galeria Movimento</div>
+        <div class="nav-user-role">Galeria • Luanda</div>
+      </div>
+      <img class="nav-user-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=50&q=80" alt="Galeria Movimento" onerror="this.style.display='none'">
+      <a href="index.html" class="btn btn-outline-purple btn-small" style="margin-left: var(--space-sm);">Sair</a>
+    </div>
+  </nav>
+  
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / <span>Dashboard da Galeria</span></div>
+      <h1>Painel da <span style="color: var(--color-purple);">Galeria</span></h1>
+    </div>
+  </section>
+  
+  <!-- Welcome Banner -->
+  <section>
+    <div class="container">
+      <div class="welcome-banner">
+        <div class="welcome-text">
+          <h2>Bem-vinda, <span>Galeria Movimento</span></h2>
+          <p>Gira as obras dos seus artistas representados. Publique, acompanhe reservas e visualize os seus ganhos.</p>
+        </div>
+        <div class="welcome-stats">
+          <div class="welcome-stat">
+            <div class="welcome-stat-value" id="welcomeTotalArtistas">8</div>
+            <div class="welcome-stat-label">Artistas</div>
+          </div>
+          <div class="welcome-stat">
+            <div class="welcome-stat-value" id="welcomeTotalObras">156</div>
+            <div class="welcome-stat-label">Obras</div>
+          </div>
+          <div class="welcome-stat">
+            <div class="welcome-stat-value" id="welcomeVendasMes">42</div>
+            <div class="welcome-stat-label">Vendas Este Mês</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Artistas Representados -->
+  <section>
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+        <h3 style="margin-bottom: 0;">🎨 Artistas Representados</h3>
+        <button class="btn btn-outline-purple btn-small" onclick="openNewArtistModal()">
+          <i class="fas fa-user-plus"></i> Novo Artista
+        </button>
+      </div>
+      <div class="artists-mini-grid" id="artistsMiniGrid"></div>
+    </div>
+  </section>
+  
+  <!-- Summary Cards -->
+  <section>
+    <div class="container">
+      <div class="summary-cards">
+        <div class="summary-card">
+          <div class="summary-card-header"><div class="summary-card-icon red"><i class="fas fa-palette"></i></div></div>
+          <div class="summary-card-value" id="totalObrasValue">156</div>
+          <div class="summary-card-label">Total de Obras</div>
+          <div class="summary-card-detail" id="totalObrasDetail">142 publicadas • 14 em análise</div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-card-header"><div class="summary-card-icon yellow"><i class="fas fa-bookmark"></i></div></div>
+          <div class="summary-card-value" id="totalReservas">22</div>
+          <div class="summary-card-label">Reservas Ativas</div>
+          <div class="summary-card-detail">Aguardando confirmação</div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-card-header"><div class="summary-card-icon green"><i class="fas fa-check-circle"></i></div></div>
+          <div class="summary-card-value" id="totalVendasValue">512</div>
+          <div class="summary-card-label">Obras Vendidas</div>
+          <div class="summary-card-detail">Desde o início na GALART</div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-card-header"><div class="summary-card-icon purple"><i class="fas fa-wallet"></i></div></div>
+          <div class="summary-card-value" id="totalEarnings">0 Kz</div>
+          <div class="summary-card-label">Total Recebido (70%)</div>
+          <div class="summary-card-detail">Líquido após comissão GALART</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Tabs -->
+  <section>
+    <div class="container">
+      <div class="dashboard-tabs">
+        <button class="dashboard-tab active" data-tab="obras">Todas as Obras</button>
+        <button class="dashboard-tab" data-tab="reservas">Reservas <span class="badge" id="reservasBadge">22</span></button>
+        <button class="dashboard-tab" data-tab="vendas">Vendas</button>
+        <button class="dashboard-tab" data-tab="ganhos">Ganhos</button>
+        <button class="dashboard-tab" data-tab="artistas">Artistas</button>
+      </div>
+      
+      <!-- TAB: OBRAS -->
+      <div class="tab-panel active" id="tab-obras">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+          <h3 style="margin-bottom: 0;">Catálogo de Obras</h3>
+          <button class="btn btn-primary" onclick="openNewArtworkModal()"><i class="fas fa-plus"></i> Nova Obra</button>
+        </div>
+        
+        <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); flex-wrap: wrap;">
+          <select id="filterArtist" style="padding: 0.5rem 1rem; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; background: var(--color-black-light); border: 1px solid var(--color-border); color: var(--color-white);" onchange="filterByArtist()">
+            <option value="all">Todos os Artistas</option>
+          </select>
+          <select id="filterStatus" style="padding: 0.5rem 1rem; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; background: var(--color-black-light); border: 1px solid var(--color-border); color: var(--color-white);" onchange="filterByStatus()">
+            <option value="all">Todos os Status</option>
+            <option value="published">Publicado</option>
+            <option value="reserved">Reservado</option>
+            <option value="sold">Vendido</option>
+          </select>
+        </div>
+        
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Imagem</th><th>Título</th><th>Artista</th><th>Categoria</th><th>Preço</th><th>Status</th><th>Data</th><th>Ações</th></tr></thead>
+            <tbody id="obrasTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- TAB: RESERVAS -->
+      <div class="tab-panel" id="tab-reservas">
+        <h3>Obras Reservadas</h3>
+        <p style="opacity: 0.7; margin-bottom: var(--space-md);">Estas obras foram reservadas por clientes e aguardam confirmação.</p>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Imagem</th><th>Título</th><th>Artista</th><th>Cliente</th><th>Contacto</th><th>Preço</th><th>Data</th><th>Ações</th></tr></thead>
+            <tbody id="reservasTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- TAB: VENDAS -->
+      <div class="tab-panel" id="tab-vendas">
+        <h3>Histórico de Vendas</h3>
+        <p style="opacity: 0.7; margin-bottom: var(--space-md);">Obras vendidas através da plataforma GALART.</p>
+        
+        <div class="commission-info-box">
+          <div class="commission-text">
+            <h4><i class="fas fa-info-circle"></i> Distribuição dos Ganhos</h4>
+            <p>A GALART retém 30% do valor. Os 70% restantes são divididos entre a Galeria e o Artista conforme acordo próprio.</p>
+          </div>
+          <div class="commission-breakdown">
+            <div class="commission-item">
+              <div class="commission-item-value galart">30%</div>
+              <div class="commission-item-label">Comissão GALART</div>
+            </div>
+            <div class="commission-item">
+              <div class="commission-item-value gallery">70%</div>
+              <div class="commission-item-label">Galeria + Artista</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Imagem</th><th>Título</th><th>Artista</th><th>Preço</th><th>Comissão (30%)</th><th>Líquido (70%)</th><th>Data</th></tr></thead>
+            <tbody id="vendasTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- TAB: GANHOS -->
+      <div class="tab-panel" id="tab-ganhos">
+        <h3>Resumo de Ganhos</h3>
+        <p style="opacity: 0.7; margin-bottom: var(--space-md);">Resumo financeiro das vendas realizadas.</p>
+        
+        <div class="summary-cards" style="margin-bottom: var(--space-xl);">
+          <div class="summary-card"><div class="summary-card-header"><div class="summary-card-icon purple"><i class="fas fa-coins"></i></div></div><div class="summary-card-value" id="ganhosTotalVendas">0 Kz</div><div class="summary-card-label">Valor Total das Vendas</div></div>
+          <div class="summary-card"><div class="summary-card-header"><div class="summary-card-icon red"><i class="fas fa-hand-holding-usd"></i></div></div><div class="summary-card-value" id="ganhosComissao">0 Kz</div><div class="summary-card-label">Comissão GALART (30%)</div></div>
+          <div class="summary-card"><div class="summary-card-header"><div class="summary-card-icon green"><i class="fas fa-wallet"></i></div></div><div class="summary-card-value" id="ganhosLiquido">0 Kz</div><div class="summary-card-label">Valor Líquido (70%)</div></div>
+          <div class="summary-card"><div class="summary-card-header"><div class="summary-card-icon yellow"><i class="fas fa-chart-line"></i></div></div><div class="summary-card-value" id="ganhosMensal">0 Kz</div><div class="summary-card-label">Ganhos Este Mês (70%)</div></div>
+        </div>
+        
+        <h3 style="margin-bottom: var(--space-md);">Histórico de Pagamentos</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Data</th><th>Obra</th><th>Artista</th><th>Valor Venda</th><th>Comissão (30%)</th><th>Líquido (70%)</th><th>Status</th></tr></thead>
+            <tbody id="ganhosTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- TAB: ARTISTAS -->
+      <div class="tab-panel" id="tab-artistas">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+          <h3 style="margin-bottom: 0;">Artistas Representados</h3>
+          <button class="btn btn-outline-purple" onclick="openNewArtistModal()"><i class="fas fa-user-plus"></i> Adicionar Artista</button>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Artista</th><th>Localização</th><th>Especialidades</th><th>Obras</th><th>Vendas</th><th>Status</th><th>Contacto</th></tr></thead>
+            <tbody id="artistasTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <span>© 2026 GALART</span> • <span>Dashboard da Galeria</span> • <span style="color: var(--color-purple);">ANGOLA • ÁFRICA • MUNDO</span>
+    </div>
+  </footer>
+  
+  <!-- ============================================ -->
+  <!-- MODAL: NOVA OBRA (COM UPLOAD DE IMAGEM)      -->
+  <!-- ============================================ -->
+  <div class="modal-overlay" id="newArtworkModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-plus-circle"></i> Publicar Nova Obra</h3>
+        <button class="modal-close" onclick="closeModal('newArtworkModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="newArtworkForm" onsubmit="publishArtwork(event)">
+          <div class="form-group">
+            <label for="artworkArtist">Artista *</label>
+            <select id="artworkArtist" required><option value="">Selecione o artista</option></select>
+          </div>
+          <div class="form-group">
+            <label for="artworkTitle">Título da Obra *</label>
+            <input type="text" id="artworkTitle" placeholder="Ex: Raízes do Namibe" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="artworkCategory">Categoria *</label>
+              <select id="artworkCategory" required>
+                <option value="">Selecione</option>
+                <option value="Pintura">Pintura</option><option value="Escultura">Escultura</option>
+                <option value="Arte Digital">Arte Digital</option><option value="Fotografia">Fotografia</option>
+                <option value="Desenho">Desenho</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="artworkPrice">Preço (Kz) *</label>
+              <input type="number" id="artworkPrice" placeholder="Ex: 180000" required min="1000">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="artworkDimensions">Dimensões</label><input type="text" id="artworkDimensions" placeholder="Ex: 120 x 80 cm"></div>
+            <div class="form-group"><label for="artworkTechnique">Técnica</label><input type="text" id="artworkTechnique" placeholder="Ex: Óleo sobre Tela"></div>
+          </div>
+          
+          <!-- Upload de Imagem da Obra -->
+          <div class="form-group">
+            <label>Imagem da Obra *</label>
+            <div class="file-upload-area" id="artworkUploadArea">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Clique para carregar a imagem</p>
+              <small>JPG, PNG ou WebP • Máx. 5MB</small>
+              <input type="file" id="artworkImageFile" accept="image/jpeg,image/png,image/webp" required onchange="previewArtworkImage(event)">
+            </div>
+            <div class="image-preview artwork-preview" id="artworkImagePreview">
+              <img src="" alt="Preview da obra" id="artworkPreviewImg">
+            </div>
+          </div>
+          
+          <div class="modal-footer" style="padding: 0; border: none; margin-top: var(--space-lg);">
+            <button type="button" class="btn" onclick="closeModal('newArtworkModal')">Cancelar</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i> Publicar Obra</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ============================================ -->
+  <!-- MODAL: CADASTRAR ARTISTA                     -->
+  <!-- ============================================ -->
+  <div class="modal-overlay" id="newArtistModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-user-plus"></i> Cadastrar Novo Artista</h3>
+        <button class="modal-close" onclick="closeModal('newArtistModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="newArtistForm" onsubmit="registerArtist(event)">
+          
+          <!-- Upload de Avatar -->
+          <div class="form-group" style="text-align: center;">
+            <label>Foto de Perfil</label>
+            <div class="file-upload-area" id="artistAvatarUploadArea" style="max-width: 200px; margin: 0 auto;">
+              <i class="fas fa-camera"></i>
+              <p>Carregar Foto</p>
+              <small>JPG ou PNG</small>
+              <input type="file" id="artistAvatarFile" accept="image/jpeg,image/png" onchange="previewArtistAvatar(event)">
+            </div>
+            <div class="image-preview avatar-preview" id="artistAvatarPreview" style="margin-top: var(--space-sm);">
+              <img src="" alt="Preview do avatar" id="artistPreviewImg">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group"><label for="artistName">Nome Completo *</label><input type="text" id="artistName" placeholder="Ex: Isabel Domingos" required></div>
+            <div class="form-group">
+              <label for="artistLocation">Localização *</label>
+              <select id="artistLocation" required>
+                <option value="">Selecione a província</option>
+                <option value="Luanda">Luanda</option><option value="Benguela">Benguela</option>
+                <option value="Huíla">Huíla</option><option value="Cabinda">Cabinda</option>
+                <option value="Huambo">Huambo</option><option value="Bié">Bié</option>
+                <option value="Cunene">Cunene</option><option value="Lunda Sul">Lunda Sul</option>
+                <option value="Lunda Norte">Lunda Norte</option><option value="Malanje">Malanje</option>
+                <option value="Moxico">Moxico</option><option value="Namibe">Namibe</option>
+                <option value="Uíge">Uíge</option><option value="Zaire">Zaire</option>
+                <option value="Cuanza Norte">Cuanza Norte</option><option value="Cuanza Sul">Cuanza Sul</option>
+                <option value="Cuando Cubango">Cuando Cubango</option><option value="Bengo">Bengo</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="artistSpecialties">Especialidades *</label>
+            <input type="text" id="artistSpecialties" placeholder="Ex: Pintura, Abstracionismo, Óleo" required>
+            <small style="color: var(--color-white-muted); font-size: 0.65rem; display: block; margin-top: 4px;">Separe as especialidades por vírgulas</small>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group"><label for="artistPhone">Telefone / WhatsApp *</label><input type="tel" id="artistPhone" placeholder="+244 9XX XXX XXX" required></div>
+            <div class="form-group"><label for="artistEmail">Email *</label><input type="email" id="artistEmail" placeholder="artista@email.com" required></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="artistStatus">Status</label>
+            <select id="artistStatus"><option value="active">Ativo</option><option value="inactive">Inativo</option></select>
+          </div>
+          
+          <div class="modal-footer" style="padding: 0; border: none; margin-top: var(--space-lg);">
+            <button type="button" class="btn" onclick="closeModal('newArtistModal')">Cancelar</button>
+            <button type="submit" class="btn btn-outline-purple"><i class="fas fa-user-plus"></i> Cadastrar Artista</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script>
+    (function() {
+      'use strict';
+      
+      // =============================================
+      // DADOS SIMULADOS
+      // =============================================
+      var artistas = [
+        { id: 1, name: 'Isabel Domingos', location: 'Benguela', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=60&q=80', specialties: 'Pintura, Abstracionismo', obras: 34, vendas: 128, status: 'active', phone: '+244 923 456 789', email: 'isabel@email.com' },
+        { id: 2, name: 'Manuel Kiala', location: 'Luanda', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&q=80', specialties: 'Escultura, Madeira, Bronze', obras: 22, vendas: 67, status: 'active', phone: '+244 912 345 678', email: 'kiala@email.com' },
+        { id: 3, name: 'João Tchitula', location: 'Benguela', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&q=80', specialties: 'Pintura, Expressionismo', obras: 41, vendas: 156, status: 'active', phone: '+244 934 567 890', email: 'tchitula@email.com' },
+        { id: 4, name: 'Márcia Nguabi', location: 'Luanda', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&q=80', specialties: 'Escultura, Reciclagem', obras: 18, vendas: 42, status: 'active', phone: '+244 945 678 901', email: 'marcia@email.com' },
+        { id: 5, name: 'Carlos Ndunduma', location: 'Cabinda', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&q=80', specialties: 'Fotografia, Pintura', obras: 28, vendas: 45, status: 'inactive', phone: '+244 956 789 012', email: 'carlos@email.com' }
+      ];
+      
+      var obras = [
+        { id: 1, title: 'Raízes do Namibe', artistId: 1, artistName: 'Isabel Domingos', category: 'Pintura', price: 180000, status: 'published', date: '2026-04-15', image: 'https://images.joseartgallery.com/247650/conversions/portrait-painting-dreaming-colorful-portrait-thumb.jpg', dimensions: '120 x 80 cm', technique: 'Óleo sobre Tela' },
+        { id: 2, title: 'Guardião Ancestral', artistId: 2, artistName: 'Manuel Kiala', category: 'Escultura', price: 320000, status: 'published', date: '2026-04-12', image: 'https://images.joseartgallery.com/169221/conversions/portrait-painting-floral-tranquility-thumb.jpg', dimensions: '45 x 30 x 20 cm', technique: 'Madeira Makonde' },
+        { id: 3, title: 'Abstrato Vermelho', artistId: 1, artistName: 'Isabel Domingos', category: 'Pintura', price: 165000, status: 'reserved', date: '2026-04-18', image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=100&q=80', dimensions: '110 x 90 cm', technique: 'Técnica Mista' },
+        { id: 4, title: 'Tela Viva', artistId: 3, artistName: 'João Tchitula', category: 'Pintura', price: 210000, status: 'sold', date: '2026-04-01', image: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320bf?w=100&q=80', dimensions: '130 x 90 cm', technique: 'Óleo sobre Tela' },
+        { id: 5, title: 'Pensador Angolano', artistId: 2, artistName: 'Manuel Kiala', category: 'Escultura', price: 450000, status: 'sold', date: '2026-03-25', image: 'https://images.unsplash.com/photo-1561360524-38a1f47e02b5?w=100&q=80', dimensions: '60 x 40 x 30 cm', technique: 'Bronze' },
+        { id: 6, title: 'Força Ancestral', artistId: 4, artistName: 'Márcia Nguabi', category: 'Escultura', price: 350000, status: 'reserved', date: '2026-04-17', image: 'https://images.unsplash.com/photo-1594787318285-23c34a8d3935?w=100&q=80', dimensions: '50 x 30 x 25 cm', technique: 'Madeira e Resina' },
+        { id: 7, title: 'Cores da Huíla', artistId: 3, artistName: 'João Tchitula', category: 'Pintura', price: 145000, status: 'sold', date: '2026-03-28', image: 'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=100&q=80', dimensions: '100 x 70 cm', technique: 'Acrílico sobre Tela' },
+        { id: 8, title: 'Pôr do Sol no Kwanza', artistId: 5, artistName: 'Carlos Ndunduma', category: 'Fotografia', price: 220000, status: 'published', date: '2026-04-20', image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=100&q=80', dimensions: '90 x 60 cm', technique: 'Impressão Fine Art' }
+      ];
+      
+      var reservas = [
+        { id: 1, obraId: 3, title: 'Abstrato Vermelho', artistName: 'Isabel Domingos', clientName: 'Carlos Ferreira', clientPhone: '+244 923 456 789', clientEmail: 'carlos@email.com', price: 165000, date: '2026-04-18', image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=100&q=80' },
+        { id: 2, obraId: 6, title: 'Força Ancestral', artistName: 'Márcia Nguabi', clientName: 'Maria dos Santos', clientPhone: '+244 912 345 678', clientEmail: 'maria@email.com', price: 350000, date: '2026-04-17', image: 'https://images.unsplash.com/photo-1594787318285-23c34a8d3935?w=100&q=80' }
+      ];
+      
+      var vendas = [
+        { id: 1, title: 'Tela Viva', artistName: 'João Tchitula', price: 210000, date: '2026-04-05', image: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320bf?w=100&q=80' },
+        { id: 2, title: 'Pensador Angolano', artistName: 'Manuel Kiala', price: 450000, date: '2026-04-03', image: 'https://images.unsplash.com/photo-1561360524-38a1f47e02b5?w=100&q=80' },
+        { id: 3, title: 'Cores da Huíla', artistName: 'João Tchitula', price: 145000, date: '2026-03-30', image: 'https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=100&q=80' },
+        { id: 4, title: 'Guardião Ancestral', artistName: 'Manuel Kiala', price: 320000, date: '2026-03-20', image: 'https://images.joseartgallery.com/169221/conversions/portrait-painting-floral-tranquility-thumb.jpg' },
+        { id: 5, title: 'Raízes do Namibe', artistName: 'Isabel Domingos', price: 180000, date: '2026-03-15', image: 'https://images.joseartgallery.com/247650/conversions/portrait-painting-dreaming-colorful-portrait-thumb.jpg' }
+      ];
+      
+      var COMMISSION_RATE = 0.30;
+      var ARTIST_SHARE_RATE = 0.70;
+      
+      function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' Kz';
+      }
+      
+      function commission(price) { return Math.round(price * COMMISSION_RATE); }
+      function artistShare(price) { return Math.round(price * ARTIST_SHARE_RATE); }
+      
+      function showToast(message, type) {
+        var toast = document.getElementById('toast');
+        var toastMessage = document.getElementById('toastMessage');
+        var icon = toast.querySelector('i');
+        toast.className = 'toast ' + (type || 'info');
+        toastMessage.textContent = message;
+        icon.className = 'fas';
+        if (type === 'success') icon.className += ' fa-check-circle';
+        else if (type === 'error') icon.className += ' fa-exclamation-circle';
+        else icon.className += ' fa-info-circle';
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 3000);
+      }
+      
+      // =============================================
+      // MODAIS
+      // =============================================
+      window.openNewArtworkModal = function() {
+        document.getElementById('newArtworkModal').classList.add('active');
+        document.body.classList.add('modal-open');
+        populateArtistSelect();
+        document.getElementById('artworkImagePreview').classList.remove('show');
+        document.getElementById('artworkPreviewImg').src = '';
+        document.getElementById('artworkImageFile').value = '';
+      };
+      
+      window.openNewArtistModal = function() {
+        document.getElementById('newArtistModal').classList.add('active');
+        document.body.classList.add('modal-open');
+        document.getElementById('artistAvatarPreview').classList.remove('show');
+        document.getElementById('artistPreviewImg').src = '';
+        document.getElementById('artistAvatarFile').value = '';
+        document.getElementById('newArtistForm').reset();
+      };
+      
+      window.closeModal = function(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+        document.body.classList.remove('modal-open');
+      };
+      
+      document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) closeModal(this.id);
+        });
+      });
+      
+      function populateArtistSelect() {
+        var select = document.getElementById('artworkArtist');
+        select.innerHTML = '<option value="">Selecione o artista</option>';
+        artistas.forEach(function(a) {
+          if (a.status === 'active') {
+            select.innerHTML += '<option value="' + a.id + '">' + a.name + '</option>';
+          }
+        });
+      }
+      
+      // =============================================
+      // PREVIEW DE IMAGENS
+      // =============================================
+      window.previewArtworkImage = function(event) {
+        var file = event.target.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            document.getElementById('artworkPreviewImg').src = e.target.result;
+            document.getElementById('artworkImagePreview').classList.add('show');
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      
+      window.previewArtistAvatar = function(event) {
+        var file = event.target.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            document.getElementById('artistPreviewImg').src = e.target.result;
+            document.getElementById('artistAvatarPreview').classList.add('show');
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      
+      // =============================================
+      // PUBLICAR NOVA OBRA (COM UPLOAD)
+      // =============================================
+      window.publishArtwork = function(event) {
+        event.preventDefault();
+        
+        var artistId = parseInt(document.getElementById('artworkArtist').value);
+        var title = document.getElementById('artworkTitle').value.trim();
+        var category = document.getElementById('artworkCategory').value;
+        var price = parseInt(document.getElementById('artworkPrice').value);
+        var dimensions = document.getElementById('artworkDimensions').value.trim();
+        var technique = document.getElementById('artworkTechnique').value.trim();
+        var imageFile = document.getElementById('artworkImageFile').files[0];
+        
+        if (!artistId || !title || !category || !price) {
+          showToast('Preencha todos os campos obrigatórios.', 'error');
+          return false;
+        }
+        
+        if (!imageFile) {
+          showToast('Por favor, carregue uma imagem da obra.', 'error');
+          return false;
+        }
+        
+        var artist = artistas.find(function(a) { return a.id === artistId; });
+        var imageUrl = URL.createObjectURL(imageFile);
+        
+        var newArtwork = {
+          id: obras.length + 1,
+          title: title,
+          artistId: artistId,
+          artistName: artist ? artist.name : 'Desconhecido',
+          category: category,
+          price: price,
+          status: 'published',
+          date: new Date().toISOString().split('T')[0],
+          image: imageUrl,
+          dimensions: dimensions || 'N/D',
+          technique: technique || 'N/D'
+        };
+        
+        obras.unshift(newArtwork);
+        if (artist) artist.obras++;
+        
+        renderAllTables();
+        updateSummaryCards();
+        closeModal('newArtworkModal');
+        document.getElementById('newArtworkForm').reset();
+        document.getElementById('artworkImagePreview').classList.remove('show');
+        showToast('Obra publicada com sucesso!', 'success');
+        return false;
+      };
+      
+      // =============================================
+      // CADASTRAR NOVO ARTISTA
+      // =============================================
+      window.registerArtist = function(event) {
+        event.preventDefault();
+        
+        var name = document.getElementById('artistName').value.trim();
+        var location = document.getElementById('artistLocation').value;
+        var specialties = document.getElementById('artistSpecialties').value.trim();
+        var phone = document.getElementById('artistPhone').value.trim();
+        var email = document.getElementById('artistEmail').value.trim();
+        var status = document.getElementById('artistStatus').value;
+        var avatarFile = document.getElementById('artistAvatarFile').files[0];
+        
+        if (!name || !location || !specialties || !phone || !email) {
+          showToast('Preencha todos os campos obrigatórios.', 'error');
+          return false;
+        }
+        
+        var avatarUrl;
+        if (avatarFile) {
+          avatarUrl = URL.createObjectURL(avatarFile);
+        } else {
+          avatarUrl = 'https://via.placeholder.com/120x120/1A1A1A/9C27B0?text=' + name.charAt(0).toUpperCase();
+        }
+        
+        var newArtist = {
+          id: artistas.length + 1,
+          name: name,
+          location: location,
+          avatar: avatarUrl,
+          specialties: specialties,
+          obras: 0,
+          vendas: 0,
+          status: status,
+          phone: phone,
+          email: email
+        };
+        
+        artistas.push(newArtist);
+        
+        renderAllTables();
+        populateArtistSelect();
+        populateFilterArtist();
+        updateSummaryCards();
+        closeModal('newArtistModal');
+        document.getElementById('newArtistForm').reset();
+        document.getElementById('artistAvatarPreview').classList.remove('show');
+        showToast('Artista "' + name + '" cadastrado com sucesso!', 'success');
+        return false;
+      };
+      
+      // =============================================
+      // RENDERIZAR TABELAS
+      // =============================================
+      function renderObrasTable(filteredObras) {
+        var tbody = document.getElementById('obrasTableBody');
+        var data = filteredObras || obras;
+        
+        if (data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: var(--space-xl); color: var(--color-white-muted);">Nenhuma obra encontrada.</td></tr>';
+          return;
+        }
+        
+        var html = '';
+        data.forEach(function(obra) {
+          var statusBadge = '';
+          switch(obra.status) {
+            case 'published': statusBadge = '<span class="status-badge published">Publicado</span>'; break;
+            case 'reserved': statusBadge = '<span class="status-badge reserved">Reservado</span>'; break;
+            case 'sold': statusBadge = '<span class="status-badge sold">Vendido</span>'; break;
+            default: statusBadge = '<span class="status-badge pending">Pendente</span>';
+          }
+          
+          var artist = artistas.find(function(a) { return a.id === obra.artistId; });
+          var avatarHtml = artist ? '<img src="' + artist.avatar + '" class="artist-avatar-small" alt="" onerror="this.style.display=\'none\'">' : '';
+          
+          var actionsHtml = '';
+          if (obra.status === 'published') {
+            actionsHtml = '<button class="btn btn-small btn-outline-purple" onclick="markAsSold(' + obra.id + ')" title="Marcar como vendida"><i class="fas fa-check"></i></button>';
+          }
+          
+          html += '<tr>' +
+            '<td><img src="' + obra.image + '" class="artwork-thumb" alt="' + obra.title + '" onerror="this.src=\'https://via.placeholder.com/50x60/1A1A1A/9C27B0?text=GAL\'"></td>' +
+            '<td><strong>' + obra.title + '</strong><br><small style="color: var(--color-white-muted);">' + obra.dimensions + ' • ' + obra.technique + '</small></td>' +
+            '<td>' + avatarHtml + obra.artistName + '</td>' +
+            '<td>' + obra.category + '</td>' +
+            '<td class="amount yellow">' + formatPrice(obra.price) + '</td>' +
+            '<td>' + statusBadge + '</td>' +
+            '<td>' + obra.date + '</td>' +
+            '<td>' + actionsHtml + '</td>' +
+          '</tr>';
+        });
+        
+        tbody.innerHTML = html;
+      }
+      
+      function renderReservasTable() {
+        var tbody = document.getElementById('reservasTableBody');
+        if (reservas.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: var(--space-xl); color: var(--color-white-muted);">Nenhuma reserva ativa.</td></tr>';
+          return;
+        }
+        
+        var html = '';
+        reservas.forEach(function(reserva) {
+          html += '<tr>' +
+            '<td><img src="' + reserva.image + '" class="artwork-thumb" alt="' + reserva.title + '"></td>' +
+            '<td><strong>' + reserva.title + '</strong></td>' +
+            '<td>' + reserva.artistName + '</td>' +
+            '<td>' + reserva.clientName + '</td>' +
+            '<td><small>' + reserva.clientPhone + '<br>' + reserva.clientEmail + '</small></td>' +
+            '<td class="amount yellow">' + formatPrice(reserva.price) + '</td>' +
+            '<td>' + reserva.date + '</td>' +
+            '<td>' +
+              '<button class="btn btn-small btn-outline-purple" onclick="confirmSale(' + reserva.id + ')" title="Confirmar venda"><i class="fas fa-check-circle"></i></button>' +
+              '<button class="btn btn-small" style="margin-left: 4px;" onclick="cancelReservation(' + reserva.id + ')" title="Cancelar reserva"><i class="fas fa-times"></i></button>' +
+            '</td>' +
+          '</tr>';
+        });
+        tbody.innerHTML = html;
+      }
+      
+      function renderVendasTable() {
+        var tbody = document.getElementById('vendasTableBody');
+        if (vendas.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: var(--space-xl); color: var(--color-white-muted);">Nenhuma venda realizada.</td></tr>';
+          return;
+        }
+        
+        var html = '';
+        vendas.forEach(function(venda) {
+          var comm = commission(venda.price);
+          var share = artistShare(venda.price);
+          html += '<tr>' +
+            '<td><img src="' + venda.image + '" class="artwork-thumb" alt="' + venda.title + '"></td>' +
+            '<td><strong>' + venda.title + '</strong></td>' +
+            '<td>' + venda.artistName + '</td>' +
+            '<td class="amount yellow">' + formatPrice(venda.price) + '</td>' +
+            '<td class="amount" style="color: var(--color-red);">' + formatPrice(comm) + ' <small>(30%)</small></td>' +
+            '<td class="amount positive">' + formatPrice(share) + ' <small>(70%)</small></td>' +
+            '<td>' + venda.date + '</td>' +
+          '</tr>';
+        });
+        tbody.innerHTML = html;
+      }
+      
+      function renderGanhosTable() {
+        var tbody = document.getElementById('ganhosTableBody');
+        if (vendas.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: var(--space-xl); color: var(--color-white-muted);">Nenhum pagamento registado.</td></tr>';
+          return;
+        }
+        
+        var html = '';
+        vendas.forEach(function(venda) {
+          var comm = commission(venda.price);
+          var share = artistShare(venda.price);
+          html += '<tr>' +
+            '<td>' + venda.date + '</td>' +
+            '<td><strong>' + venda.title + '</strong></td>' +
+            '<td>' + venda.artistName + '</td>' +
+            '<td class="amount yellow">' + formatPrice(venda.price) + '</td>' +
+            '<td class="amount" style="color: var(--color-red);">' + formatPrice(comm) + '</td>' +
+            '<td class="amount positive">' + formatPrice(share) + '</td>' +
+            '<td><span class="status-badge published">Pago</span></td>' +
+          '</tr>';
+        });
+        tbody.innerHTML = html;
+      }
+      
+      function renderArtistasTable() {
+        var tbody = document.getElementById('artistasTableBody');
+        var html = '';
+        artistas.forEach(function(a) {
+          var statusBadge = a.status === 'active' ? '<span class="status-badge active">Ativo</span>' : '<span class="status-badge pending">Inativo</span>';
+          html += '<tr>' +
+            '<td><img src="' + a.avatar + '" class="artist-avatar-small" alt="' + a.name + '" onerror="this.style.display=\'none\'"><strong>' + a.name + '</strong></td>' +
+            '<td>' + a.location + '</td><td>' + a.specialties + '</td><td>' + a.obras + '</td><td>' + a.vendas + '</td>' +
+            '<td>' + statusBadge + '</td><td><small>' + a.phone + '<br>' + a.email + '</small></td>' +
+          '</tr>';
+        });
+        tbody.innerHTML = html;
+      }
+      
+      function renderArtistsMiniGrid() {
+        var grid = document.getElementById('artistsMiniGrid');
+        var html = '';
+        artistas.forEach(function(a) {
+          html += '<div class="artist-mini-card">' +
+            '<img src="' + a.avatar + '" class="artist-mini-avatar" alt="' + a.name + '" onerror="this.src=\'https://via.placeholder.com/60x60/1A1A1A/9C27B0?text=' + a.name.charAt(0) + '\'">' +
+            '<div class="artist-mini-name">' + a.name + '</div>' +
+            '<div class="artist-mini-location"><i class="fas fa-map-pin"></i> ' + a.location + '</div>' +
+            '<div class="artist-mini-stats">' +
+              '<span class="amount yellow">' + a.obras + ' obras</span>' +
+              '<span class="amount positive">' + a.vendas + ' vendas</span>' +
+            '</div>' +
+          '</div>';
+        });
+        grid.innerHTML = html;
+      }
+      
+      function updateSummaryCards() {
+        var totalVendasValor = vendas.reduce(function(sum, v) { return sum + v.price; }, 0);
+        var totalComissao = vendas.reduce(function(sum, v) { return sum + commission(v.price); }, 0);
+        var totalLiquido = vendas.reduce(function(sum, v) { return sum + artistShare(v.price); }, 0);
+        
+        var now = new Date();
+        var currentMonth = now.getMonth();
+        var currentYear = now.getFullYear();
+        var vendasMes = vendas.filter(function(v) {
+          var d = new Date(v.date);
+          return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+        });
+        var totalMes = vendasMes.reduce(function(sum, v) { return sum + artistShare(v.price); }, 0);
+        
+        var publishedCount = obras.filter(function(o) { return o.status === 'published'; }).length;
+        var pendingCount = obras.filter(function(o) { return o.status === 'pending'; }).length;
+        
+        document.getElementById('totalObrasValue').textContent = obras.length;
+        document.getElementById('totalObrasDetail').textContent = publishedCount + ' publicadas • ' + pendingCount + ' em análise';
+        document.getElementById('totalReservas').textContent = reservas.length;
+        document.getElementById('reservasBadge').textContent = reservas.length;
+        document.getElementById('totalVendasValue').textContent = vendas.length;
+        document.getElementById('totalEarnings').textContent = formatPrice(totalLiquido);
+        document.getElementById('ganhosTotalVendas').textContent = formatPrice(totalVendasValor);
+        document.getElementById('ganhosComissao').textContent = formatPrice(totalComissao);
+        document.getElementById('ganhosLiquido').textContent = formatPrice(totalLiquido);
+        document.getElementById('ganhosMensal').textContent = formatPrice(totalMes);
+        document.getElementById('welcomeTotalArtistas').textContent = artistas.length;
+        document.getElementById('welcomeTotalObras').textContent = obras.length;
+        document.getElementById('welcomeVendasMes').textContent = vendasMes.length;
+      }
+      
+      function renderAllTables() {
+        renderObrasTable();
+        renderReservasTable();
+        renderVendasTable();
+        renderGanhosTable();
+        renderArtistasTable();
+        renderArtistsMiniGrid();
+        updateSummaryCards();
+      }
+      
+      // =============================================
+      // FILTROS
+      // =============================================
+      window.filterByArtist = function() {
+        var artistId = document.getElementById('filterArtist').value;
+        if (artistId === 'all') { renderObrasTable(obras); }
+        else { renderObrasTable(obras.filter(function(o) { return o.artistId === parseInt(artistId); })); }
+      };
+      
+      window.filterByStatus = function() {
+        var status = document.getElementById('filterStatus').value;
+        var artistId = document.getElementById('filterArtist').value;
+        var filtered = obras;
+        if (artistId !== 'all') filtered = filtered.filter(function(o) { return o.artistId === parseInt(artistId); });
+        if (status !== 'all') filtered = filtered.filter(function(o) { return o.status === status; });
+        renderObrasTable(filtered);
+      };
+      
+      function populateFilterArtist() {
+        var select = document.getElementById('filterArtist');
+        artistas.forEach(function(a) { select.innerHTML += '<option value="' + a.id + '">' + a.name + '</option>'; });
+      }
+      
+      // =============================================
+      // AÇÕES
+      // =============================================
+      window.markAsSold = function(artworkId) {
+        var obra = obras.find(function(o) { return o.id === artworkId; });
+        if (!obra || obra.status !== 'published') return;
+        obra.status = 'sold';
+        vendas.unshift({ id: vendas.length + 1, title: obra.title, artistName: obra.artistName, price: obra.price, date: new Date().toISOString().split('T')[0], image: obra.image });
+        var artist = artistas.find(function(a) { return a.id === obra.artistId; });
+        if (artist) artist.vendas++;
+        renderAllTables();
+        showToast('Obra marcada como vendida! Valor líquido (70%): ' + formatPrice(artistShare(obra.price)), 'success');
+      };
+      
+      window.confirmSale = function(reservaId) {
+        var reserva = reservas.find(function(r) { return r.id === reservaId; });
+        if (!reserva) return;
+        vendas.unshift({ id: vendas.length + 1, title: reserva.title, artistName: reserva.artistName, price: reserva.price, date: new Date().toISOString().split('T')[0], image: reserva.image });
+        var obra = obras.find(function(o) { return o.id === reserva.obraId; });
+        if (obra) obra.status = 'sold';
+        reservas = reservas.filter(function(r) { return r.id !== reservaId; });
+        renderAllTables();
+        showToast('Venda confirmada! Comissão GALART: ' + formatPrice(commission(reserva.price)) + ' (30%)', 'success');
+      };
+      
+      window.cancelReservation = function(reservaId) {
+        var reserva = reservas.find(function(r) { return r.id === reservaId; });
+        reservas = reservas.filter(function(r) { return r.id !== reservaId; });
+        var obra = obras.find(function(o) { return o.id === (reserva ? reserva.obraId : reservaId); });
+        if (obra && obra.status === 'reserved') obra.status = 'published';
+        renderAllTables();
+        showToast('Reserva cancelada.', 'info');
+      };
+      
+      // =============================================
+      // TABS
+      // =============================================
+      document.querySelectorAll('.dashboard-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.dashboard-tab').forEach(function(t) { t.classList.remove('active'); });
+          this.classList.add('active');
+          var tabName = this.getAttribute('data-tab');
+          document.querySelectorAll('.tab-panel').forEach(function(panel) { panel.classList.remove('active'); });
+          document.getElementById('tab-' + tabName).classList.add('active');
+        });
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.active').forEach(function(modal) { modal.classList.remove('active'); });
+          document.body.classList.remove('modal-open');
+        }
+      });
+      
+      // =============================================
+      // INICIALIZAR
+      // =============================================
+      populateFilterArtist();
+      renderAllTables();
+      
+      console.log('GALART Dashboard - Painel da Galeria inicializado.');
+      console.log('Comissão GALART: 30% | Valor líquido: 70%');
+      
+    })();
+  </script>
+  
+</body>
+</html>
